@@ -56,6 +56,25 @@ Damit werden `fahrschule.html`, `klassen.html` und `preise.html` neu erzeugt.
 Die Startseite und die Rechtsseiten werden **nicht** überschrieben — ändert
 sich die Navigation, muss sie dort von Hand nachgezogen werden.
 
+## Die drei Goldtöne
+
+Das Gold aus dem Logo ist `#c9b41e`. Auf weißem Grund erreicht es nur einen
+Kontrast von 2,1:1 — als Schrift wäre das zu blass. Deshalb gibt es drei
+abgestufte Werte, alle oben in `css/style.css`:
+
+| Variable        | Wert      | Kontrast auf Weiß | Wofür |
+|-----------------|-----------|-------------------|-------|
+| `--gold`        | `#c9b41e` | 2,1:1             | Flächen, Linien, Schaltflächen, dunkler Grund |
+| `--gold-titel`  | `#a89413` | 3,0:1             | große Schrift: „Führerschein", Klassenbuchstaben, Preiszahlen |
+| `--gold-deep`   | `#7e6d0a` | 5,2:1             | kleine Schrift: Dachzeilen, Verweise, Bildunterschriften |
+
+Im dunklen Schema drehen sich die Verhältnisse um, dort ist `--gold-titel`
+identisch mit dem Logo-Gold.
+
+Wer den Titel exakt im Logo-Gold möchte, ändert `--gold-titel` auf
+`#c9b41e` — dann stimmt die Farbe pixelgenau, die Überschrift ist auf
+weißem Grund aber deutlich blasser.
+
 ## Preise
 
 Alle Beträge stammen vom Preisaushang nach § 32 Fahrlehrergesetz. Sie stehen
