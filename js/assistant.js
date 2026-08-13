@@ -270,9 +270,13 @@
     root.innerHTML =
       '<button class="ari-launcher" type="button" aria-expanded="false" aria-controls="ariPanel">' +
         '<span class="ari-launcher-icon" aria-hidden="true">' +
-          '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-3.8-.8L3 21l1.9-5a8.4 8.4 0 0 1-.8-3.6 8.4 8.4 0 0 1 8.4-8.4 8.4 8.4 0 0 1 8.5 8.5z"/></svg>' +
+          '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.4 8.4 0 0 1-9 8.4 8.9 8.9 0 0 1-3.8-.8L3 21l1.9-5a8.4 8.4 0 0 1-.8-3.6 8.4 8.4 0 0 1 8.4-8.4 8.4 8.4 0 0 1 8.5 8.5z"/></svg>' +
+          '<span class="ari-punkt"></span>' +
         '</span>' +
-        '<span class="ari-launcher-text">' + PACK.openLabel + '</span>' +
+        '<span class="ari-launcher-text">' +
+          '<strong>' + PACK.openLabel + '</strong>' +
+          '<small>' + PACK.subtitle + '</small>' +
+        '</span>' +
       '</button>' +
       '<div class="ari-panel" id="ariPanel" role="dialog" aria-modal="false" aria-labelledby="ariTitle" hidden>' +
         '<header class="ari-head">' +

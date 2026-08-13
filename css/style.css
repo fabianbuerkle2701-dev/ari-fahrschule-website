@@ -842,21 +842,48 @@ html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
    --------------------------------------------------------- */
 .ari-root { position: fixed; right: 22px; bottom: 22px; z-index: 100; font-family: inherit; }
 
+/* Der Knopf ist eine kleine Karte, kein bunter Klecks: heller Grund mit
+   Rand wie die übrigen Karten, davor die goldene Sprechblase mit
+   Bereitschaftspunkt. So gehört er sichtbar zur Seite und schreit nicht. */
 .ari-launcher {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 13px 20px 13px 15px; border: 0; border-radius: var(--radius-pill);
-  background: var(--ink); color: #fff; cursor: pointer;
-  font-family: "Rubik", sans-serif; font-size: .92rem; font-weight: 500;
+  display: inline-flex; align-items: center; gap: 12px;
+  padding: 9px 22px 9px 9px; border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  background: var(--card); color: var(--ink); cursor: pointer;
+  font-family: "Rubik", sans-serif;
   box-shadow: var(--shadow-md);
-  transition: transform .25s var(--ease), background .25s var(--ease);
+  transition: transform .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
 }
-html[data-theme="dark"] .ari-launcher { background: var(--gold); color: #17150c; }
-.ari-launcher:hover { transform: translateY(-2px); }
+.ari-launcher:hover {
+  transform: translateY(-2px);
+  border-color: color-mix(in srgb, var(--gold) 55%, var(--line));
+}
 .ari-launcher-icon {
-  width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center;
+  position: relative;
+  width: 38px; height: 38px; border-radius: 50%; display: grid; place-items: center;
   background: var(--gold); color: #24200f; flex: none;
 }
-html[data-theme="dark"] .ari-launcher-icon { background: #17150c; color: var(--gold); }
+.ari-launcher-text {
+  display: flex; flex-direction: column; align-items: flex-start; line-height: 1.25;
+}
+.ari-launcher-text strong { font-size: .93rem; font-weight: 600; }
+.ari-launcher-text small { font-size: .74rem; color: var(--ink-3); font-weight: 400; }
+
+/* Bereitschaftspunkt, zweimal blinzeln und dann Ruhe */
+.ari-punkt {
+  position: absolute; right: -1px; bottom: -1px;
+  width: 11px; height: 11px; border-radius: 50%;
+  background: #3fbf6a; border: 2px solid var(--card);
+}
+.ari-punkt::after {
+  content: ""; position: absolute; inset: -2px; border-radius: 50%;
+  border: 2px solid #3fbf6a;
+  animation: ariPuls 2.6s ease-out 3;
+}
+@keyframes ariPuls {
+  0% { transform: scale(.7); opacity: .9; }
+  70%, 100% { transform: scale(2.1); opacity: 0; }
+}
 .ari-open .ari-launcher { opacity: 0; pointer-events: none; transform: scale(.9); }
 
 /* [hidden] allein reicht nicht: display:flex unten wuerde es ueberstimmen. */
@@ -864,7 +891,7 @@ html[data-theme="dark"] .ari-launcher-icon { background: #17150c; color: var(--g
 
 .ari-panel {
   position: absolute; right: 0; bottom: 0; width: min(384px, calc(100vw - 32px));
-  height: min(600px, calc(100vh - 48px));
+  height: min(680px, calc(100dvh - 40px));
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: 24px; box-shadow: var(--shadow-md);
@@ -978,7 +1005,7 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
-  .hero-ground::before, .hero-car .felge { animation: none; }
+  .hero-ground::before, .hero-car .felge, .ari-punkt::after { animation: none; }
   *, *::before, *::after {
     animation-duration: .01ms !important; animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
@@ -1067,9 +1094,9 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   .fakt + .fakt::before { display: none; }
   .to-top { bottom: 84px; right: 16px; }
   .ari-root { right: 16px; bottom: 16px; }
-  .ari-launcher-text { display: none; }
-  .ari-launcher { padding: 13px; }
-  .ari-panel { height: min(600px, calc(100dvh - 40px)); }
+  .ari-launcher-text small { display: none; }
+  .ari-launcher { padding: 8px 18px 8px 8px; }
+  .ari-panel { height: min(680px, calc(100dvh - 32px)); }
 }
 
 /* ---------------------------------------------------------
