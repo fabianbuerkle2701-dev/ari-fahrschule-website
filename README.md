@@ -113,7 +113,8 @@ weichen bewusst von der alten Seite ab — dort fehlte Zähringen noch.
 | `golf-8.png` | Bühne, steht auf der Fahrbahn | `Golf-removebg-preview-3.png` |
 | `felge.svg` | drehende Räder, Zahlenband | selbst gezeichnet, deshalb exakt rund |
 | `asphalt-kante.png` | Übergang in das Zahlenband | `carObj-arrow-down.png` |
-| `miftar.jpg` | Abschnitt „Unsere Fahrschule" | Foto von Miftar am Fahrschulwagen |
+| `miftar.jpg` | Abschnitt „Unsere Fahrschule" | Porträt-Zuschnitt aus einem Bestanden-Foto |
+| `bestanden/01–09.jpg` | Bildband „Bestanden" auf der Startseite | neun Fotos vom Schreibtisch, mittig auf 4:5 beschnitten |
 | `theorie-quer.jpg` | randloses Breitbild „Theorieunterricht" | `Mifa.jpg` |
 | `golf-8-klein.png` | fährt im Ablauf die Straße entlang | kleinere Ableitung |
 
@@ -163,10 +164,16 @@ und die Web-Adresse, gespiegelt stünde beides seitenverkehrt da.
       Steuernummer — eine USt-IdNr. beginnt mit „DE“. Bitte richtigstellen.
 - [ ] **Hoster** in der Datenschutzerklärung eintragen und einen
       Auftragsverarbeitungsvertrag abschließen
-- [ ] **Einwilligung für das Theoriefoto:** Auf dem Bild sind Fahrschüler zu
-      erkennen. Das Foto stand schon auf der alten Seite; trotzdem sollte die
-      Einwilligung der Abgebildeten vorliegen. Sonst durch ein Foto ohne
-      erkennbare Gesichter ersetzen.
+- [ ] **Einwilligungen für alle Personenfotos.** Betroffen sind das
+      Theoriefoto (erkennbare Fahrschüler) und die neun Bestanden-Bilder.
+      Unter dem Bildband steht der Satz „Alle Abgebildeten haben der
+      Veröffentlichung zugestimmt." — **dieser Satz muss stimmen.** Wenn für
+      einzelne Bilder keine Einwilligung vorliegt, nimm sie aus
+      `images/bestanden/` heraus und lösche die zugehörige `<figure>` in
+      `index.html`. Bei Minderjährigen unterschreiben die Eltern.
+- [ ] Die Bestanden-Bilder werden bewusst nur 560 px breit ausgeliefert.
+      Auf den Prüfbescheinigungen stehen Namen und Unterschriften — bei
+      dieser Größe sind sie unlesbar. Nicht durch größere Fassungen ersetzen.
 - [ ] **Zwei Wege zur Anmeldung, Telefon zuerst.** Die Schaltflächen in
       Kopfzeile und Bühne wählen direkt 0176 43454447; im Kontaktbereich
       steht der Anruf oben, das Formular darunter als zweiter Weg.

@@ -1242,3 +1242,43 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
 .faq-links { font-size: .9rem; color: var(--ink-3); margin-top: 18px; }
 .faq-links a { color: var(--gold-deep); text-decoration: none; }
 .faq-links a:hover { text-decoration: underline; }
+
+/* ---------------------------------------------------------
+   10. Bestanden
+   Ein waagerechtes Band statt eines hohen Rasters: neun Hochformate
+   untereinander würden die Startseite sprengen. Gewischt wird mit
+   Fangpunkten, damit immer eine Kachel sauber sitzt.
+   --------------------------------------------------------- */
+.bestanden { padding-bottom: clamp(56px, 7vw, 96px); }
+
+.bk-band {
+  display: flex; gap: 16px;
+  overflow-x: auto; scroll-snap-type: x mandatory;
+  padding: 4px clamp(4vw, calc(50vw - var(--shell) / 2), 50vw) 20px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
+  -webkit-overflow-scrolling: touch;
+}
+.bk-band::-webkit-scrollbar { height: 6px; }
+.bk-band::-webkit-scrollbar-thumb { background: var(--line); border-radius: 3px; }
+
+.bk {
+  flex: 0 0 auto; width: clamp(200px, 24vw, 264px); margin: 0;
+  scroll-snap-align: center;
+}
+.bk img {
+  display: block; width: 100%; height: auto; aspect-ratio: 4 / 5;
+  object-fit: cover; border-radius: var(--radius-sm);
+  border: 1px solid var(--line);
+  transition: transform .4s var(--ease);
+}
+.bk:hover img { transform: translateY(-4px); }
+.bk figcaption {
+  margin-top: 10px; font-size: .8rem; color: var(--ink-3); line-height: 1.4;
+}
+.bk-hinweis { font-size: .82rem; color: var(--ink-3); margin-top: 6px; }
+
+@media (max-width: 620px) {
+  .bk { width: 70vw; }
+  .bk-band { padding-inline: 4vw; }
+}
