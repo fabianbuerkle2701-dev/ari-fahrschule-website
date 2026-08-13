@@ -18,6 +18,17 @@ images/original/      unveränderte Dateien aus der alten Seite
 _altbestand/          Sicherung der alten Seiteninhalte als Text
 ```
 
+## Im Netz ansehen
+
+Vorschau: <https://fabianbuerkle2701-dev.github.io/ari-fahrschule-website/>
+
+Das ist eine Vorschau auf GitHub Pages, nicht die Livedomain. Jeder `git push`
+auf `main` veröffentlicht die Änderung nach etwa einer Minute automatisch.
+
+```bash
+git add -A && git commit -m "Was geändert wurde" && git push
+```
+
 ## Lokal ansehen
 
 ```bash
@@ -115,9 +126,10 @@ und die Web-Adresse, gespiegelt stünde beides seitenverkehrt da.
       erkennen. Das Foto stand schon auf der alten Seite; trotzdem sollte die
       Einwilligung der Abgebildeten vorliegen. Sonst durch ein Foto ohne
       erkennbare Gesichter ersetzen.
-- [ ] Kontaktformular: Es öffnet das E-Mail-Programm des Besuchers. Wer
-      stattdessen echten Formularversand will, braucht einen Dienst
-      (z. B. Formspree) — der Block liegt am Ende von `js/main.js`.
+- [ ] **Anmeldung läuft nur telefonisch.** Es gibt bewusst kein Formular:
+      Alle „Anmelden"-Schaltflächen lösen einen Anruf an 0176 43454447 aus.
+      Wenn sich das ändert, sind es die `tel:`-Verweise in `index.html`
+      sowie die Antworten „anmeldung" und „ablauf" in `js/assistant.js`.
 - [ ] Domain umstellen und den Verzeichnisschutz entfernen
 
 ## Was noch fehlt
