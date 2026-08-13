@@ -37,6 +37,23 @@ cd "/Users/fabian/Documents/Claude Code/ari-fahrschule-website" && python3 -m ht
 
 Dann `http://localhost:8815` im Browser öffnen.
 
+## Datenschutz-Bestätigung
+
+Beim ersten Besuch erscheint unten eine schmale Leiste mit einem
+Akzeptieren-Knopf. **Kein Cookie-Banner** — die Seite setzt keine Cookies
+und lädt nichts von Dritten, es gibt also nichts, wofür eine Einwilligung
+nötig wäre. Die Leiste ist eine Kenntnisnahme der Datenschutzerklärung und
+verschwindet dauerhaft, sobald sie einmal bestätigt wurde.
+
+`js/datenschutz-hinweis.js`. Ein Verweis mit dem Attribut
+`data-datenschutz-oeffnen` blendet die Leiste wieder ein, falls sie irgendwo
+erneut erreichbar sein soll. Ändert sich die Verarbeitung, wird `FASSUNG` in
+der Datei hochgezählt — dann wird erneut gefragt.
+
+Der Assistent ist damit verbunden: Läuft er später mit Sprachmodell, fragt er
+vor der ersten Übertragung ausdrücklich nach und antwortet ohne Zustimmung
+weiter aus der lokalen Wissensbasis.
+
 ## Der Assistent
 
 Unten rechts sitzt ein Assistent, der die häufigsten Fragen beantwortet. Er

@@ -403,18 +403,22 @@ html[data-theme="dark"] .strip-item span { color: var(--ink-3); }
 .theorie-photo img {
   width: 100%; height: 100%; object-fit: cover; object-position: center 44%;
 }
+/* Feste Farbwerte, ausdrücklich KEINE Tokens: Der Schleier liegt auf einem
+   Foto, und das Foto dreht im Dunkelschema nicht mit. Mit var(--ink) wurde
+   die Abdunklung im Dunkelmodus fast weiß und der Text unlesbar hell. */
 .theorie-photo::after {
   content: ""; position: absolute; inset: 0;
   background: linear-gradient(to right,
-              color-mix(in srgb, var(--ink) 88%, transparent) 0%,
-              color-mix(in srgb, var(--ink) 62%, transparent) 46%,
-              color-mix(in srgb, var(--ink) 24%, transparent) 100%);
+              rgba(16, 18, 20, .92) 0%,
+              rgba(16, 18, 20, .74) 46%,
+              rgba(16, 18, 20, .34) 100%);
 }
+html[data-theme="dark"] .theorie-photo img { filter: brightness(.82) saturate(.8); }
 .theorie-inner {
   position: relative; z-index: 1;
   padding: clamp(72px, 9vw, 132px) 0;
 }
-.theorie-card { max-width: 620px; color: #fff; }
+.theorie-card { max-width: 620px; color: #fff; }   /* fest hell, siehe oben */
 .theorie-card .eyebrow { color: var(--gold); }
 .theorie-card h2 { color: #fff; }
 .theorie-card h2 + p { margin-top: 20px; }
@@ -948,9 +952,7 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   /* Schmal reicht der seitliche Verlauf nicht: das Bild wird gleichmäßig
      abgedunkelt, sonst steht die rechte Zeilenhälfte auf hellem Grund. */
   .theorie-photo::after {
-    background: linear-gradient(to bottom,
-                color-mix(in srgb, var(--ink) 88%, transparent),
-                color-mix(in srgb, var(--ink) 78%, transparent));
+    background: linear-gradient(to bottom, rgba(16, 18, 20, .9), rgba(16, 18, 20, .82));
   }
   .hero-media { height: calc(var(--header-h) + 30svh); }
   .facts dt { min-width: 74px; font-size: 1.45rem; }
@@ -981,3 +983,38 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   border-radius: var(--radius-sm); padding: 16px 18px; font-size: .9rem; color: var(--ink-2);
 }
 .legal .updated { font-size: .86rem; color: var(--ink-3); margin-top: 48px; }
+
+/* ---------------------------------------------------------
+   8. Bestätigung der Datenschutzerklärung
+   Eine schmale Leiste, kein Sperrbildschirm: Die Seite verarbeitet
+   nichts, worauf gewartet werden müsste. Bewusst einzeilig gehalten,
+   damit sie auf dem Handy nicht die halbe Bühne verdeckt.
+   --------------------------------------------------------- */
+.dh {
+  position: fixed; left: 0; right: 0; bottom: 0; z-index: 120;
+  padding: 0 clamp(12px, 3vw, 24px) clamp(12px, 3vw, 20px);
+  transform: translateY(140%); opacity: 0;
+  transition: transform .45s var(--ease), opacity .35s var(--ease);
+  pointer-events: none;
+}
+.dh-sichtbar { transform: translateY(0); opacity: 1; pointer-events: auto; }
+
+.dh-innen {
+  width: min(760px, 100%); margin-inline: auto;
+  display: flex; align-items: center; gap: 20px; flex-wrap: wrap;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius-pill); padding: 12px 12px 12px 24px;
+  box-shadow: var(--shadow-md);
+}
+.dh-text {
+  flex: 1 1 240px; margin: 0;
+  font-size: .87rem; line-height: 1.5; color: var(--ink-2);
+}
+.dh-text a { color: var(--gold-deep); }
+.dh-ok { flex: 0 0 auto; padding: 11px 26px; font-size: .9rem; }
+
+@media (max-width: 620px) {
+  .dh { padding-bottom: 82px; }             /* Platz für den Assistenten */
+  .dh-innen { border-radius: var(--radius); padding: 16px 18px; }
+  .dh-ok { width: 100%; }
+}

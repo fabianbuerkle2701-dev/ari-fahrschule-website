@@ -420,6 +420,50 @@
       }, thinkTime(PACK.fallback));
     }
 
+    // Mit Sprachmodell verlassen Nachrichten den Browser. Dafuer wird vor
+    // der ersten Uebertragung ausdruecklich gefragt — ohne Zustimmung
+    // antwortet weiter die eingebaute Wissensbasis.
+    function einwilligungEinholen(value) {
+      var box = document.createElement("div");
+      box.className = "ari-handoff";
+
+      var t = document.createElement("span");
+      t.className = "ari-handoff-title";
+      t.textContent = "Einverstanden?";
+      box.appendChild(t);
+
+      var row = document.createElement("div");
+      row.className = "ari-handoff-row";
+
+      var ja = document.createElement("button");
+      ja.type = "button";
+      ja.className = "ari-hbtn ari-hbtn-primary";
+      ja.textContent = "Ja, Frage senden";
+      ja.addEventListener("click", function () {
+        if (window.ariDatenschutz) window.ariDatenschutz.setzen("assistent", true);
+        box.remove();
+        answerViaApi(value);
+      });
+
+      var nein = document.createElement("button");
+      nein.type = "button";
+      nein.className = "ari-hbtn";
+      nein.textContent = "Lieber nicht";
+      nein.addEventListener("click", function () {
+        box.remove();
+        answerLocal(value);
+      });
+
+      row.appendChild(ja);
+      row.appendChild(nein);
+      box.appendChild(row);
+
+      addMsg("bot",
+        "Für eine frei formulierte Antwort wird deine Frage an unseren Dienstleister übertragen und dort verarbeitet.\n\nOhne dein Einverständnis antworte ich weiter aus der eingebauten Liste — das bleibt vollständig in deinem Browser.",
+        box);
+      renderSuggestions();
+    }
+
     function answerViaApi(value) {
       var t = showTyping();
       var ctrl = new AbortController();
@@ -511,7 +555,12 @@
       addMsg("user", v);
       history.push({ role: "user", content: v });
       input.value = "";
-      if (API_URL) answerViaApi(v); else answerLocal(v);
+      if (!API_URL) { answerLocal(v); return; }
+      if (window.ariDatenschutz && !window.ariDatenschutz.erlaubt("assistent")) {
+        einwilligungEinholen(v);
+        return;
+      }
+      answerViaApi(v);
     }
   }
 
