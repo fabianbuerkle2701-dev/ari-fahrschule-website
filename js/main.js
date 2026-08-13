@@ -68,6 +68,19 @@
     toTop.addEventListener("click", function () {
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
+
+    /* Im Fußbereich weicht der Pfeil zurück: dort lag er sonst über
+       "Impressum · Datenschutz". Verloren geht nichts — die Fußzeile hat
+       ihre eigenen Verweise, unter anderem zur Startseite.              */
+    var fuss = document.querySelector(".site-footer");
+    if (fuss && "IntersectionObserver" in window) {
+      var wache = new IntersectionObserver(function (eintraege) {
+        eintraege.forEach(function (e) {
+          toTop.classList.toggle("im-fuss", e.isIntersecting);
+        });
+      }, { rootMargin: "0px 0px -40% 0px" });
+      wache.observe(fuss);
+    }
   }
 
   /* ---------- Einblenden beim Scrollen ---------- */
