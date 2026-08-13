@@ -58,12 +58,10 @@
       if (toTop) toTop.classList.toggle("is-visible", y > 600);
       var max = document.documentElement.scrollHeight - window.innerHeight;
       progress.style.width = max > 0 ? (y / max) * 100 + "%" : "0";
-      aktivenPunktSetzen();
       ticking = false;
     });
   }
   window.addEventListener("scroll", onScroll, { passive: true });
-  window.addEventListener("resize", aktivenPunktSetzen, { passive: true });
   onScroll();
 
   if (toTop) {
@@ -191,36 +189,15 @@
   }
 
   /* ---------- Aktiver Menüpunkt ----------
-     Auf der Startseite wandert die Auszeichnung mit dem Abschnitt mit, in
-     dem man gerade liest; ist keiner im Blick, steht sie auf "Startseite".
-     Bewusst am Scroll-Handler statt am IntersectionObserver: Der wird von
-     manchen Browsern angehalten, sobald der Tab in den Hintergrund
-     rutscht, und die Auszeichnung bliebe dann stehen.
-     Auf den Unterseiten setzt das Markup selbst aria-current.          */
-  var beobachtet = ["standorte", "kontakt"]
-    .map(function (id) { return document.getElementById(id); })
-    .filter(Boolean);
-
-  function markiere(id) {
-    document.querySelectorAll(".main-nav a").forEach(function (a) {
-      var ziel = a.getAttribute("href");
-      var treffer = id ? ziel === "#" + id : ziel === "#top";
-      a.classList.toggle("is-active", treffer);
-    });
-  }
-
-  function aktivenPunktSetzen() {
-    if (!beobachtet || !beobachtet.length) return;
-    // Gedachte Linie bei knapp der halben Fensterhöhe: Was sie schneidet,
-    // liest man gerade.
-    var linie = window.innerHeight * 0.48;
-    var treffer = null;
-    beobachtet.forEach(function (el) {
-      var b = el.getBoundingClientRect();
-      if (b.top <= linie && b.bottom >= linie) treffer = el.id;
-    });
-    markiere(treffer);
-  }
+     Die Auszeichnung meint die Seite, nicht den Abschnitt. Vorher wanderte
+     sie beim Scrollen auf "Standorte" und "Kontakt" und fiel dazwischen —
+     etwa bei den häufigen Fragen, die keinen Menüpunkt haben — wieder auf
+     "Startseite" zurück. Das sah nach Fehler aus, weil ein Menü sagen
+     soll, wo man ist, und nicht, woran man gerade vorbeiscrollt.
+     Auf den Unterseiten steht aria-current im Markup; hier setzt es das
+     Skript, weil die Startseite denselben Kopf verwendet.              */
+  var startpunkt = document.querySelector('.main-nav a[href="#top"]');
+  if (startpunkt) startpunkt.setAttribute("aria-current", "page");
 
   /* ---------- FAQ: immer nur eine Antwort offen ---------- */
   var faqItems = document.querySelectorAll(".faq-item");

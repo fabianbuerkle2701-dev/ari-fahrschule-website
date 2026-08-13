@@ -234,14 +234,12 @@ html[data-theme="dark"] .brand .logo-dark { display: block; }
 
 /* Der aktive Punkt in Gold. Der Rahmen liegt als innerer Schatten an,
    damit die Zeile beim Wechsel nicht um einen Pixel springt. */
-.main-nav a.is-active,
 .main-nav a[aria-current="page"] {
   color: var(--gold-deep);
   background: var(--gold-tint);
   box-shadow: inset 0 0 0 1px color-mix(in srgb, var(--gold) 34%, transparent);
   font-weight: 500;
 }
-.main-nav a.is-active:hover,
 .main-nav a[aria-current="page"]:hover {
   color: var(--gold-deep);
   background: color-mix(in srgb, var(--gold) 18%, transparent);
@@ -1086,7 +1084,6 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   .nav-open .main-nav { transform: translateY(0); opacity: 1; visibility: visible; }
   .main-nav ul { flex-direction: column; align-items: stretch; width: var(--shell); margin-inline: auto; gap: 0; }
   .main-nav a { padding: 15px 4px; font-size: 1.06rem; border-bottom: 1px solid var(--line-soft); border-radius: 0; }
-  .main-nav a.is-active,
   .main-nav a[aria-current="page"] {
     background: transparent; box-shadow: none;
     padding-left: 14px; border-left: 3px solid var(--gold);
