@@ -172,20 +172,37 @@
   }
 
   function countUp(el) {
-    var target = parseInt(el.getAttribute("data-count"), 10);
+    var ziel = parseInt(el.getAttribute("data-count"), 10);
     var suffix = el.getAttribute("data-suffix") || "";
-    if (isNaN(target)) return;
+    if (isNaN(ziel)) return;
+
     var start = null;
-    var dur = 900;
-    function frame(now) {
-      if (start === null) start = now;
-      var p = Math.min(1, (now - start) / dur);
-      var eased = 1 - Math.pow(1 - p, 3);
-      el.textContent = Math.round(target * eased) + suffix;
-      if (p < 1) window.requestAnimationFrame(frame);
+    var dauer = 900;
+    var fertig = false;
+
+    function abschliessen() {
+      if (fertig) return;
+      fertig = true;
+      el.textContent = ziel + suffix;
     }
+
+    function schritt(jetzt) {
+      if (fertig) return;
+      if (start === null) start = jetzt;
+      var p = Math.min(1, (jetzt - start) / dauer);
+      var weich = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ziel * weich) + suffix;
+      if (p < 1) window.requestAnimationFrame(schritt);
+      else abschliessen();
+    }
+
     el.textContent = "0" + suffix;
-    window.requestAnimationFrame(frame);
+    window.requestAnimationFrame(schritt);
+
+    // Sicherheitsnetz: Browser halten requestAnimationFrame an, sobald der
+    // Tab in den Hintergrund rutscht. Ohne das blieben die Zahlen auf null
+    // stehen — genau das war zu sehen.
+    window.setTimeout(abschliessen, dauer + 400);
   }
 
   /* ---------- Aktiver Menüpunkt ----------
