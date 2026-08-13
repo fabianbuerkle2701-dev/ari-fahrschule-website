@@ -1,0 +1,5 @@
+.DS_Store
+
+# Rohmaterial und Sicherungen bleiben lokal — sie gehoeren nicht ins Netz
+images/original/
+_altbestand/

@@ -1,0 +1,49 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100" height="100" role="img" aria-label="Rad">
+  <defs>
+    <radialGradient id="reifen" cx="46%" cy="38%" r="64%">
+      <stop offset="0.6" stop-color="#0f1012"/>
+      <stop offset="0.88" stop-color="#1e2124"/>
+      <stop offset="1" stop-color="#0a0b0c"/>
+    </radialGradient>
+    <linearGradient id="speiche" x1="0.1" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#5a5d61"/>
+      <stop offset="0.45" stop-color="#33363a"/>
+      <stop offset="1" stop-color="#1c1e21"/>
+    </linearGradient>
+    <linearGradient id="lippe" x1="0" y1="0" x2="0.6" y2="1">
+      <stop offset="0" stop-color="#f2f3f3"/>
+      <stop offset="0.4" stop-color="#a9abad"/>
+      <stop offset="0.7" stop-color="#dedfe0"/>
+      <stop offset="1" stop-color="#7d8083"/>
+    </linearGradient>
+    <radialGradient id="topf" cx="40%" cy="34%" r="72%">
+      <stop offset="0" stop-color="#2e3134"/>
+      <stop offset="1" stop-color="#141618"/>
+    </radialGradient>
+  </defs>
+
+  <circle cx="50" cy="50" r="50" fill="url(#reifen)"/>
+  <circle cx="50" cy="50" r="44" fill="none" stroke="#08090a" stroke-width="1.4" opacity=".8"/>
+  <circle cx="50" cy="50" r="41.5" fill="url(#topf)"/>
+
+  <circle cx="50" cy="50" r="24" fill="#26292c"/>
+  <path d="M50 26a24 24 0 0 1 21 12.4l-4.6 2.5A18.8 18.8 0 0 0 50 31Z" fill="#7f8488" opacity=".4"/>
+
+  <path d="M62.48 50.74 C71.86 52.49 79.45 55.72 85.72 60.38 L88.19 55.64 C80.82 53.35 71.96 51.38 63.60 50.28 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M62.48 49.26 C71.86 47.51 79.45 44.28 85.72 39.62 L88.19 44.36 C80.82 46.65 71.96 48.62 63.60 49.72 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M53.15 62.10 C54.39 71.56 53.66 79.78 51.17 87.18 L56.44 88.06 C56.34 80.34 55.47 71.31 53.93 63.02 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M54.56 61.64 C59.12 70.02 64.54 76.24 70.91 80.77 L67.16 84.57 C62.71 78.28 58.10 70.46 54.47 62.84 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M39.47 56.73 C30.85 60.83 22.81 62.68 15.00 62.60 L15.79 67.88 C23.10 65.41 31.42 61.79 38.83 57.76 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M40.34 57.93 C33.78 64.86 29.54 71.94 27.20 79.39 L22.42 77.01 C27.04 70.82 33.05 64.02 39.17 58.22 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M40.34 42.07 C33.78 35.14 29.54 28.06 27.20 20.61 L22.42 22.99 C27.04 29.18 33.05 35.98 39.17 41.78 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M39.47 43.27 C30.85 39.17 22.81 37.32 15.00 37.40 L15.79 32.12 C23.10 34.59 31.42 38.21 38.83 42.24 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M54.56 38.36 C59.12 29.98 64.54 23.76 70.91 19.23 L67.16 15.43 C62.71 21.72 58.10 29.54 54.47 37.16 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+    <path d="M53.15 37.90 C54.39 28.44 53.66 20.22 51.17 12.82 L56.44 11.94 C56.34 19.66 55.47 28.69 53.93 36.98 Z" fill="url(#speiche)" stroke="#e6e7e8" stroke-width=".55" stroke-linejoin="round"/>
+
+  <circle cx="50" cy="50" r="40.2" fill="none" stroke="url(#lippe)" stroke-width="2.6"/>
+  <circle cx="50" cy="50" r="38.4" fill="none" stroke="#0e0f11" stroke-width=".7" opacity=".7"/>
+
+  <circle cx="50" cy="50" r="9.6" fill="#191b1d"/>
+  <circle cx="50" cy="50" r="9.6" fill="none" stroke="url(#lippe)" stroke-width=".9"/>
+  <circle cx="50" cy="50" r="3.6" fill="#c9b41e"/>
+</svg>
