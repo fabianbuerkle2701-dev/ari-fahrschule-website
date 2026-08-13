@@ -5,9 +5,13 @@ keine Datenbank. Zum Ansehen genügt ein beliebiger Webserver, zum Ändern ein
 Texteditor.
 
 ```
-index.html            Startseite, alle Abschnitte
+index.html            Startseite
+fahrschule.html       Über die Fahrschule, Theorie, Fuhrpark
+klassen.html          B, B197, B96 und BE im Detail
+preise.html           Preisaushang nach § 32 FahrlG
 impressum.html        Impressum
 datenschutz.html      Datenschutzerklärung
+_bau/                 Kopf, Fuß und Inhalte der Unterseiten
 css/style.css         gesamte Gestaltung, Farben ganz oben als Variablen
 css/fonts.css         Schriften (liegen lokal unter fonts/)
 js/main.js            Menü, Farbschema, Einblendungen, Kontaktformular
@@ -36,6 +40,26 @@ cd "/Users/fabian/Documents/Claude Code/ari-fahrschule-website" && python3 -m ht
 ```
 
 Dann `http://localhost:8815` im Browser öffnen.
+
+## Unterseiten ändern
+
+Kopf- und Fußbereich liegen einmalig in `_bau/kopf.html` und `_bau/fuss.html`,
+die Texte der drei Unterseiten in `_bau/inhalte.py`. Nach einer Änderung:
+
+```bash
+python3 _bau/baue.py
+```
+
+Damit werden `fahrschule.html`, `klassen.html` und `preise.html` neu erzeugt.
+Die Startseite und die Rechtsseiten werden **nicht** überschrieben — ändert
+sich die Navigation, muss sie dort von Hand nachgezogen werden.
+
+## Preise
+
+Alle Beträge stammen vom Preisaushang nach § 32 Fahrlehrergesetz. Sie stehen
+an drei Stellen und müssen bei einer Änderung überall nachgezogen werden:
+`_bau/inhalte.py` (Preisseite), `index.html` (Verweis auf der Startseite) und
+`js/assistant.js` sowie `assistant-backend/worker.js` (Assistent).
 
 ## Datenschutz-Bestätigung
 

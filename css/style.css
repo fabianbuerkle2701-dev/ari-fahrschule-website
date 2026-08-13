@@ -1126,3 +1126,119 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   .dh-innen { border-radius: var(--radius); padding: 16px 18px; }
   .dh-ok { width: 100%; }
 }
+
+/* ---------------------------------------------------------
+   9. Unterseiten
+   --------------------------------------------------------- */
+.seitenkopf {
+  padding: calc(var(--header-h) + clamp(52px, 7vw, 96px)) 0 clamp(36px, 4.5vw, 60px);
+  border-bottom: 1px solid var(--line-soft);
+}
+.seitenkopf h1 { font-size: clamp(2.2rem, 5.2vw, 4rem); margin-bottom: 22px; }
+.seitenkopf .lead { max-width: 60ch; }
+
+/* --- Preisaushang --- */
+.p-karten { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; }
+.p-karte {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: clamp(24px, 3vw, 36px);
+}
+.p-karte-haupt { border-color: color-mix(in srgb, var(--gold) 45%, var(--line)); }
+
+.p-kopf {
+  display: flex; align-items: baseline; gap: 14px;
+  padding-bottom: 18px; margin-bottom: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.p-klasse {
+  font-family: "Rubik", sans-serif; font-weight: 700;
+  font-size: clamp(1.8rem, 3vw, 2.4rem); letter-spacing: -.03em; color: var(--gold-deep);
+}
+.p-titel { font-size: .95rem; color: var(--ink-3); }
+
+.p-zeile {
+  display: flex; align-items: baseline; justify-content: space-between;
+  gap: 20px; padding: 15px 0; border-bottom: 1px solid var(--line-soft);
+}
+.p-zeile:last-child { border-bottom: 0; }
+.p-was { font-size: .97rem; color: var(--ink); }
+.p-was small { display: block; font-size: .82rem; color: var(--ink-3); margin-top: 3px; line-height: 1.45; }
+.p-wert {
+  font-family: "Rubik", sans-serif; font-weight: 600; font-size: 1.06rem;
+  color: var(--ink); white-space: nowrap; font-variant-numeric: tabular-nums;
+}
+.p-leer { color: var(--ink-3); font-weight: 400; }
+
+.p-extra { display: grid; grid-template-columns: 1fr 1fr; gap: 22px; margin-top: 22px; }
+.p-extra-block {
+  background: var(--gold-tint); border-radius: var(--radius);
+  border: 1px solid color-mix(in srgb, var(--gold) 28%, transparent);
+  padding: clamp(22px, 2.6vw, 32px);
+}
+.p-extra-label {
+  display: block; font-family: "Rubik", sans-serif; font-size: .7rem;
+  font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+  color: var(--gold-deep); margin-bottom: 10px;
+}
+.p-extra-block strong {
+  display: block; font-family: "Rubik", sans-serif; font-size: 1.15rem;
+  font-weight: 600; color: var(--ink); margin-bottom: 8px;
+}
+.p-extra-block p { margin: 0; font-size: .93rem; }
+
+.p-hinweis { margin-top: clamp(40px, 5vw, 64px); max-width: 68ch; }
+.p-hinweis h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin-bottom: 16px; }
+.p-stand { font-size: .86rem; color: var(--ink-3); }
+
+/* --- Klassen im Detail --- */
+.klassen-lang { display: grid; gap: clamp(40px, 5vw, 72px); }
+.kl {
+  display: grid; grid-template-columns: 200px 1fr; gap: clamp(24px, 4vw, 56px);
+  padding-bottom: clamp(40px, 5vw, 72px); border-bottom: 1px solid var(--line-soft);
+}
+.klassen-lang .kl:last-child { border-bottom: 0; padding-bottom: 0; }
+.kl-marke {
+  display: flex; align-items: flex-start; justify-content: center;
+  padding-top: 6px;
+}
+.kl-marke span {
+  font-family: "Rubik", sans-serif; font-weight: 700;
+  font-size: clamp(2.6rem, 5vw, 4rem); letter-spacing: -.04em;
+  color: var(--gold); line-height: 1;
+}
+.kl-text h2 { font-size: clamp(1.5rem, 2.6vw, 2.1rem); margin-bottom: 18px; }
+.kl-text .lead { font-size: 1.08rem; margin-bottom: 18px; }
+.kl-preis { margin-top: 20px; }
+.kl-preis a {
+  font-family: "Rubik", sans-serif; font-weight: 500; font-size: .95rem;
+  color: var(--gold-deep); text-decoration: none;
+  border-bottom: 1px solid color-mix(in srgb, var(--gold) 50%, transparent);
+  padding-bottom: 2px;
+}
+.kl-preis a:hover { border-bottom-color: var(--gold); }
+
+/* --- Verweis auf die Preise auf der Startseite --- */
+.preis-teaser {
+  display: grid; grid-template-columns: 1fr auto; gap: clamp(22px, 3vw, 44px);
+  align-items: center;
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: clamp(26px, 3vw, 40px);
+}
+.pt-zahlen { display: flex; flex-wrap: wrap; gap: 12px 40px; margin-top: 20px; }
+.pt-zahl b {
+  display: block; font-family: "Rubik", sans-serif; font-weight: 700;
+  font-size: clamp(1.5rem, 2.6vw, 2rem); color: var(--gold-deep);
+  letter-spacing: -.02em; font-variant-numeric: tabular-nums;
+}
+.pt-zahl span { font-size: .85rem; color: var(--ink-3); }
+
+@media (max-width: 900px) {
+  .p-karten, .p-extra { grid-template-columns: 1fr; }
+  .kl { grid-template-columns: 1fr; gap: 12px; }
+  .kl-marke { justify-content: flex-start; padding-top: 0; }
+  .preis-teaser { grid-template-columns: 1fr; }
+}
+
+.faq-links { font-size: .9rem; color: var(--ink-3); margin-top: 18px; }
+.faq-links a { color: var(--gold-deep); text-decoration: none; }
+.faq-links a:hover { text-decoration: underline; }

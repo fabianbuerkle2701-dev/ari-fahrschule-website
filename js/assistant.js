@@ -60,9 +60,9 @@
       {
         id: "preis",
         label: "Was kostet der Führerschein?",
-        keywords: ["preis", "preise", "kosten", "kostet", "teuer", "guenstig", "euro", "gebuehr", "zahlen", "bezahlen", "pauschale", "tarif", "rate", "ratenzahlung", "finanzierung"],
+        keywords: ["preis", "preise", "kosten", "kostet", "teuer", "guenstig", "euro", "gebuehr", "zahlen", "bezahlen", "pauschale", "tarif", "rate", "ratenzahlung", "finanzierung", "grundbetrag", "fahrstunde", "preisaushang"],
         answer:
-          "Ehrlich: Eine Pauschale zu nennen, ohne dich zu kennen, wäre unseriös. Der größte Posten sind die Fahrstunden, und wie viele jemand braucht, ist wirklich von Mensch zu Mensch verschieden.\n\nDazu kommen feste Posten wie Grundbetrag, Lernmaterial und die Gebühren für Prüfung und Führerscheinstelle.\n\nRuf kurz an oder komm zu den Bürozeiten vorbei — dann rechnen wir das offen mit dir durch.",
+          "Die festen Posten stehen offen auf der Seite unter Preise, so wie im Preisaushang:\n\n• Klasse B: Grundbetrag 499 €\n• Fahrstunde: 79 € je 45 Minuten\n• Sonderfahrten: 85 € je 45 Minuten\n• Vorstellung zur Theorieprüfung: 79 €, zur praktischen Prüfung: 199 €\n• Klasse BE: Grundbetrag 299 €, zusammen mit B nur 699 €\n• B96-Kurs: 599 €\n\nWas ich dir nicht sagen kann, ist die Endsumme — die hängt daran, wie viele Fahrstunden du brauchst, und das ist von Mensch zu Mensch verschieden. Dazu kommen die amtlichen Gebühren von Führerscheinstelle und Prüforganisation.\n\nRuf kurz an, dann schätzen wir das für deine Situation realistisch ein.",
         handoff: true
       },
       {
