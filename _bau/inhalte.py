@@ -307,5 +307,5 @@ SEITEN = {
     "fahrschule.html": dict(
         titel="Unsere Fahrschule — ARI Fahrschule Freiburg",
         beschreibung="Miftar Rexhepi, seit über zehn Jahren Fahrlehrer, über die ARI Fahrschule in Freiburg, den Theorieunterricht und den Fuhrpark.",
-        inhalt=FAHRSCHULE, aktiv="fahrschule.html"),
+        inhalt=FAHRSCHULE, aktiv=None),
 }
