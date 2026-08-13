@@ -143,10 +143,14 @@ und die Web-Adresse, gespiegelt stünde beides seitenverkehrt da.
       erkennen. Das Foto stand schon auf der alten Seite; trotzdem sollte die
       Einwilligung der Abgebildeten vorliegen. Sonst durch ein Foto ohne
       erkennbare Gesichter ersetzen.
-- [ ] **Anmeldung läuft nur telefonisch.** Es gibt bewusst kein Formular:
-      Alle „Anmelden"-Schaltflächen lösen einen Anruf an 0176 43454447 aus.
-      Wenn sich das ändert, sind es die `tel:`-Verweise in `index.html`
-      sowie die Antworten „anmeldung" und „ablauf" in `js/assistant.js`.
+- [ ] **Zwei Wege zur Anmeldung, Telefon zuerst.** Die Schaltflächen in
+      Kopfzeile und Bühne wählen direkt 0176 43454447; im Kontaktbereich
+      steht der Anruf oben, das Formular darunter als zweiter Weg.
+      Das Formular verschickt nichts selbst, sondern öffnet das
+      E-Mail-Programm des Besuchers mit fertiger Nachricht an
+      Info@fahrschule-ari.de (Block am Ende von `js/main.js`). Wer echten
+      Serverversand will, braucht einen Dienst wie Formspree — dann wird
+      nur dieser Block ersetzt.
 - [ ] Domain umstellen und den Verzeichnisschutz entfernen
 
 ## Was noch fehlt

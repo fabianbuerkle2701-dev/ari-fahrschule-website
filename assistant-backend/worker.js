@@ -32,7 +32,7 @@ WAS WIR ANBIETEN
 - Unterlagen zur Anmeldung: Ausweis oder Pass, biometrisches Lichtbild, Sehtest, Erste-Hilfe-Nachweis
 
 DER WEG ZUM FÜHRERSCHEIN, FÜNF SCHRITTE
-1. Anmeldung telefonisch unter 0176 43454447 oder persönlich in der Fahrschule — eine Online-Anmeldung gibt es bewusst nicht
+1. Anmeldung: bevorzugt telefonisch unter 0176 43454447, alternativ über das Kontaktformular der Webseite oder persönlich in der Fahrschule
 2. Unterlagen: biometrisches Lichtbild, Sehtest, Nachweis Erste-Hilfe-Kurs
 3. Fahrerlaubnis beantragen
 4. Theorieunterricht und theoretische Prüfung

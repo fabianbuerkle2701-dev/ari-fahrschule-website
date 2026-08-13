@@ -204,6 +204,47 @@
     });
   });
 
+  /* ---------- Kontaktformular ----------
+     Die Seite liegt statisch, es gibt also keinen Server, der Post
+     verschicken könnte. Statt ein Formular vorzutäuschen, das ins Leere
+     läuft, öffnen wir das E-Mail-Programm mit fertigem Text an die
+     Adresse der Fahrschule. Wer später einen Formulardienst nutzt
+     (z. B. Formspree), ersetzt nur diesen Block.                       */
+  var MAIL = "Info@fahrschule-ari.de";
+  var form = document.getElementById("contactForm");
+  var status = document.getElementById("formStatus");
+
+  if (form) {
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      var name = form.querySelector("#cf-name");
+      var mail = form.querySelector("#cf-mail");
+      var phone = form.querySelector("#cf-phone");
+      var klasse = form.querySelector("#cf-class");
+      var msg = form.querySelector("#cf-msg");
+      var ds = form.querySelector("#cf-ds");
+
+      if (!name.value.trim()) { name.focus(); sagen("Bitte trag noch deinen Namen ein."); return; }
+      if (!mail.checkValidity()) { mail.focus(); sagen("Die E-Mail-Adresse sieht noch nicht vollständig aus."); return; }
+      if (ds && !ds.checked) { ds.focus(); sagen("Bitte bestätige noch die Datenschutzerklärung."); return; }
+
+      var text =
+        "Name: " + name.value.trim() + "\n" +
+        "Telefon: " + (phone.value.trim() || "—") + "\n" +
+        "E-Mail: " + mail.value.trim() + "\n" +
+        "Klasse: " + klasse.value + "\n\n" +
+        (msg.value.trim() || "(keine Nachricht)") + "\n";
+
+      window.location.href = "mailto:" + MAIL +
+        "?subject=" + encodeURIComponent("Anfrage über die Webseite — " + klasse.value) +
+        "&body=" + encodeURIComponent(text);
+
+      sagen("Dein E-Mail-Programm öffnet sich. Falls nicht: " + MAIL);
+    });
+  }
+  function sagen(text) { if (status) status.textContent = text; }
+
   /* ---------- Jahreszahl in der Fußzeile ---------- */
   var year = document.getElementById("year");
   if (year) year.textContent = String(new Date().getFullYear());

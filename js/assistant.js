@@ -113,7 +113,7 @@
         label: "Wie melde ich mich an?",
         keywords: ["anmelden", "anmeldung", "einschreiben", "registrieren", "starten", "anfangen", "loslegen", "beginnen", "dabei", "aufnehmen", "platz", "warteliste"],
         answer:
-          "Am besten telefonisch: " + PHONE_HUMAN + "\n\nEine Online-Anmeldung gibt es bei uns bewusst nicht — im Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nDu kannst auch einfach zu den Bürozeiten vorbeikommen. Den Antrag füllen wir gemeinsam aus. Mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
+          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\n\nIm Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nWenn dir Schreiben lieber ist, nimm das Formular unten auf der Seite oder schreib an " + MAIL + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus — mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
         handoff: true
       },
       {
@@ -156,7 +156,7 @@
         label: "Wie läuft das alles ab?",
         keywords: ["ablauf", "schritte", "reihenfolge", "wie geht", "was zuerst", "beginnen", "vorgehen", "plan", "weg"],
         answer:
-          "In fünf Schritten:\n\n1. Anruf oder Besuch zu den Bürozeiten — eine Online-Anmeldung gibt es nicht\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen — den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
+          "In fünf Schritten:\n\n1. Anmeldung: am besten telefonisch, sonst über das Formular auf dieser Seite oder persönlich\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen — den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
       },
       {
         id: "dauer",
