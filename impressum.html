@@ -6,8 +6,13 @@
 <title>Impressum — ARI Fahrschule Freiburg</title>
 <meta name="description" content="Impressum und Anbieterkennzeichnung der ARI Fahrschule in Freiburg.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#c9b41e">
+<link rel="canonical" href="https://www.fahrschule-ari.de/impressum.html">
 <link rel="icon" href="images/favicon.ico" sizes="32x32">
+<link rel="icon" href="images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preload" href="fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 <script>
@@ -132,7 +137,7 @@
       <div class="footer-col">
         <h4>Seite</h4>
         <ul>
-          <li><a href="fahrschule.html">Unsere Fahrschule</a></li>
+          <li><a href="index.html">Startseite</a></li>
           <li><a href="klassen.html">Klassen</a></li>
           <li><a href="preise.html">Preise</a></li>
           <li><a href="index.html#ablauf">Ablauf</a></li>
@@ -156,6 +161,11 @@
 
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> ARI Fahrschule Freiburg</span>
+      <span class="bz" id="besucherzaehler" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="bz-text">Besucher bisher</span>
+        <b class="bz-zahl">0</b>
+      </span>
       <span>
         <a href="impressum.html">Impressum</a> ·
         <a href="datenschutz.html">Datenschutz</a>
@@ -165,5 +175,6 @@
 </footer>
 
 <script src="js/datenschutz-hinweis.js" defer></script>
+<script src="js/zaehler.js" defer></script>
 </body>
 </html>

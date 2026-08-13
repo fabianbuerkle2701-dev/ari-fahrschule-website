@@ -6,8 +6,13 @@
 <title>Datenschutz — ARI Fahrschule Freiburg</title>
 <meta name="description" content="Datenschutzerklärung der ARI Fahrschule in Freiburg.">
 <meta name="robots" content="noindex">
+<meta name="theme-color" content="#c9b41e">
+<link rel="canonical" href="https://www.fahrschule-ari.de/datenschutz.html">
 <link rel="icon" href="images/favicon.ico" sizes="32x32">
+<link rel="icon" href="images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+<link rel="preload" href="fonts/rubik-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/onest-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 <script>
@@ -113,11 +118,26 @@
       antwortet der Assistent weiterhin ausschließlich aus der im Browser hinterlegten Liste.
     </p>
 
+    <h2>Besucherzähler</h2>
+    <p>
+      Im Fußbereich steht die Zahl der bisherigen Besuche. Dafür ruft die Seite einen von uns
+      selbst betriebenen Dienst auf, der genau eine Zahl speichert: den Zählerstand. Es werden
+      weder IP-Adressen noch Zeitpunkte, Kennungen oder sonstige Merkmale der Besucher
+      gespeichert, und es findet keine Auswertung statt. Ein Rückschluss auf einzelne Personen
+      ist damit ausgeschlossen. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO — das berechtigte
+      Interesse, die Reichweite der eigenen Seite grob einzuschätzen.
+    </p>
+    <p>
+      Damit das Blättern zwischen den Seiten nicht mehrfach zählt, merkt sich dein Browser für
+      die Dauer der Sitzung, dass bereits gezählt wurde. Diese Angabe verlässt dein Gerät nicht
+      und wird beim Schließen des Browsers gelöscht.
+    </p>
+
     <h2>Lokale Speicherung</h2>
     <p>
-      Wir setzen keine Cookies. Im lokalen Speicher deines Browsers werden genau zwei Angaben
-      abgelegt: deine Wahl des Farbschemas (hell oder dunkel) und die Bestätigung, dass du den
-      Datenschutzhinweis gesehen hast. Beides verlässt dein Gerät nicht und lässt keine
+      Wir setzen keine Cookies. Im lokalen Speicher deines Browsers werden genau drei Angaben
+      abgelegt: deine Wahl des Farbschemas (hell oder dunkel), die Bestätigung, dass du den
+      Datenschutzhinweis gesehen hast, und der oben genannte Sitzungsvermerk des Zählers. Beides verlässt dein Gerät nicht und lässt keine
       Rückschlüsse auf dich zu.
     </p>
     <p>
@@ -170,7 +190,7 @@
       <div class="footer-col">
         <h4>Seite</h4>
         <ul>
-          <li><a href="fahrschule.html">Unsere Fahrschule</a></li>
+          <li><a href="index.html">Startseite</a></li>
           <li><a href="klassen.html">Klassen</a></li>
           <li><a href="preise.html">Preise</a></li>
           <li><a href="index.html#ablauf">Ablauf</a></li>
@@ -194,6 +214,11 @@
 
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> ARI Fahrschule Freiburg</span>
+      <span class="bz" id="besucherzaehler" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="bz-text">Besucher bisher</span>
+        <b class="bz-zahl">0</b>
+      </span>
       <span>
         <a href="impressum.html">Impressum</a> ·
         <a href="datenschutz.html">Datenschutz</a>
@@ -203,5 +228,6 @@
 </footer>
 
 <script src="js/datenschutz-hinweis.js" defer></script>
+<script src="js/zaehler.js" defer></script>
 </body>
 </html>

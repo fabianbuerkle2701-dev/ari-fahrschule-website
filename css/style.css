@@ -1282,3 +1282,15 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   .bk { width: 70vw; }
   .bk-band { padding-inline: 4vw; }
 }
+
+/* --- Besucherzähler im Fußbereich --- */
+.bz {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: .83rem; color: rgba(255, 255, 255, .55);
+}
+html[data-theme="dark"] .bz { color: var(--ink-3); }
+.bz svg { width: 15px; height: 15px; opacity: .7; }
+.bz-zahl {
+  font-family: "Rubik", sans-serif; font-weight: 600;
+  color: var(--gold); font-variant-numeric: tabular-nums;
+}

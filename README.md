@@ -16,7 +16,9 @@ css/style.css         gesamte Gestaltung, Farben ganz oben als Variablen
 css/fonts.css         Schriften (liegen lokal unter fonts/)
 js/main.js            Menü, Farbschema, Einblendungen, Kontaktformular
 js/assistant.js       der Assistent samt Wissensbasis
+js/zaehler.js         Besucherzähler im Fußbereich
 assistant-backend/    optionales KI-Backend, siehe README dort
+besucher-backend/     Zähl-Dienst für den Besucherzähler, siehe README dort
 images/               ausgelieferte Bilder
 images/original/      unveränderte Dateien aus der alten Seite
 _altbestand/          Sicherung der alten Seiteninhalte als Text
@@ -60,6 +62,24 @@ Alle Beträge stammen vom Preisaushang nach § 32 Fahrlehrergesetz. Sie stehen
 an drei Stellen und müssen bei einer Änderung überall nachgezogen werden:
 `_bau/inhalte.py` (Preisseite), `index.html` (Verweis auf der Startseite) und
 `js/assistant.js` sowie `assistant-backend/worker.js` (Assistent).
+
+## Besucherzähler
+
+Im Fußbereich steht „Du bist Besucher Nr. …". Die Zahl kommt von einem
+eigenen Cloudflare Worker (`besucher-backend/`), **nicht** von einem fremden
+Zähldienst — solche Dienste bezahlen sich mit den Daten der Besucher, und die
+Seite lädt sonst nichts von Dritten.
+
+Solange kein Dienst eingetragen ist, bleibt die Zeile **unsichtbar**. Es wird
+nie eine erfundene Zahl angezeigt. Zum Aktivieren die Worker-Adresse in allen
+HTML-Dateien eintragen:
+
+```html
+<script src="js/zaehler.js" data-api="https://ari-zaehler.DEIN-NAME.workers.dev" defer></script>
+```
+
+Gezählt wird einmal je Besuchssitzung, nicht je Seitenaufruf. Gespeichert
+wird ausschließlich die Zahl selbst — keine IP, kein Zeitpunkt, kein Merkmal.
 
 ## Datenschutz-Bestätigung
 

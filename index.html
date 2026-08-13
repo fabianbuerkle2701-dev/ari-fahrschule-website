@@ -362,8 +362,8 @@
         <li class="road-step reveal">
           <span class="road-num">1</span>
           <h3>Anmeldung</h3>
-          <p>Über das Formular auf dieser Seite, telefonisch oder persönlich
-             zu den Bürozeiten.</p>
+          <p>Telefonisch, über das <a href="#kontakt">Formular weiter unten</a>
+             oder persönlich zu den Bürozeiten.</p>
         </li>
         <li class="road-step reveal reveal-delay-1">
           <span class="road-num">2</span>
@@ -790,7 +790,7 @@
       <div class="footer-col">
         <h4>Seite</h4>
         <ul>
-          <li><a href="fahrschule.html">Unsere Fahrschule</a></li>
+          <li><a href="#top">Startseite</a></li>
           <li><a href="klassen.html">Klassen</a></li>
           <li><a href="preise.html">Preise</a></li>
           <li><a href="#ablauf">Ablauf</a></li>
@@ -814,6 +814,11 @@
 
     <div class="footer-bottom">
       <span>© <span id="year">2026</span> ARI Fahrschule Freiburg</span>
+      <span class="bz" id="besucherzaehler" hidden>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7-10-7-10-7Z"/><circle cx="12" cy="12" r="3"/></svg>
+        <span class="bz-text">Besucher bisher</span>
+        <b class="bz-zahl">0</b>
+      </span>
       <span>
         <a href="impressum.html">Impressum</a> ·
         <a href="datenschutz.html">Datenschutz</a>
@@ -827,6 +832,7 @@
 </button>
 
 <script src="js/datenschutz-hinweis.js" defer></script>
+<script src="js/zaehler.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/assistant.js" defer></script>
 </body>

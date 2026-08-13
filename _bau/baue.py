@@ -42,6 +42,13 @@ def seite(datei, titel, beschreibung, inhalt, aktiv=None):
 <title>{titel}</title>
 <meta name="description" content="{beschreibung}">
 <meta name="theme-color" content="#c9b41e">
+<link rel="canonical" href="https://www.fahrschule-ari.de/{datei}">
+<meta property="og:type" content="website">
+<meta property="og:title" content="{titel}">
+<meta property="og:description" content="{beschreibung}">
+<meta property="og:url" content="https://www.fahrschule-ari.de/{datei}">
+<meta property="og:image" content="https://www.fahrschule-ari.de/images/golf-8.png">
+<meta property="og:locale" content="de_DE">
 <link rel="icon" href="images/favicon.ico" sizes="32x32">
 <link rel="icon" href="images/favicon-64.png" type="image/png" sizes="64x64">
 <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
@@ -72,6 +79,7 @@ def seite(datei, titel, beschreibung, inhalt, aktiv=None):
 </button>
 
 <script src="js/datenschutz-hinweis.js" defer></script>
+<script src="js/zaehler.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/assistant.js" defer></script>
 </body>
