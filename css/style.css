@@ -38,6 +38,10 @@
   --radius-sm: 8px;
   --radius-pill: 999px;
 
+  /* Der Asphalt unter der Bühne. Bewusst ein fester Wert und kein Token,
+     das im Dunkelmodus kippt: Die Fahrbahn ist in beiden Modi dunkel. */
+  --asphalt: #1f2022;
+
   --shadow-sm: 0 1px 2px rgba(44, 45, 44, .04), 0 6px 20px rgba(44, 45, 44, .05);
   --shadow-md: 0 2px 6px rgba(44, 45, 44, .06), 0 18px 44px rgba(44, 45, 44, .09);
 
@@ -303,7 +307,12 @@ html[data-theme="dark"] .theme-toggle .sun { display: none; }
    Kein weicher Verlauf ueber das Bild: eine harte Kante liest sich als
    Absicht, ein Verlauf als Baukasten. Und es steht kein Wort auf dem
    Foto, damit ist der Kontrast unabhaengig vom Farbschema gesichert. */
-.hero { position: relative; padding: 0; }
+/* Die Fahrbahn hört nicht am Ende der Bühne auf: Sie läuft unter der
+   Info-Leiste weiter und geht in das Zahlenband über. Vorher stand eine
+   weisse Leiste zwischen zwei dunklen Bändern, das zerschnitt den Asphalt
+   in zwei Stücke. Der Hero traegt deshalb den Asphalt, die Bühne legt
+   ihren hellen Grund darüber. */
+.hero { position: relative; padding: 0; background: var(--asphalt); }
 
 .hero-stage {
   position: relative;
@@ -311,6 +320,7 @@ html[data-theme="dark"] .theme-toggle .sun { display: none; }
   min-height: clamp(560px, 86svh, 820px);
   display: flex; align-items: center;
   padding: calc(var(--header-h) + clamp(32px, 5vw, 64px)) 0 clamp(196px, 23vw, 286px);
+  background: var(--paper);
   overflow: hidden;
 }
 
@@ -333,9 +343,12 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
               color-mix(in srgb, var(--ink-2) 22%, transparent));
   mix-blend-mode: multiply;
 }
-/* Haarlinie auf der Naht: macht aus zwei Flaechen eine Komposition */
+/* Haarlinie auf der Naht: macht aus zwei Flaechen eine Komposition.
+   Sie endet an der Fahrbahn. Vorher lief sie darüber hinweg, weil sie
+   über der Fahrbahn liegt – das sah aus wie ein Strich auf der Strasse. */
 .hero-media::before {
-  content: ""; position: absolute; inset: 0 auto 0 0; width: 1px; z-index: 2;
+  content: ""; position: absolute; z-index: 2; width: 1px;
+  inset: 0 auto clamp(84px, 10vw, 122px) 0;
   background: color-mix(in srgb, var(--gold) 55%, transparent);
 }
 
@@ -376,7 +389,7 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
 .hero-ground {
   position: absolute; left: 0; right: 0; bottom: 0;
   height: clamp(84px, 10vw, 122px);
-  background: #1f2022;
+  background: var(--asphalt);
   z-index: 0;
 }
 html[data-theme="dark"] .hero-ground { box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08); }
@@ -409,13 +422,14 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 @keyframes einfahrt { from { opacity: 0; transform: translateX(38px); } }
 
 /* --- Info-Leiste unter der Bühne ---
-   Vier Spalten, getrennt durch Haarlinien. Bewusst kein Kasten mit
-   Schatten: Die Bühne endet hart mit der Fahrbahn, danach soll die
-   Seite ruhig weitergehen. */
+   Vier Spalten, getrennt durch Haarlinien, stehend auf der Fahrbahn.
+   Die Leiste ist in beiden Modi dunkel, deshalb sind die Farben hier
+   fest notiert: Token wie --ink kippen im Dunkelmodus ins Helle und
+   die Schrift wäre dann auf dem Asphalt nicht mehr zu lesen. */
 .fakten {
   display: grid; grid-template-columns: repeat(4, 1fr);
-  margin: 0; padding: clamp(26px, 3vw, 40px) 0 0;
-  border-top: 1px solid var(--line);
+  margin: 0;
+  padding: clamp(30px, 3.4vw, 46px) 0 clamp(32px, 3.6vw, 50px);
 }
 .fakt {
   position: relative;
@@ -426,26 +440,28 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 .fakt + .fakt { padding-left: clamp(18px, 2.4vw, 32px); }
 .fakt + .fakt::before {
   content: ""; position: absolute; left: 0; top: 2px; bottom: 6px;
-  width: 1px; background: var(--line);
+  width: 1px; background: rgba(255, 255, 255, .13);
 }
 .fakt-icon {
   grid-row: span 3; width: 34px; height: 34px; border-radius: var(--radius-sm);
   display: grid; place-items: center; margin-top: 2px;
-  background: var(--gold-tint); color: var(--gold-deep);
-  border: 1px solid color-mix(in srgb, var(--gold) 22%, transparent);
+  background: rgba(201, 180, 30, .15); color: var(--gold);
+  border: 1px solid rgba(201, 180, 30, .34);
 }
 .fakt-icon svg { width: 17px; height: 17px; }
 .fakt-label {
   font-family: "Rubik", sans-serif; font-size: .68rem; font-weight: 600;
-  letter-spacing: .16em; text-transform: uppercase; color: var(--gold-deep);
+  letter-spacing: .16em; text-transform: uppercase; color: var(--gold);
 }
 .fakt-wert {
   font-family: "Rubik", sans-serif; font-size: 1.02rem; font-weight: 500;
-  color: var(--ink); text-decoration: none; margin-top: 3px;
+  color: #f6f6f4; text-decoration: none; margin-top: 3px;
   transition: color .2s var(--ease);
 }
-a.fakt-wert:hover { color: var(--gold-deep); }
-.fakt-zusatz { font-size: .82rem; color: var(--ink-3); margin-top: 4px; line-height: 1.45; }
+@media (hover: hover) and (pointer: fine) {
+  a.fakt-wert:hover { color: var(--gold); }
+}
+.fakt-zusatz { font-size: .82rem; color: rgba(255, 255, 255, .62); margin-top: 4px; line-height: 1.45; }
 
 /* Die Anmeldung ist die wichtigste Spalte, also bekommt sie mehr Gewicht */
 .fakt-ruf .fakt-icon { background: var(--gold); color: #24200f; border-color: var(--gold); }
@@ -454,7 +470,9 @@ a.fakt-wert:hover { color: var(--gold-deep); }
 /* --- Zahlenband --- */
 .strip {
   position: relative; overflow: hidden;
-  background: var(--ink); color: #fff;
+  /* Derselbe Asphalt wie Fahrbahn und Info-Leiste. Gleicher Ton heisst:
+     Der Übergang ist allein die Asphaltkante, keine gerade Farbkante. */
+  background: var(--asphalt); color: #fff;
   padding: clamp(64px, 7vw, 92px) 0 clamp(40px, 4vw, 56px);
 }
 /* Asphaltkante aus dem Bestand der alten Seite, als Übergang nach oben */
@@ -469,7 +487,9 @@ a.fakt-wert:hover { color: var(--gold-deep); }
   opacity: .1; pointer-events: none;
   transform: rotate(calc(var(--spin, 0) * 1turn));
 }
-html[data-theme="dark"] .strip { background: var(--surface); border-block: 1px solid var(--line); }
+/* Oben keine Linie: Da liegt der Asphalt der Info-Leiste an, den soll
+   nur die Asphaltkante ablösen. Unten trennt die Linie zum hellen Grund. */
+html[data-theme="dark"] .strip { background: var(--surface); border-bottom: 1px solid var(--line); }
 .strip-grid {
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 28px;
 }
@@ -1185,7 +1205,7 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   .road-run { height: 84px; }
   .fakten { grid-template-columns: 1fr; row-gap: 0; }
   .fakt { padding: 16px 0; }
-  .fakt + .fakt { padding-left: 0; border-top: 1px solid var(--line-soft); }
+  .fakt + .fakt { padding-left: 0; border-top: 1px solid rgba(255, 255, 255, .11); }
   .fakt + .fakt::before { display: none; }
   .to-top { bottom: 96px; right: 16px; }
   .ari-root { right: 16px; bottom: 30px; }
@@ -1465,7 +1485,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
   .strip { padding: clamp(52px, 14vw, 76px) 0 clamp(32px, 8vw, 46px); }
   .strip-grid { gap: 26px 18px; }
 
-  .fakten { padding-top: 24px; }
+  .fakten { padding-top: 24px; padding-bottom: 26px; }
   .about-grid, .contact-grid, .faq-wrap { gap: 28px; }
   .values { gap: 8px; margin-top: 20px; }
   .values li { padding: 7px 13px; font-size: .84rem; }
