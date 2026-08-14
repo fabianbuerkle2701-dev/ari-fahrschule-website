@@ -32,6 +32,21 @@
   } catch (e) {}
 </script>
 
+<script>
+  // Auftakt: Die Fahrbahn liegt beim ersten Aufruf einer Sitzung über der
+  // Seite und faehrt danach auseinander. Die Entscheidung faellt hier oben,
+  // noch vor dem ersten Anzeigen, sonst blitzt die Seite kurz auf, bevor
+  // der Asphalt daraufliegt. Wer weniger Bewegung eingestellt hat, direkt
+  // auf einen Abschnitt springt oder schon da war, bekommt die Seite sofort.
+  try {
+    var ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!ruhig && !location.hash && !sessionStorage.getItem("ari-auftakt")) {
+      document.documentElement.classList.add("auftakt-laeuft");
+      sessionStorage.setItem("ari-auftakt", "1");
+    }
+  } catch (e) {}
+</script>
+
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
@@ -89,6 +104,15 @@
 <body>
 
 <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+<!-- Auftakt: zwei Flaechen Asphalt, ober- und unterhalb der Fahrbahn der
+     Bühne. Reine Zierde, deshalb aria-hidden und ohne Zeigerereignisse.
+     Die Bewegung steckt vollstaendig im CSS: Faellt das Skript aus, faehrt
+     der Vorhang trotzdem auf und die Seite ist da. -->
+<div class="auftakt" aria-hidden="true">
+  <span class="auftakt-oben"></span>
+  <span class="auftakt-unten"></span>
+</div>
 
 <!-- ===================== Kopfzeile ===================== -->
 <header class="site-header" id="siteHeader">

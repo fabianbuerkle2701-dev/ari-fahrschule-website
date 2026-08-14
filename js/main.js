@@ -10,6 +10,47 @@
   var mainNav = document.getElementById("mainNav");
   var toTop = document.getElementById("toTop");
 
+  /* ---------- Auftakt ----------
+     Die Klasse setzt das Kopfskript, damit schon vor dem ersten Anzeigen
+     Asphalt über der Seite liegt. Hier bleibt dreierlei: die Naht auf die
+     echte Fahrbahn legen, jeden Eingriff sofort gelten lassen und danach
+     aufraeumen. Die Bewegung selbst macht das CSS. */
+  var wurzel = document.documentElement;
+  if (wurzel.classList.contains("auftakt-laeuft")) {
+    var strasse = document.querySelector(".hero-ground");
+    var kasten = strasse ? strasse.getBoundingClientRect() : null;
+    // Ohne brauchbare Messung kein Vorhang: Stellt der Browser eine alte
+    // Scrollposition wieder her oder steht die Bühne noch nicht, laege die
+    // Naht an der falschen Stelle. Dann lieber gleich die fertige Seite.
+    if (!kasten || kasten.height < 1 || window.scrollY > 4) {
+      wurzel.classList.remove("auftakt-laeuft");
+      wurzel.classList.add("auftakt-fertig");
+    } else {
+      // Bewusst in Pixeln, nicht in Prozent der Fensterhoehe: Die steht in
+      // eingebetteten Ansichten zum Messzeitpunkt noch auf null.
+      // Drei Pixel Überlappung in die Fahrbahn hinein, damit beim Öffnen
+      // kein heller Streifen der Bühne aufblitzt, falls die Messung um
+      // eine Kleinigkeit danebenliegt.
+      wurzel.style.setProperty("--auftakt-naht", Math.round(kasten.top + 3) + "px");
+      wurzel.style.setProperty("--auftakt-fuss", Math.round(kasten.bottom - 3) + "px");
+
+      var eingriffe = ["pointerdown", "keydown", "wheel", "touchstart"];
+      var beenden = function () {
+        wurzel.classList.remove("auftakt-laeuft");
+        // Ohne diese Klasse liefe die Einfahrt der Bühne jetzt noch einmal:
+        // Der Wagen bekaeme wieder eine Animation und ruckte zurueck.
+        wurzel.classList.add("auftakt-fertig");
+        var vorhang = document.querySelector(".auftakt");
+        if (vorhang && vorhang.parentNode) vorhang.parentNode.removeChild(vorhang);
+        eingriffe.forEach(function (art) { window.removeEventListener(art, beenden); });
+      };
+      eingriffe.forEach(function (art) {
+        window.addEventListener(art, beenden, { passive: true });
+      });
+      window.setTimeout(beenden, 1250);
+    }
+  }
+
   /* ---------- Farbschema ---------- */
   var themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {

@@ -421,6 +421,63 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 @keyframes felgeLinks { to { transform: rotate(-1turn); } }
 @keyframes einfahrt { from { opacity: 0; transform: translateX(38px); } }
 
+/* --- Auftakt: die Fahrbahn öffnet die Seite ---
+   Beim ersten Aufruf einer Sitzung liegt Asphalt über der Seite. Der
+   Wagen faehrt von rechts herein – er zeigt nach links, also faehrt er
+   auch nach links – und danach faehrt der Asphalt ober- und unterhalb
+   der Fahrbahn auseinander.
+
+   Der Streifen mit der Fahrbahn selbst wird nie verdeckt: Dort liegt
+   schon die echte Strasse der Bühne im selben Ton. Beim Öffnen bleibt
+   sie deshalb einfach stehen, waehrend darüber die Überschrift und
+   darunter die Info-Leiste frei werden. Das letzte Bild des Auftakts
+   ist das erste Bild der Seite.
+
+   Die Bewegung liegt bewusst im CSS und laeuft mit forwards aus. Bleibt
+   das Skript aus, oeffnet sich der Vorhang trotzdem; Klicks faengt er
+   ohnehin nie ab. Wo genau geteilt wird, misst das Skript und legt es in
+   --auftakt-naht. Der Vorgabewert teilt ohne Lücke, damit vor der Messung
+   nichts durchscheint. */
+.auftakt { display: none; }
+.auftakt-laeuft .auftakt { display: block; }
+.auftakt span {
+  position: fixed; left: 0; right: 0; z-index: 80;
+  background: var(--asphalt); pointer-events: none;
+}
+.auftakt-oben {
+  top: 0; height: var(--auftakt-naht, 70%);
+  animation: auftaktOben 440ms var(--ease) 760ms forwards;
+}
+.auftakt-unten {
+  top: var(--auftakt-fuss, 70%); bottom: 0;
+  animation: auftaktUnten 440ms var(--ease) 760ms forwards;
+}
+@keyframes auftaktOben  { to { transform: translateY(-100%); } }
+@keyframes auftaktUnten { to { transform: translateY(100%); } }
+
+/* Der Wagen faehrt über dem Vorhang, aber unter der Kopfzeile: "Anrufen"
+   ist ab der ersten Millisekunde erreichbar. */
+.auftakt-laeuft .hero-car { z-index: 85; }
+.auftakt-laeuft .hero-car .wagen {
+  animation: auftaktWagen 780ms cubic-bezier(.16, .84, .44, 1) 60ms backwards;
+}
+@keyframes auftaktWagen { from { transform: translateX(118vw); } }
+/* Nach dem Auftakt steht der Wagen. Ohne das liefe die Einfahrt der Bühne
+   ein zweites Mal, sobald die Auftaktklasse faellt. */
+.auftakt-fertig .hero-car .wagen { animation: none; }
+
+/* Die Überschrift kommt an, waehrend der Asphalt sie freigibt. */
+.auftakt-laeuft .hero-copy {
+  animation: auftaktText 380ms var(--ease) 800ms backwards;
+}
+@keyframes auftaktText { from { opacity: 0; transform: translateY(14px); } }
+
+/* Alles, was fest über der Seite schwebt, tritt so lange zurück. Beide
+   haben eigene Überblendungen, sie kommen danach von selbst wieder. */
+.ari-root { transition: opacity .45s var(--ease); }
+.auftakt-laeuft .ari-root { opacity: 0; pointer-events: none; }
+.auftakt-laeuft .dh { transform: translateY(140%); opacity: 0; }
+
 /* --- Info-Leiste unter der Bühne ---
    Vier Spalten, getrennt durch Haarlinien, stehend auf der Fahrbahn.
    Die Leiste ist in beiden Modi dunkel, deshalb sind die Farben hier
