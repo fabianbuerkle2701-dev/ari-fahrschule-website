@@ -1,5 +1,5 @@
 /* =========================================================
-   ARI Fahrschule Freiburg — Gestaltung
+   ARI Fahrschule Freiburg – Gestaltung
    Farben aus dem Logo: Gold, Anthrazit, Creme.
    Aufbau: 1. Grundlagen  2. Bausteine  3. Abschnitte
            4. Assistent   5. Bewegung   6. Schmale Bildschirme
@@ -11,7 +11,7 @@
 :root {
   /* Farben direkt aus dem Logo: Weiss, Gold, das Grau der Wortmarke.
      Die Textwerte sind so weit abgedunkelt, dass sie den Kontrast
-     nach WCAG AA schaffen — reines Logo-Gold auf Weiss tut das nicht. */
+     nach WCAG AA schaffen – reines Logo-Gold auf Weiss tut das nicht. */
   --gold: #c9b41e;          /* Logo-Gold, für Flächen und Linien */
   --gold-titel: #a89413;    /* große Schrift: 3,0:1 auf Weiss */
   --gold-deep: #7e6d0a;     /* kleine Schrift: 5,2:1 auf Weiss */
@@ -41,7 +41,8 @@
   --shadow-sm: 0 1px 2px rgba(44, 45, 44, .04), 0 6px 20px rgba(44, 45, 44, .05);
   --shadow-md: 0 2px 6px rgba(44, 45, 44, .06), 0 18px 44px rgba(44, 45, 44, .09);
 
-  --ease: cubic-bezier(.22, .68, .32, 1);
+  --ease: cubic-bezier(.22, .68, .32, 1);      /* lange Einfahrten */
+  --ease-out: cubic-bezier(.23, 1, .32, 1);    /* kurze Rückmeldungen */
   --header-h: 76px;
 }
 
@@ -72,6 +73,9 @@ html[data-theme="dark"] {
 *, *::before, *::after { box-sizing: border-box; }
 
 html {
+  /* Erlaubt das Überblenden auf height/block-size: auto. Ohne das lässt
+     sich eine Antwort unbekannter Höhe nicht animieren. */
+  interpolate-size: allow-keywords;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   -webkit-text-size-adjust: 100%;
@@ -135,6 +139,29 @@ ul { margin: 0; padding: 0; list-style: none; }
 }
 .skip-link:focus { transform: translate(-50%, 0); }
 
+/* --- Seitenwechsel ---------------------------------------
+   Beim Klick auf Klassen oder Preise blitzte die Seite weiß auf und
+   Kopfzeile samt Logo sprangen neu ins Bild. Mit benannten Elementen
+   bleiben sie stehen, nur der Inhalt blendet über. Browser, die das
+   nicht kennen, laden wie bisher – es fehlt ihnen nichts.        */
+@view-transition { navigation: auto; }
+
+.site-header { view-transition-name: kopfzeile; }
+.site-header .brand { view-transition-name: wortmarke; }
+.site-footer { view-transition-name: fusszeile; }
+.ari-root { view-transition-name: assistent; }
+
+::view-transition-old(root),
+::view-transition-new(root) { animation-duration: 220ms; }
+
+/* Kopf- und Fußzeile sollen nicht überblenden, sondern schlicht bleiben. */
+::view-transition-old(kopfzeile),
+::view-transition-new(kopfzeile),
+::view-transition-old(fusszeile),
+::view-transition-new(fusszeile),
+::view-transition-old(assistent),
+::view-transition-new(assistent) { animation: none; mix-blend-mode: normal; }
+
 /* ---------------------------------------------------------
    2. Bausteine
    --------------------------------------------------------- */
@@ -146,12 +173,16 @@ ul { margin: 0; padding: 0; list-style: none; }
   font-family: "Rubik", sans-serif; font-size: .95rem; font-weight: 500;
   padding: 15px 28px; border-radius: var(--radius-pill);
   border: 1px solid transparent; cursor: pointer; text-decoration: none;
-  transition: transform .25s var(--ease), background .25s var(--ease),
+  transition: transform 140ms var(--ease-out), background .25s var(--ease),
               color .25s var(--ease), border-color .25s var(--ease), box-shadow .25s var(--ease);
   white-space: nowrap;
 }
-.btn:hover { transform: translateY(-2px); }
-.btn:active { transform: translateY(0); }
+/* Hover nur dort, wo es einen Zeiger gibt: Auf Tastgeräten bliebe der
+   Zustand sonst nach dem Tippen kleben. */
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover { transform: translateY(-2px); }
+}
+.btn:active { transform: scale(.97); }
 .btn svg { width: 17px; height: 17px; flex: none; }
 
 .btn-primary { background: var(--ink); color: var(--paper); box-shadow: var(--shadow-sm); }
@@ -180,6 +211,20 @@ html[data-theme="dark"] .btn-gold { color: #17150c; }
   background: var(--gold-tint); color: var(--gold-deep);
   border: 1px solid color-mix(in srgb, var(--gold) 24%, transparent);
 }
+
+/* Alles, was man drückt, antwortet gleich. Der Wert bleibt bewusst
+   knapp unter der Wahrnehmungsschwelle: Man sieht es nicht, man merkt es. */
+.icon-btn:active,
+.ari-launcher:active,
+.ari-send:active,
+.ari-chip:active,
+.ari-hbtn:active,
+.contact-card:active,
+.anruf-nummer:active,
+.kl-mehr:active,
+.zustimmung:active input { transform: scale(.97); }
+.ari-send { transition: background .2s var(--ease), transform 140ms var(--ease-out); }
+.contact-card:active { transform: scale(.99); }
 
 /* ---------------------------------------------------------
    3. Abschnitte
@@ -315,7 +360,7 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
    Die Felge ist gezeichnet (images/felge.svg), nicht aus dem Foto
    geschnitten: dadurch ist sie exakt rund, hat keine Schnittkante und
    bleibt bei jeder Größe scharf. Sie liegt innerhalb des Reifens, der
-   Teil des Fahrzeugbildes bleibt — dort kann nichts durchblitzen.
+   Teil des Fahrzeugbildes bleibt – dort kann nichts durchblitzen.
    Die Prozentwerte stammen aus der Vermessung des Fahrzeugbildes. */
 .wagen { position: relative; display: block; }
 .wagen-karosse { display: block; width: 100%; height: auto; }
@@ -567,17 +612,24 @@ html[data-theme="dark"] .road-step.is-visible .road-num { color: #17150c; }
 .road-car {
   position: absolute; bottom: 2px; left: 0;
   width: clamp(150px, 21vw, 260px); height: auto;
-  /* Nicht spiegeln: auf der Fahrzeugtür stehen "ARI FAHRSCHULE" und die
-     Web-Adresse, gespiegelt stünde beides seitenverkehrt da. Der Wagen
-     zeigt nach links, also fährt er auch nach links — er startet rechts
-     und rollt beim Scrollen nach vorne links aus dem Abschnitt. */
-  transform: translateX(calc((1 - var(--drive, 0)) * (100cqw - 100%)));
+  /* Hier fährt der Wagen mit der Leserichtung von Schritt 1 zu Schritt 5.
+     Dafür liegt eine eigene, gespiegelte Bilddatei bereit: Beim bloßen
+     Spiegeln stünden "ARI FAHRSCHULE" und die Web-Adresse seitenverkehrt,
+     deshalb sind die beschrifteten Flächen darin unverändert wieder
+     eingesetzt. Siehe images/golf-8-rechts.png. */
+  transform: translateX(calc(var(--drive, 0) * (100cqw - 100%)));
   filter: drop-shadow(0 10px 14px rgba(27, 30, 35, .16));
 }
-/* Umdrehungen aus Strecke und Reifenumfang, --turns setzt das Skript. */
+/* Umdrehungen aus Strecke und Reifenumfang, --turns setzt das Skript.
+   Fahrt nach rechts heißt Drehung im Uhrzeigersinn, also positiv. */
 .road-car .felge {
-  transform: rotate(calc(var(--drive, 0) * var(--turns, 6) * -1turn));
+  transform: rotate(calc(var(--drive, 0) * var(--turns, 6) * 1turn));
 }
+/* Im gespiegelten Bild liegen die Räder an der gespiegelten Stelle: Aus der
+   Mitte m wird (Bildbreite - 1 - m), nicht einfach der Wert des anderen Rades,
+   denn der Wagen sitzt nicht mittig in der Bildfläche. */
+.road-car .felge-v { left: 72.300%; }
+.road-car .felge-h { left: 11.385%; }
 .road-run { container-type: inline-size; }
 
 /* --- Hinweisband --- */
@@ -692,6 +744,22 @@ html[data-theme="dark"] .loc-b .loc-pin { background: var(--ink-3); color: #1416
 .faq-item summary .chev svg { width: 14px; height: 14px; }
 .faq-item[open] summary .chev { transform: rotate(45deg); background: var(--gold); border-color: var(--gold); color: #241f0c; }
 .faq-answer { padding: 0 60px 24px 2px; font-size: .98rem; color: var(--ink-2); }
+
+/* Der Winkel drehte sich schon sauber, der Text sprang. ::details-content
+   ist der Kasten, den der Browser selbst um den Inhalt legt – nur darüber
+   lässt sich ein <details> überblenden. Wo der Browser das nicht kennt,
+   klappt die Antwort wie bisher sofort auf. */
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    block-size 240ms var(--ease),
+    opacity 170ms var(--ease),
+    content-visibility 240ms allow-discrete;
+  transition-behavior: allow-discrete;
+}
+.faq-item[open]::details-content { block-size: auto; opacity: 1; }
 .faq-answer p { margin-bottom: .8em; }
 
 .faq-aside { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(26px, 3vw, 34px); }
@@ -808,7 +876,9 @@ html[data-theme="dark"] .loc-b .loc-pin { background: var(--ink-3); color: #1416
   background: var(--paper); text-decoration: none;
   transition: border-color .25s var(--ease), transform .25s var(--ease), background .25s var(--ease);
 }
-.contact-card:hover { border-color: var(--gold); transform: translateX(4px); }
+@media (hover: hover) and (pointer: fine) {
+  .contact-card:hover { border-color: var(--gold); transform: translateX(4px); }
+}
 .contact-card .ci {
   width: 42px; height: 42px; border-radius: var(--radius-sm); display: grid; place-items: center;
   background: var(--gold-tint); color: var(--gold-deep); flex: none;
@@ -1324,7 +1394,9 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   border: 1px solid var(--line);
   transition: transform .4s var(--ease);
 }
-.bk:hover img { transform: translateY(-4px); }
+@media (hover: hover) and (pointer: fine) {
+  .bk:hover img { transform: translateY(-4px); }
+}
 .bk figcaption {
   margin-top: 10px; font-size: .8rem; color: var(--ink-3); line-height: 1.4;
 }
@@ -1352,7 +1424,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 /* ---------------------------------------------------------
    11. Handy: Maßstab statt nur Umbruch
    Die Abstände und Schriftgrößen sind für breite Bildschirme gemacht.
-   Auf 375 px wirkt dieselbe Großzügigkeit nicht luftig, sondern zäh —
+   Auf 375 px wirkt dieselbe Großzügigkeit nicht luftig, sondern zäh –
    die Seite war 18 Bildschirme lang. Hier wird der ganze Maßstab
    heruntergezogen, nicht nur umgebrochen.
    --------------------------------------------------------- */
