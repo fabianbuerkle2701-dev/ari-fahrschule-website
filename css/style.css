@@ -382,6 +382,18 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
 }
 .felge-v { left: 13.028%; }
 .felge-h { left: 73.944%; }
+/* Im Hero sitzt jede Felge in einem Lager (span). Das Lager uebernimmt
+   die Position, das Bild fuellt es aus – so kann der Auftakt dem Lager
+   eine zusaetzliche Drehung geben, die sich mit der endlosen Drehung des
+   Bildes addiert, ohne deren Phase anzufassen. */
+.hero-car .felge-lager {
+  position: absolute; top: 50.996%; width: 14.554%;
+}
+.hero-car .felge-lager-v { left: 13.028%; }
+.hero-car .felge-lager-h { left: 73.944%; }
+.hero-car .felge-lager .felge {
+  position: static; top: auto; left: auto; width: 100%; display: block;
+}
 
 /* --- Fahrbahn: das Auto steht, die Strasse laeuft darunter durch ---
    Ein nach links zeigendes Auto, das nach rechts wandert, sieht aus wie
@@ -421,23 +433,28 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 @keyframes felgeLinks { to { transform: rotate(-1turn); } }
 @keyframes einfahrt { from { opacity: 0; transform: translateX(38px); } }
 
-/* --- Auftakt: die Fahrbahn öffnet die Seite ---
-   Beim ersten Aufruf einer Sitzung liegt Asphalt über der Seite. Der
-   Wagen faehrt von rechts herein – er zeigt nach links, also faehrt er
-   auch nach links – und danach faehrt der Asphalt ober- und unterhalb
-   der Fahrbahn auseinander.
+/* --- Auftakt: der Wagen zieht den goldenen Strich ---
+   Beim ersten Aufruf einer Sitzung liegt Asphalt über der Seite, nur
+   das Fahrbahnband der Bühne bleibt frei. Der Golf schiesst von rechts
+   herein und zieht dabei die goldene Mittellinie wie einen Stift hinter
+   sich her; danach reisst der Asphalt entlang dieser Linie an seinen
+   Abrisskanten auf, und derselbe Strich zieht sich als Unterstrich
+   unter "Führerschein" – Strasse und Überschrift sind eine Geste.
 
-   Der Streifen mit der Fahrbahn selbst wird nie verdeckt: Dort liegt
-   schon die echte Strasse der Bühne im selben Ton. Beim Öffnen bleibt
-   sie deshalb einfach stehen, waehrend darüber die Überschrift und
-   darunter die Info-Leiste frei werden. Das letzte Bild des Auftakts
-   ist das erste Bild der Seite.
+   Die Mittellinie und die Felgen laufen dabei durchgehend in ihren
+   endlosen Schleifen weiter; der Auftakt legt nur Zusätze darüber
+   (einen Deckstreifen, ein zusätzlich drehendes Lager, einen Kegel
+   Licht). Faellt die Auftaktklasse – durch Eingriff oder den Zeitgeber
+   im Skript –, kollabiert alles in den Ruhezustand der Seite: Das
+   letzte Bild des Auftakts ist das erste Bild der Seite.
 
-   Die Bewegung liegt bewusst im CSS und laeuft mit forwards aus. Bleibt
-   das Skript aus, oeffnet sich der Vorhang trotzdem; Klicks faengt er
-   ohnehin nie ab. Wo genau geteilt wird, misst das Skript und legt es in
-   --auftakt-naht. Der Vorgabewert teilt ohne Lücke, damit vor der Messung
-   nichts durchscheint. */
+   Die Bewegung liegt vollstaendig im CSS und laeuft mit forwards aus;
+   bleibt das Skript aus, oeffnet sich der Vorhang trotzdem. Das Skript
+   misst nur die Naht (--auftakt-naht/-fuss) und raeumt hinterher auf.
+
+   Zeitplan: Wagen und Felgenschub 60–920, Linie 60–1140 (Knick bei
+   816), Licht statisch bis 760, aus bis 1140, Vorhang 760–1200, Text
+   780/820/860 je 360, Unterstrich 1120–1600, Skript-Aufraeumen 1250. */
 .auftakt { display: none; }
 .auftakt-laeuft .auftakt { display: block; }
 .auftakt span {
@@ -455,22 +472,122 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 @keyframes auftaktOben  { to { transform: translateY(-100%); } }
 @keyframes auftaktUnten { to { transform: translateY(100%); } }
 
+/* Abrisskanten: Asphalt-Fransen stehen über die schnurgeraden Flächen
+   hinaus. Geschlossen liegen sie Asphalt auf Asphalt im Fahrbahnband
+   und sind unsichtbar; erst wenn die Flächen über die helle Bühne
+   fahren, erscheint der Riss – genau im Moment des Reissens. Sie haben
+   keine eigene Bewegung, sie erben das translateY der Flächen.
+   Hoehe hart bei 30px gedeckelt: Die Goldlinie liegt mindestens 38px
+   unter der Naht (46 % von minimal 84px Fahrbahn), 3px Überlappung
+   plus 30px Fransen = 33px – die Fransen erreichen die Linie nie. */
+.auftakt-oben::after,
+.auftakt-unten::after {
+  content: ""; position: absolute; left: 0; right: 0;
+  height: clamp(16px, 2.4vw, 30px);
+  background: url("../images/asphalt-kante.png") 0 0 / max(1000px, 100vw) 100% repeat-x;
+  pointer-events: none;
+}
+.auftakt-oben::after { top: 100%; }
+.auftakt-unten::after { bottom: 100%; transform: scaleY(-1); }
+
 /* Der Wagen faehrt über dem Vorhang, aber unter der Kopfzeile: "Anrufen"
    ist ab der ersten Millisekunde erreichbar. */
 .auftakt-laeuft .hero-car { z-index: 85; }
+
+/* Einfahrt mit Kamera-Physik: Der Wagen schiesst herein, die Kamera
+   holt auf, überholt um eine Handbreit und korrigiert zurueck – der
+   Wagen driftet minimal über die Ruheposition hinaus und setzt sich
+   dann exakt auf translateX(0). Nichts bremst: Das ewige Cruisen der
+   Bühne wird nahtlos übernommen, weil der Endwert die Identitaet ist.
+   Abbruch mitten im Überschwinger snapt maximal 0.5vw, das traegt. */
 .auftakt-laeuft .hero-car .wagen {
-  animation: auftaktWagen 780ms cubic-bezier(.16, .84, .44, 1) 60ms backwards;
+  animation: auftaktWagen 860ms linear 60ms backwards;
 }
-@keyframes auftaktWagen { from { transform: translateX(118vw); } }
+@keyframes auftaktWagen {
+  0%   { transform: translateX(118vw); animation-timing-function: cubic-bezier(.16, .8, .3, 1); }
+  85%  { transform: translateX(-0.5vw); animation-timing-function: cubic-bezier(.33, 0, .2, 1); }
+  100% { transform: translateX(0); }
+}
 /* Nach dem Auftakt steht der Wagen. Ohne das liefe die Einfahrt der Bühne
    ein zweites Mal, sobald die Auftaktklasse faellt. */
 .auftakt-fertig .hero-car .wagen { animation: none; }
 
-/* Die Überschrift kommt an, waehrend der Asphalt sie freigibt. */
-.auftakt-laeuft .hero-copy {
-  animation: auftaktText 380ms var(--ease) 800ms backwards;
+/* Felgenschub: Das Lager dreht waehrend der Einfahrt zusaetzlich von
+   2turn auf 0 – abnehmender Winkel, also gegen den Uhrzeigersinn wie
+   felgeLinks (0 auf -1turn). Lager- und Felgendrehung addieren sich;
+   die Kurve ist dieselbe wie die erste Phase des Wagens und endet mit
+   waagerechter Tangente: Die Übergabe ans Cruisen ist nahtlos, die
+   Endlosdrehung auf dem Bild wurde nie angefasst. Zwei Umdrehungen
+   statt physikalisch korrekter sieben: Lesbarkeit vor Simulation. */
+.auftakt-laeuft .hero-car .felge-lager {
+  animation: felgenSchub 860ms cubic-bezier(.16, .8, .3, 1) 60ms backwards;
 }
+@keyframes felgenSchub { from { transform: rotate(2turn); } to { transform: rotate(0turn); } }
+
+/* Der goldene Strich: Die Mittellinie laeuft von Anfang an in ihrer
+   endlosen Schleife, liegt aber unter einem asphaltfarbenen Deckstreifen.
+   Der schiebt sich nach links aus dem Bild und legt die Linie von rechts
+   her frei – der Wagen zieht den Strich hinter sich her. Am Knick der
+   Kurve liegt die Aufdeckfront unter der Karosserie (52–69vw breit),
+   die Übergabe ist deshalb auf jeder Viewportbreite verdeckt; danach
+   reisst sich der Strich los und vollendet sich zum linken Rand.
+   Bewusst KEINE Maske auf .hero-ground::before: Das Element pendelt
+   selbst per translateX in der Schleife, eine Maske pendelte mit.
+   Der Überhang -60px entspricht dem Bleed von .hero-ground::before –
+   wer den eine aendert, aendert beide. */
+.auftakt-laeuft .hero-ground::after {
+  content: ""; position: absolute; inset: 0 -60px; z-index: 1;
+  background: var(--asphalt); pointer-events: none;
+  animation: linieZiehen 1080ms linear 60ms forwards;
+}
+@keyframes linieZiehen {
+  0%   { transform: translateX(0); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
+  70%  { transform: translateX(-58%); animation-timing-function: cubic-bezier(.23, 1, .32, 1); }
+  100% { transform: translateX(-101%); }
+}
+
+/* Der eine Lichtmoment: ein warmer Kegel vor der Fahrzeugnase, haengt
+   am Wagen und faehrt mit. Er ragt weit über die Nase hinaus, das Licht
+   betritt das Bild also vor der Karosserie. Bewusst ohne mix-blend-mode:
+   Der drop-shadow-Filter auf .wagen kapselt Blending, screen bliebe
+   wirkungslos. Als ::before liegt er hinter den Bild-Kindern und
+   überdeckt nie die Haube. Sobald der Vorhang aufgeht, schluckt das
+   Tageslicht der Seite den Schein: Er blendet parallel zur Öffnung aus.
+   Endzustand unsichtbar = Ruhezustand ohne Kegel. */
+.auftakt-laeuft .hero-car .wagen::before {
+  content: ""; position: absolute; right: 86%; width: 95%;
+  top: 12%; height: 80%; pointer-events: none;
+  /* Explizite Radien, nicht closest-side: Mit dem Zentrum auf der
+     rechten Kante waere die naechste Seite null Pixel entfernt und der
+     Verlauf haette Radius null – er renderte gar nicht. */
+  background: radial-gradient(100% 62% at 100% 52%,
+              rgba(255, 240, 190, .26), rgba(255, 240, 190, .08) 55%,
+              rgba(255, 240, 190, 0) 82%);
+  animation: auftaktLichtAus 380ms var(--ease) 760ms forwards;
+}
+@keyframes auftaktLichtAus { to { opacity: 0; } }
+
+/* Die Typografie tritt gestaffelt ein, waehrend der Asphalt sie
+   freigibt: Überschrift, Fliesstext, Knoepfe in drei kurzen Schlaegen.
+   Alles endet vor dem Aufraeumen bei 1250, der Klassenwechsel trifft
+   nie eine laufende Bewegung. */
+.auftakt-laeuft .hero-copy h1     { animation: auftaktText 360ms var(--ease) 780ms backwards; }
+.auftakt-laeuft .hero-copy .lead  { animation: auftaktText 360ms var(--ease) 820ms backwards; }
+.auftakt-laeuft .hero-cta         { animation: auftaktText 360ms var(--ease) 860ms backwards; }
 @keyframes auftaktText { from { opacity: 0; transform: translateY(14px); } }
+
+/* Die Pointe: Die Mittellinie kommt bei 1140 am linken Rand an, im
+   selben Atemzug zieht sich derselbe goldene Strich unter "Führerschein",
+   von links nach rechts in Leserichtung.
+   Doppel-Deklaration nicht aufraeumen: Die Regel steht absichtlich
+   identisch unter beiden Klassen, damit sich der berechnete Wert beim
+   Klassenwechsel um 1250 nicht aendert und die laufende Bewegung nicht
+   neu startet – jede Abweichung, auch nur im Delay, startet sie neu.
+   Besucher ohne Auftakt behalten die Basisregel (swipe 1s .6s). */
+html.auftakt-laeuft .hero h1 .accent::after,
+html.auftakt-fertig .hero h1 .accent::after {
+  animation: swipe 480ms var(--ease-out) 1120ms both;
+}
 
 /* Alles, was fest über der Seite schwebt, tritt so lange zurück. Beide
    haben eigene Überblendungen, sie kommen danach von selbst wieder. */

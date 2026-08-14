@@ -186,8 +186,12 @@
           <img class="wagen-karosse" src="images/golf-8.png"
                alt="Fahrschulwagen der Fahrschule ARI, ein VW Golf 8 mit ARI-Beschriftung"
                width="852" height="251">
-          <img class="felge felge-v" src="images/felge.svg" alt="" aria-hidden="true" width="100" height="100">
-          <img class="felge felge-h" src="images/felge.svg" alt="" aria-hidden="true" width="100" height="100">
+          <!-- Das Lager um jede Felge dreht beim Auftakt zusaetzlich mit:
+               Lager- und Felgendrehung addieren sich, die endlose Drehung
+               auf dem Bild selbst bleibt unangetastet und kann deshalb in
+               ihrer Phase nicht springen. Nur hier im Hero noetig. -->
+          <span class="felge-lager felge-lager-v"><img class="felge felge-v" src="images/felge.svg" alt="" aria-hidden="true" width="100" height="100"></span>
+          <span class="felge-lager felge-lager-h"><img class="felge felge-h" src="images/felge.svg" alt="" aria-hidden="true" width="100" height="100"></span>
         </span>
       </div>
     </div>
