@@ -1,5 +1,5 @@
 /* =========================================================
-   ARI — der Assistent der Fahrschule ARI Freiburg
+   ARI – der Assistent der Fahrschule ARI Freiburg
 
    Zwei Betriebsarten:
 
@@ -29,7 +29,7 @@
   /* ---------------------------------------------------------
      Wissensbasis
      Jedes Thema: Stichwörter zum Erkennen, dazu die Antwort.
-     "handoff: true" blendet Anrufen/E-Mail unter die Antwort —
+     "handoff: true" blendet Anrufen/E-Mail unter die Antwort –
      überall dort, wo eine verbindliche Auskunft fällig wäre.
      --------------------------------------------------------- */
   var PACK = {
@@ -38,7 +38,7 @@
     subtitle: "antwortet sofort",
     badge: "KI",
     greeting:
-      "Hallo! Ich bin der Assistent der Fahrschule ARI in Freiburg.\nFrag mich nach Klassen, Theoriezeiten, Standorten oder dem Ablauf — ich antworte sofort.",
+      "Hallo! Ich bin der Assistent der Fahrschule ARI in Freiburg.\nFrag mich nach Klassen, Theoriezeiten, Standorten oder dem Ablauf – ich antworte sofort.",
     disclaimer:
       "Ich bin ein digitaler Assistent, kein Fahrlehrer. Bei Preisen und allem Verbindlichen hole ich lieber das Team dazu.",
     inputLabel: "Deine Frage",
@@ -49,7 +49,7 @@
     suggestionsLabel: "Häufig gefragt",
     moreLabel: "Das interessiert andere auch",
     fallback:
-      "Da bin ich mir nicht sicher, ob ich dich richtig verstanden habe — und dann rate ich lieber nicht.\n\nSchau, ob unten etwas passt. Oder ruf kurz an, das geht meistens schneller als jedes Formular.",
+      "Da bin ich mir nicht sicher, ob ich dich richtig verstanden habe – und dann rate ich lieber nicht.\n\nSchau, ob unten etwas passt. Oder ruf kurz an, das geht meistens schneller als jedes Formular.",
     handoffTitle: "Lieber direkt sprechen?",
     callLabel: "Anrufen",
     mailLabel: "E-Mail",
@@ -62,7 +62,7 @@
         label: "Was kostet der Führerschein?",
         keywords: ["preis", "preise", "kosten", "kostet", "teuer", "guenstig", "euro", "gebuehr", "zahlen", "bezahlen", "pauschale", "tarif", "rate", "ratenzahlung", "finanzierung", "grundbetrag", "fahrstunde", "preisaushang"],
         answer:
-          "Die festen Posten stehen offen auf der Seite unter Preise, so wie im Preisaushang:\n\n• Klasse B: Grundbetrag 499 €\n• Fahrstunde: 79 € je 45 Minuten\n• Sonderfahrten: 85 € je 45 Minuten\n• Vorstellung zur Theorieprüfung: 79 €, zur praktischen Prüfung: 199 €\n• Klasse BE: Grundbetrag 299 €, zusammen mit B nur 699 €\n• B96-Kurs: 599 €\n\nWas ich dir nicht sagen kann, ist die Endsumme — die hängt daran, wie viele Fahrstunden du brauchst, und das ist von Mensch zu Mensch verschieden. Dazu kommen die amtlichen Gebühren von Führerscheinstelle und Prüforganisation.\n\nRuf kurz an, dann schätzen wir das für deine Situation realistisch ein.",
+          "Die festen Posten stehen offen auf der Seite unter Preise, so wie im Preisaushang:\n\n• Klasse B: Grundbetrag 499 €\n• Fahrstunde: 79 € je 45 Minuten\n• Sonderfahrten: 85 € je 45 Minuten\n• Vorstellung zur Theorieprüfung: 79 €, zur praktischen Prüfung: 199 €\n• Klasse BE: Grundbetrag 299 €, zusammen mit B nur 699 €\n• B96-Kurs: 599 €\n\nWas ich dir nicht sagen kann, ist die Endsumme – die hängt daran, wie viele Fahrstunden du brauchst, und das ist von Mensch zu Mensch verschieden. Dazu kommen die amtlichen Gebühren von Führerscheinstelle und Prüforganisation.\n\nRuf kurz an, dann schätzen wir das für deine Situation realistisch ein.",
         handoff: true
       },
       {
@@ -70,7 +70,7 @@
         label: "Welche Klassen bildet ihr aus?",
         keywords: ["klasse", "klassen", "welche", "angebot", "ausbildung", "kategorie", "auto", "pkw", "anbieten", "bietet"],
         answer:
-          "Wir bilden in vier Klassen aus:\n\n• B — der Autoführerschein bis 3.500 kg, AM und L sind enthalten\n• B197 — du lernst auf Automatik und bekommst trotzdem den Führerschein ohne Automatik-Eintrag\n• B96 — Anhängerschulung bis 4.250 kg Gesamtgewicht, ohne Prüfung\n• BE — die große Anhängerklasse mit eigener praktischer Prüfung\n\nWelche zu dir passt, hängt davon ab, was du fahren willst. Sag mir, was du vorhast."
+          "Wir bilden in vier Klassen aus:\n\n• B – der Autoführerschein bis 3.500 kg, AM und L sind enthalten\n• B197 – du lernst auf Automatik und bekommst trotzdem den Führerschein ohne Automatik-Eintrag\n• B96 – Anhängerschulung bis 4.250 kg Gesamtgewicht, ohne Prüfung\n• BE – die große Anhängerklasse mit eigener praktischer Prüfung\n\nWelche zu dir passt, hängt davon ab, was du fahren willst. Sag mir, was du vorhast."
       },
       {
         id: "b197",
@@ -81,7 +81,7 @@
       },
       {
         id: "anhaenger",
-        label: "B96 oder BE — was brauche ich?",
+        label: "B96 oder BE – was brauche ich?",
         keywords: ["b96", "96", "be", "anhaenger", "anhanger", "wohnwagen", "caravan", "pferdeanhaenger", "boot", "gespann", "zugfahrzeug", "ziehen", "haenger"],
         answer:
           "Das entscheidet das Gewicht deines Gespanns.\n\nB96 ist eine Schulung ohne Prüfung: Zugfahrzeug und Anhänger dürfen zusammen bis 4.250 kg wiegen. Das reicht für die meisten Wohnwagen.\n\nBE ist eine eigene Klasse mit praktischer Prüfung und geht deutlich darüber hinaus.\n\nAm besten bringst du die Fahrzeugscheine von Auto und Anhänger mit, dann rechnen wir es zusammen aus und du bezahlst nichts, was du nicht brauchst.",
@@ -92,28 +92,28 @@
         label: "Wann ist Theorieunterricht?",
         keywords: ["theorie", "theorieunterricht", "unterricht", "abend", "abends", "vorlesung", "theoriestunde", "doppelstunde", "montag", "dienstag", "donnerstag"],
         answer:
-          "Theorie ist an drei Abenden pro Woche, jeweils von 18:00 bis 19:30 Uhr:\n\n• Zähringen (Zähringerstr. 373): montags\n• Stühlinger (Stühlingerstr. 12): dienstags und donnerstags\n\nFür Klasse B sind es 12 Doppelstunden Grundstoff à 90 Minuten und 2 Doppelstunden Zusatzstoff. Der Unterricht ist in geschlossene Themenblöcke gegliedert — du kannst also jederzeit einsteigen, ohne auf einen Kursstart zu warten, und die Abende mischen."
+          "Theorie ist an drei Abenden pro Woche, jeweils von 18:00 bis 19:30 Uhr:\n\n• Zähringen (Zähringerstr. 373): montags\n• Stühlinger (Stühlingerstr. 12): dienstags und donnerstags\n\nFür Klasse B sind es 12 Doppelstunden Grundstoff à 90 Minuten und 2 Doppelstunden Zusatzstoff. Der Unterricht ist in geschlossene Themenblöcke gegliedert – du kannst also jederzeit einsteigen, ohne auf einen Kursstart zu warten, und die Abende mischen."
       },
       {
         id: "oeffnung",
         label: "Wann habt ihr Büro?",
         keywords: ["oeffnungszeiten", "offnungszeiten", "geoeffnet", "geoffnet", "buero", "buro", "sprechzeiten", "wann offen", "auf", "erreichbar", "vorbeikommen"],
         answer:
-          "Unsere Bürozeiten:\n\n• Zähringen: Montag und Freitag, 12:00 bis 18:00 Uhr\n• Stühlinger: Dienstag und Donnerstag, 12:00 bis 18:00 Uhr\n\nDanach ist an denselben Standorten Theorie von 18:00 bis 19:30 Uhr — in Zähringen nur montags.\n\nAn Feiertagen und in den Ferien kann das abweichen. Ein kurzer Anruf vorher spart dir den Weg."
+          "Unsere Bürozeiten:\n\n• Zähringen: Montag und Freitag, 12:00 bis 18:00 Uhr\n• Stühlinger: Dienstag und Donnerstag, 12:00 bis 18:00 Uhr\n\nDanach ist an denselben Standorten Theorie von 18:00 bis 19:30 Uhr – in Zähringen nur montags.\n\nAn Feiertagen und in den Ferien kann das abweichen. Ein kurzer Anruf vorher spart dir den Weg."
       },
       {
         id: "standort",
         label: "Wo finde ich euch?",
         keywords: ["adresse", "wo", "standort", "standorte", "anfahrt", "finden", "strasse", "zaehringen", "zahringen", "stuehlinger", "stuhlinger", "freiburg", "parken", "karte", "hinkommen", "filiale"],
         answer:
-          "Wir sind an zwei Standorten in Freiburg:\n\n• Zähringen — Zähringerstraße 373, 79108 Freiburg\n• Stühlinger — Stühlingerstraße 12, 79106 Freiburg\n\nDein Vertrag gilt für beide. Du suchst dir aus, wo Theorie und Büro für dich günstiger liegen."
+          "Wir sind an zwei Standorten in Freiburg:\n\n• Zähringen – Zähringerstraße 373, 79108 Freiburg\n• Stühlinger – Stühlingerstraße 12, 79106 Freiburg\n\nDein Vertrag gilt für beide. Du suchst dir aus, wo Theorie und Büro für dich günstiger liegen."
       },
       {
         id: "anmeldung",
         label: "Wie melde ich mich an?",
         keywords: ["anmelden", "anmeldung", "einschreiben", "registrieren", "starten", "anfangen", "loslegen", "beginnen", "dabei", "aufnehmen", "platz", "warteliste"],
         answer:
-          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\n\nIm Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nWenn dir Schreiben lieber ist, nimm das Kontaktformular auf der Startseite oder schreib an " + MAIL + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus — mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
+          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\n\nIm Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nWenn dir Schreiben lieber ist, nimm das Kontaktformular auf der Startseite oder schreib an " + MAIL + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus – mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
         handoff: true
       },
       {
@@ -121,49 +121,49 @@
         label: "Welche Unterlagen brauche ich?",
         keywords: ["unterlagen", "papiere", "dokumente", "mitbringen", "brauche", "benoetige", "sehtest", "augen", "passfoto", "foto", "bild", "erste hilfe", "ersthelfer", "kurs", "antrag", "ausweis", "pass"],
         answer:
-          "Das ist schnell erzählt. Du brauchst:\n\n• Personalausweis oder Reisepass\n• ein biometrisches Passfoto\n• eine Sehtestbescheinigung, nicht älter als zwei Jahre\n• den Nachweis über den Erste-Hilfe-Kurs (9 Unterrichtseinheiten)\n\nBeim Begleiteten Fahren ab 17 kommt pro Begleitperson ein Formular dazu, mit Kopie von Ausweis und Führerschein.\n\nSehtest gibt es bei jedem Optiker, Erste Hilfe bei den üblichen Anbietern. Wenn dir etwas fehlt, sag Bescheid — wir sortieren das gemeinsam."
+          "Das ist schnell erzählt. Du brauchst:\n\n• Personalausweis oder Reisepass\n• ein biometrisches Passfoto\n• eine Sehtestbescheinigung, nicht älter als zwei Jahre\n• den Nachweis über den Erste-Hilfe-Kurs (9 Unterrichtseinheiten)\n\nBeim Begleiteten Fahren ab 17 kommt pro Begleitperson ein Formular dazu, mit Kopie von Ausweis und Führerschein.\n\nSehtest gibt es bei jedem Optiker, Erste Hilfe bei den üblichen Anbietern. Wenn dir etwas fehlt, sag Bescheid – wir sortieren das gemeinsam."
       },
       {
         id: "bf17",
         label: "Kann ich mit 17 anfangen?",
         keywords: ["17", "16", "bf17", "bf 17", "begleitet", "begleitetes", "begleitperson", "jung", "alter", "mindestalter", "eltern", "frueh", "schon"],
         answer:
-          "Ja. Ab 16½ Jahren kannst du mit der Ausbildung beginnen und hältst den Führerschein pünktlich zum 18. Geburtstag in der Hand.\n\nBeim Begleiteten Fahren ab 17 machst du den kompletten Führerschein mit 17 und fährst danach mit einer Begleitperson, die in deiner Prüfungsbescheinigung eingetragen ist. Mit 18 fällt die Begleitung weg.\n\nDen Antrag kannst du schon mit 16½ stellen, anmelden darfst du dich vorher. Wer früh anfängt, ist pünktlich zum Geburtstag fertig — das planen wir gern rückwärts.\n\nDie Begleitperson braucht keine Ausbildung, nur ein paar Voraussetzungen. Welche genau, erklären wir dir in Ruhe."
+          "Ja. Ab 16½ Jahren kannst du mit der Ausbildung beginnen und hältst den Führerschein pünktlich zum 18. Geburtstag in der Hand.\n\nBeim Begleiteten Fahren ab 17 machst du den kompletten Führerschein mit 17 und fährst danach mit einer Begleitperson, die in deiner Prüfungsbescheinigung eingetragen ist. Mit 18 fällt die Begleitung weg.\n\nDen Antrag kannst du schon mit 16½ stellen, anmelden darfst du dich vorher. Wer früh anfängt, ist pünktlich zum Geburtstag fertig – das planen wir gern rückwärts.\n\nDie Begleitperson braucht keine Ausbildung, nur ein paar Voraussetzungen. Welche genau, erklären wir dir in Ruhe."
       },
       {
         id: "fahrlehrer",
         label: "Wer unterrichtet bei euch?",
         keywords: ["fahrlehrer", "wer", "lehrer", "team", "miftar", "rexhepi", "chef", "inhaber", "erfahrung", "ausbilder", "unterrichtet"],
         answer:
-          "Bei uns unterrichtet Miftar Rexhepi — seit über zehn Jahren Fahrlehrer. Im Februar 2024 hat er die Fahrschule ARI neu eröffnet.\n\nDas heißt für dich: kein ständiger Wechsel des Fahrlehrers. Du fährst mit jemandem, der weiß, wo du stehst und was du noch brauchst."
+          "Bei uns unterrichtet Miftar Rexhepi – seit über zehn Jahren Fahrlehrer. Im Februar 2024 hat er die Fahrschule ARI neu eröffnet.\n\nDas heißt für dich: kein ständiger Wechsel des Fahrlehrers. Du fährst mit jemandem, der weiß, wo du stehst und was du noch brauchst."
       },
       {
         id: "fuhrpark",
         label: "Welche Autos fahrt ihr?",
         keywords: ["auto", "autos", "fahrzeug", "fahrzeuge", "fuhrpark", "golf", "vw", "wagen", "modell", "welches"],
         answer:
-          "Einen VW Golf 8 und einen VW Golf Plus mit Automatik.\n\nBeide haben aktuelle Assistenzsysteme, werden regelmäßig gewartet und sind sauber — das ist uns wichtig, weil du dich darin wohlfühlen sollst."
+          "Einen VW Golf 8 und einen VW Golf Plus mit Automatik.\n\nBeide haben aktuelle Assistenzsysteme, werden regelmäßig gewartet und sind sauber – das ist uns wichtig, weil du dich darin wohlfühlen sollst."
       },
       {
         id: "app",
         label: "Gibt es eine Lern-App?",
         keywords: ["app", "lernapp", "lern app", "online", "handy", "lernen", "zuhause", "fragebogen", "uebungsfragen", "digital"],
         answer:
-          "Ja, und sie kostet dich nichts extra. Alle unsere Schüler bekommen die Führerscheinlern-App.\n\nDamit lernst du, wann und wo du willst — im Bus, auf dem Sofa, in der Pause. Die Theorieabende ersetzt sie nicht, aber sie macht die Vorbereitung auf die Prüfung deutlich leichter."
+          "Ja, und sie kostet dich nichts extra. Alle unsere Schüler bekommen die Führerscheinlern-App.\n\nDamit lernst du, wann und wo du willst – im Bus, auf dem Sofa, in der Pause. Die Theorieabende ersetzt sie nicht, aber sie macht die Vorbereitung auf die Prüfung deutlich leichter."
       },
       {
         id: "ablauf",
         label: "Wie läuft das alles ab?",
         keywords: ["ablauf", "schritte", "reihenfolge", "wie geht", "was zuerst", "beginnen", "vorgehen", "plan", "weg"],
         answer:
-          "In fünf Schritten:\n\n1. Anmeldung: am besten telefonisch, sonst über das Kontaktformular auf der Startseite oder persönlich\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen — den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
+          "In fünf Schritten:\n\n1. Anmeldung: am besten telefonisch, sonst über das Kontaktformular auf der Startseite oder persönlich\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen – den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
       },
       {
         id: "dauer",
         label: "Wie lange dauert das?",
         keywords: ["dauer", "dauert", "lange", "schnell", "wochen", "monate", "zeit", "fertig", "intensiv", "ferien", "sommer"],
         answer:
-          "Das hängt vor allem an dir.\n\nDie Theorie hast du in wenigen Wochen durch, wenn du regelmäßig zu den Abenden kommst. Bei der Praxis ist die Spanne groß: Manche brauchen wenige Stunden über die Pflichtfahrten hinaus, andere mehr. Beides ist völlig normal.\n\nWenn du auf einen festen Termin hinarbeitest — Geburtstag, Studienbeginn, Umzug —, sag früh Bescheid. Dann planen wir von hinten."
+          "Das hängt vor allem an dir.\n\nDie Theorie hast du in wenigen Wochen durch, wenn du regelmäßig zu den Abenden kommst. Bei der Praxis ist die Spanne groß: Manche brauchen wenige Stunden über die Pflichtfahrten hinaus, andere mehr. Beides ist völlig normal.\n\nWenn du auf einen festen Termin hinarbeitest – Geburtstag, Studienbeginn, Umzug –, sag früh Bescheid. Dann planen wir von hinten."
       },
       {
         id: "fahrstunden",
@@ -184,7 +184,7 @@
         label: "Ich bin unsicher am Steuer",
         keywords: ["angst", "unsicher", "nervoes", "nervos", "panik", "traue", "schaffe", "aufregung", "pruefungsangst", "prufungsangst", "stress", "ueberfordert", "langsam"],
         answer:
-          "Das hören wir öfter, als du denkst — und es ist überhaupt nichts, wofür man sich schämen müsste.\n\nWir gehen das Tempo, das für dich passt. Keine Zurufe, kein Blick auf die Uhr, keine Prüfung, bevor du dich sicher fühlst. Angefangen wird da, wo es dir noch angenehm ist, und von dort aus wird es Schritt für Schritt mehr.\n\nSag deinem Fahrlehrer einfach gleich in der ersten Stunde, wie es dir geht. Dann kann er sich darauf einstellen.",
+          "Das hören wir öfter, als du denkst – und es ist überhaupt nichts, wofür man sich schämen müsste.\n\nWir gehen das Tempo, das für dich passt. Keine Zurufe, kein Blick auf die Uhr, keine Prüfung, bevor du dich sicher fühlst. Angefangen wird da, wo es dir noch angenehm ist, und von dort aus wird es Schritt für Schritt mehr.\n\nSag deinem Fahrlehrer einfach gleich in der ersten Stunde, wie es dir geht. Dann kann er sich darauf einstellen.",
         handoff: true
       },
       {
@@ -192,7 +192,7 @@
         label: "Ausländischen Führerschein umschreiben",
         keywords: ["umschreiben", "umschreibung", "auslaendisch", "auslandisch", "ausland", "anerkennung", "uebersetzung", "ubersetzung", "eu", "drittstaat", "umtausch"],
         answer:
-          "Ob und wie ein ausländischer Führerschein umgeschrieben wird, hängt vom Ausstellungsland ab — und die Regeln ändern sich immer wieder.\n\nDeshalb sage ich hier bewusst nichts, worauf du dich am Ende nicht verlassen kannst. Ruf an oder komm mit deinem Führerschein vorbei, dann schauen wir uns deinen Fall konkret an.",
+          "Ob und wie ein ausländischer Führerschein umgeschrieben wird, hängt vom Ausstellungsland ab – und die Regeln ändern sich immer wieder.\n\nDeshalb sage ich hier bewusst nichts, worauf du dich am Ende nicht verlassen kannst. Ruf an oder komm mit deinem Führerschein vorbei, dann schauen wir uns deinen Fall konkret an.",
         handoff: true
       },
       {
@@ -200,7 +200,7 @@
         label: "Wie erreiche ich euch?",
         keywords: ["kontakt", "telefon", "nummer", "anrufen", "erreichen", "mail", "email", "whatsapp", "schreiben", "instagram", "melden"],
         answer:
-          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\nPer E-Mail: " + MAIL + "\n\nAuf Instagram findest du uns als @fahrschule_ari — dort posten wir Bestandene, Termine und was sonst so ansteht.",
+          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\nPer E-Mail: " + MAIL + "\n\nAuf Instagram findest du uns als @fahrschule_ari – dort posten wir Bestandene, Termine und was sonst so ansteht.",
         handoff: true
       }
     ]
@@ -425,7 +425,7 @@
     }
 
     // Mit Sprachmodell verlassen Nachrichten den Browser. Dafuer wird vor
-    // der ersten Uebertragung ausdruecklich gefragt — ohne Zustimmung
+    // der ersten Uebertragung ausdruecklich gefragt – ohne Zustimmung
     // antwortet weiter die eingebaute Wissensbasis.
     function einwilligungEinholen(value) {
       var box = document.createElement("div");
@@ -463,7 +463,7 @@
       box.appendChild(row);
 
       addMsg("bot",
-        "Für eine frei formulierte Antwort wird deine Frage an unseren Dienstleister übertragen und dort verarbeitet.\n\nOhne dein Einverständnis antworte ich weiter aus der eingebauten Liste — das bleibt vollständig in deinem Browser.",
+        "Für eine frei formulierte Antwort wird deine Frage an unseren Dienstleister übertragen und dort verarbeitet.\n\nOhne dein Einverständnis antworte ich weiter aus der eingebauten Liste – das bleibt vollständig in deinem Browser.",
         box);
       renderSuggestions();
     }

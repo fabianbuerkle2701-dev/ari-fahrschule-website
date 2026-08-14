@@ -2,7 +2,7 @@
  * Besucherzähler der Fahrschule ARI
  *
  * Ein Cloudflare Worker mit einem KV-Speicher. Er zählt hoch und gibt den
- * Stand zurück — mehr nicht. Es wird KEINE IP-Adresse, kein Zeitstempel und
+ * Stand zurück – mehr nicht. Es wird KEINE IP-Adresse, kein Zeitstempel und
  * kein Merkmal des Besuchers gespeichert. In dem Speicher steht genau eine
  * Zahl.
  *

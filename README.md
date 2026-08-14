@@ -53,13 +53,27 @@ python3 _bau/baue.py
 ```
 
 Damit werden `fahrschule.html`, `klassen.html` und `preise.html` neu erzeugt.
-Die Startseite und die Rechtsseiten werden **nicht** überschrieben — ändert
+Die Startseite und die Rechtsseiten werden **nicht** überschrieben – ändert
 sich die Navigation, muss sie dort von Hand nachgezogen werden.
+
+## Drei Regeln, die den Aufbau tragen
+
+**Keine Kicker.** Über keiner Überschrift steht ein kleines Gold-Label. Elf
+gleich gebaute Labels über elf Abschnitten erzeugen den Gleichtakt, an dem man
+Seiten nach Vorlage erkennt. Die Überschriften tragen ihre Bedeutung selbst.
+
+**Kästen nur, wo sie etwas heben.** Karten sind der bequeme Behälter. Gruppiert
+wird über Nähe und Haarlinien; ein Rahmen bekommt nur, was wirklich
+heraussteht: Anruf, Preisverweis, Standorte, Preiskarten.
+
+**Drei Radien, mehr nicht.** `--radius` für Flächen, `--radius-sm` für
+Kleinteile, `--radius-pill` für Schaltflächen. Bilder und randlose Bänder
+laufen ohne Rundung an die Kante.
 
 ## Die drei Goldtöne
 
 Das Gold aus dem Logo ist `#c9b41e`. Auf weißem Grund erreicht es nur einen
-Kontrast von 2,1:1 — als Schrift wäre das zu blass. Deshalb gibt es drei
+Kontrast von 2,1:1 – als Schrift wäre das zu blass. Deshalb gibt es drei
 abgestufte Werte, alle oben in `css/style.css`:
 
 | Variable        | Wert      | Kontrast auf Weiß | Wofür |
@@ -72,7 +86,7 @@ Im dunklen Schema drehen sich die Verhältnisse um, dort ist `--gold-titel`
 identisch mit dem Logo-Gold.
 
 Wer den Titel exakt im Logo-Gold möchte, ändert `--gold-titel` auf
-`#c9b41e` — dann stimmt die Farbe pixelgenau, die Überschrift ist auf
+`#c9b41e` – dann stimmt die Farbe pixelgenau, die Überschrift ist auf
 weißem Grund aber deutlich blasser.
 
 ## Preise
@@ -86,7 +100,7 @@ an drei Stellen und müssen bei einer Änderung überall nachgezogen werden:
 
 Im Fußbereich steht „Du bist Besucher Nr. …". Die Zahl kommt von einem
 eigenen Cloudflare Worker (`besucher-backend/`), **nicht** von einem fremden
-Zähldienst — solche Dienste bezahlen sich mit den Daten der Besucher, und die
+Zähldienst – solche Dienste bezahlen sich mit den Daten der Besucher, und die
 Seite lädt sonst nichts von Dritten.
 
 Solange kein Dienst eingetragen ist, bleibt die Zeile **unsichtbar**. Es wird
@@ -98,12 +112,12 @@ HTML-Dateien eintragen:
 ```
 
 Gezählt wird einmal je Besuchssitzung, nicht je Seitenaufruf. Gespeichert
-wird ausschließlich die Zahl selbst — keine IP, kein Zeitpunkt, kein Merkmal.
+wird ausschließlich die Zahl selbst – keine IP, kein Zeitpunkt, kein Merkmal.
 
 ## Datenschutz-Bestätigung
 
 Beim ersten Besuch erscheint unten eine schmale Leiste mit einem
-Akzeptieren-Knopf. **Kein Cookie-Banner** — die Seite setzt keine Cookies
+Akzeptieren-Knopf. **Kein Cookie-Banner** – die Seite setzt keine Cookies
 und lädt nichts von Dritten, es gibt also nichts, wofür eine Einwilligung
 nötig wäre. Die Leiste ist eine Kenntnisnahme der Datenschutzerklärung und
 verschwindet dauerhaft, sobald sie einmal bestätigt wurde.
@@ -111,7 +125,7 @@ verschwindet dauerhaft, sobald sie einmal bestätigt wurde.
 `js/datenschutz-hinweis.js`. Ein Verweis mit dem Attribut
 `data-datenschutz-oeffnen` blendet die Leiste wieder ein, falls sie irgendwo
 erneut erreichbar sein soll. Ändert sich die Verarbeitung, wird `FASSUNG` in
-der Datei hochgezählt — dann wird erneut gefragt.
+der Datei hochgezählt – dann wird erneut gefragt.
 
 Der Assistent ist damit verbunden: Läuft er später mit Sprachmodell, fragt er
 vor der ersten Übertragung ausdrücklich nach und antwortet ohne Zustimmung
@@ -128,12 +142,12 @@ werden keine Daten übertragen und nichts gespeichert. Der Assistent kann
 dadurch auch nichts erfinden.
 
 **Mit Sprachmodell.** Wer freie Antworten will, richtet den Cloudflare Worker
-aus `assistant-backend/` ein — Anleitung liegt dort. Fällt der Dienst aus,
+aus `assistant-backend/` ein – Anleitung liegt dort. Fällt der Dienst aus,
 schaltet die Seite automatisch auf die Wissensbasis zurück.
 
 Ändern sich Öffnungszeiten oder Angebote, müssen sie an **drei** Stellen
 nachgezogen werden: in `index.html`, in der Wissensbasis in `js/assistant.js`
-und — falls eingerichtet — im Systemprompt in `assistant-backend/worker.js`.
+und – falls eingerichtet – im Systemprompt in `assistant-backend/worker.js`.
 
 ## Woher die Inhalte stammen
 
@@ -141,7 +155,7 @@ und — falls eingerichtet — im Systemprompt in `assistant-backend/worker.js`.
 Rexhepi, die fünf Schritte zum Führerschein, Umfang des Theorieunterrichts
 (12 + 2 Doppelstunden), die Lern-App, der Fuhrpark und die Kontaktdaten.
 Öffnungszeiten und Standorte stammen aus der aktuellen Instagram-Grafik und
-weichen bewusst von der alten Seite ab — dort fehlte Zähringen noch.
+weichen bewusst von der alten Seite ab – dort fehlte Zähringen noch.
 
 ### Welches Bild wo sitzt
 
@@ -159,26 +173,26 @@ weichen bewusst von der alten Seite ab — dort fehlte Zähringen noch.
 
 Nicht verwendet, mit Absicht:
 
-- **`tt-carusel-img01-01/02/03.png`** — Stockfotos, die mit dem alten
+- **`tt-carusel-img01-01/02/03.png`** – Stockfotos, die mit dem alten
   WordPress-Theme kamen. Die Lizenz hing am Theme und deckt eine neue,
   eigenständige Seite nicht ab. Wenn du eine Lizenz dafür hast, sag
   Bescheid, dann baue ich sie ein.
-- **`Der-Weg-zu-Fuehrerschein.png` / `Der-Weg_1.png`** — die Wegegrafik ist
+- **`Der-Weg-zu-Fuehrerschein.png` / `Der-Weg_1.png`** – die Wegegrafik ist
   als Bild eingebrannt: fester Text, weißer Hintergrund, auf dem Handy
   unlesbar. Der Abschnitt „Ablauf" bildet sie stattdessen als HTML nach,
   mit denselben Rauten und demselben fahrenden Golf.
-- **`car-wheel.png`** — ein beliebiges Rad aus dem Theme. Ersetzt durch die
+- **`car-wheel.png`** – ein beliebiges Rad aus dem Theme. Ersetzt durch die
   echte Felge des Fahrschulwagens.
-- **`lCon.jpg`, `logo235.jpg`, `cropped-*`, `llogo3-*`** — kleinere oder
+- **`lCon.jpg`, `logo235.jpg`, `cropped-*`, `llogo3-*`** – kleinere oder
   beschnittene Fassungen desselben Logos.
-- **`Fahrschule-ARI-Logo.pdf`** — liegt in `images/original/`. Falls das
+- **`Fahrschule-ARI-Logo.pdf`** – liegt in `images/original/`. Falls das
   echtes Vektormaterial ist, ließe sich daraus ein gestochen scharfes
   SVG-Logo erzeugen; dafür braucht es ein Werkzeug wie Illustrator oder
   Inkscape.
 
 ### Bewegung auf der Seite
 
-Alles davon respektiert „Bewegung reduzieren" in den Systemeinstellungen —
+Alles davon respektiert „Bewegung reduzieren" in den Systemeinstellungen –
 dann steht jedes Element in seinem Endzustand still.
 
 - **Bühne:** Der Golf steht, die Fahrbahn läuft unter ihm durch und die
@@ -186,7 +200,7 @@ dann steht jedes Element in seinem Endzustand still.
   Auto, das nach rechts wandert, sieht aus wie Rückwärtsfahren.
 - **Ablauf:** Der Golf rollt beim Scrollen die Straße entlang. Wie oft sich
   seine Räder dabei drehen, rechnet `js/main.js` aus Fahrweg und
-  Reifenumfang aus — geraten sähe man sofort.
+  Reifenumfang aus – geraten sähe man sofort.
 - **Zahlenband:** Die Zahlen zählen einmal hoch, die Felge im Hintergrund
   dreht sich mit dem Scrollen.
 - **Abschnitte** blenden beim ersten Erscheinen ein, die Rauten im Ablauf
@@ -200,18 +214,18 @@ und die Web-Adresse, gespiegelt stünde beides seitenverkehrt da.
 - [ ] **Fahrschulerlaubnis-Nummer** im Impressum eintragen (fehlt noch)
 - [ ] **Steuernummer prüfen:** Die alte Seite führte `06197/48921` als
       Umsatzsteuer-Identifikationsnummer. Das Format ist aber das einer
-      Steuernummer — eine USt-IdNr. beginnt mit „DE“. Bitte richtigstellen.
+      Steuernummer – eine USt-IdNr. beginnt mit „DE“. Bitte richtigstellen.
 - [ ] **Hoster** in der Datenschutzerklärung eintragen und einen
       Auftragsverarbeitungsvertrag abschließen
 - [ ] **Einwilligungen für alle Personenfotos.** Betroffen sind das
       Theoriefoto (erkennbare Fahrschüler) und die neun Bestanden-Bilder.
       Unter dem Bildband steht der Satz „Alle Abgebildeten haben der
-      Veröffentlichung zugestimmt." — **dieser Satz muss stimmen.** Wenn für
+      Veröffentlichung zugestimmt." – **dieser Satz muss stimmen.** Wenn für
       einzelne Bilder keine Einwilligung vorliegt, nimm sie aus
       `images/bestanden/` heraus und lösche die zugehörige `<figure>` in
       `index.html`. Bei Minderjährigen unterschreiben die Eltern.
 - [ ] Die Bestanden-Bilder werden bewusst nur 560 px breit ausgeliefert.
-      Auf den Prüfbescheinigungen stehen Namen und Unterschriften — bei
+      Auf den Prüfbescheinigungen stehen Namen und Unterschriften – bei
       dieser Größe sind sie unlesbar. Nicht durch größere Fassungen ersetzen.
 - [ ] **Zwei Wege zur Anmeldung, Telefon zuerst.** Die Schaltflächen in
       Kopfzeile und Bühne wählen direkt 0176 43454447; im Kontaktbereich
@@ -219,7 +233,7 @@ und die Web-Adresse, gespiegelt stünde beides seitenverkehrt da.
       Das Formular verschickt nichts selbst, sondern öffnet das
       E-Mail-Programm des Besuchers mit fertiger Nachricht an
       Info@fahrschule-ari.de (Block am Ende von `js/main.js`). Wer echten
-      Serverversand will, braucht einen Dienst wie Formspree — dann wird
+      Serverversand will, braucht einen Dienst wie Formspree – dann wird
       nur dieser Block ersetzt.
 - [ ] Domain umstellen und den Verzeichnisschutz entfernen
 

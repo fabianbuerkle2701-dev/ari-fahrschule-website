@@ -1,5 +1,5 @@
 /* =========================================================
-   ARI Fahrschule — Verhalten der Seite
+   ARI Fahrschule – Verhalten der Seite
    Kein Framework, keine externen Aufrufe.
    ========================================================= */
 (function () {
@@ -70,7 +70,7 @@
     });
 
     /* Im Fußbereich weicht der Pfeil zurück: dort lag er sonst über
-       "Impressum · Datenschutz". Verloren geht nichts — die Fußzeile hat
+       "Impressum · Datenschutz". Verloren geht nichts – die Fußzeile hat
        ihre eigenen Verweise, unter anderem zur Startseite.              */
     var fuss = document.querySelector(".site-footer");
     if (fuss && "IntersectionObserver" in window) {
@@ -111,7 +111,7 @@
     if (roadRun) {
       drivers.push({ el: roadRun, prop: "--drive", from: -0.28, to: 1.34 });
       // Wie oft sich die Räder auf der Strecke drehen müssen, ergibt sich
-      // aus Reifenumfang und Fahrweg — geraten sähe man sofort.
+      // aus Reifenumfang und Fahrweg – geraten sähe man sofort.
       var messeUmdrehungen = function () {
         var wagen = roadRun.querySelector(".wagen");
         if (!wagen) return;
@@ -201,14 +201,14 @@
 
     // Sicherheitsnetz: Browser halten requestAnimationFrame an, sobald der
     // Tab in den Hintergrund rutscht. Ohne das blieben die Zahlen auf null
-    // stehen — genau das war zu sehen.
+    // stehen – genau das war zu sehen.
     window.setTimeout(abschliessen, dauer + 400);
   }
 
   /* ---------- Aktiver Menüpunkt ----------
      Die Auszeichnung meint die Seite, nicht den Abschnitt. Vorher wanderte
-     sie beim Scrollen auf "Standorte" und "Kontakt" und fiel dazwischen —
-     etwa bei den häufigen Fragen, die keinen Menüpunkt haben — wieder auf
+     sie beim Scrollen auf "Standorte" und "Kontakt" und fiel dazwischen –
+     etwa bei den häufigen Fragen, die keinen Menüpunkt haben – wieder auf
      "Startseite" zurück. Das sah nach Fehler aus, weil ein Menü sagen
      soll, wo man ist, und nicht, woran man gerade vorbeiscrollt.
      Auf den Unterseiten steht aria-current im Markup; hier setzt es das
@@ -254,13 +254,13 @@
 
       var text =
         "Name: " + name.value.trim() + "\n" +
-        "Telefon: " + (phone.value.trim() || "—") + "\n" +
+        "Telefon: " + (phone.value.trim() || "–") + "\n" +
         "E-Mail: " + mail.value.trim() + "\n" +
         "Klasse: " + klasse.value + "\n\n" +
         (msg.value.trim() || "(keine Nachricht)") + "\n";
 
       window.location.href = "mailto:" + MAIL +
-        "?subject=" + encodeURIComponent("Anfrage über die Webseite — " + klasse.value) +
+        "?subject=" + encodeURIComponent("Anfrage über die Webseite – " + klasse.value) +
         "&body=" + encodeURIComponent(text);
 
       sagen("Dein E-Mail-Programm öffnet sich. Falls nicht: " + MAIL);
