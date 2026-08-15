@@ -564,14 +564,19 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    Tageslicht der Seite den Schein: Er blendet parallel zur Öffnung aus.
    Endzustand unsichtbar = Ruhezustand ohne Kegel. */
 .auftakt-laeuft .hero-car .wagen::before {
-  content: ""; position: absolute; right: 86%; width: 95%;
-  top: 12%; height: 80%; pointer-events: none;
+  /* Der Ursprung liegt auf dem Scheinwerfer, nicht irgendwo auf der Haube.
+     Im Bild sitzt die Lampe bei 5,6 % der Wagenbreite und 52,6 % der Hoehe
+     (nachgemessen an golf-8.png, der Wagen zeigt nach links). Die rechte
+     Kante dieses Kastens ist der Lichtursprung, also right: 94.4 %.
+     Senkrecht: 20 % + 53 % von 62 % Hoehe = 52,9 % – die Lampenmitte. */
+  content: ""; position: absolute; right: 94.4%; width: 76%;
+  top: 20%; height: 62%; pointer-events: none;
   /* Explizite Radien, nicht closest-side: Mit dem Zentrum auf der
      rechten Kante waere die naechste Seite null Pixel entfernt und der
      Verlauf haette Radius null – er renderte gar nicht. */
-  background: radial-gradient(100% 62% at 100% 52%,
-              rgba(255, 240, 190, .26), rgba(255, 240, 190, .08) 55%,
-              rgba(255, 240, 190, 0) 82%);
+  background: radial-gradient(100% 58% at 100% 53%,
+              rgba(255, 240, 190, .28), rgba(255, 240, 190, .09) 52%,
+              rgba(255, 240, 190, 0) 80%);
   animation: auftaktLichtAus 380ms var(--ease) 1020ms forwards;
 }
 @keyframes auftaktLichtAus { to { opacity: 0; } }

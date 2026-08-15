@@ -19,9 +19,12 @@
   if (wurzel.classList.contains("auftakt-laeuft")) {
     var strasse = document.querySelector(".hero-ground");
     var kasten = strasse ? strasse.getBoundingClientRect() : null;
-    // Ohne brauchbare Messung kein Vorhang: Stellt der Browser eine alte
-    // Scrollposition wieder her oder steht die Bühne noch nicht, laege die
-    // Naht an der falschen Stelle. Dann lieber gleich die fertige Seite.
+    // Kein Vorhang ohne brauchbare Messung: Steht die Bühne noch nicht oder
+    // stellt der Browser eine alte Scrollposition wieder her, laege die Naht
+    // an der falschen Stelle. Dann lieber gleich die fertige Seite zeigen.
+    // Wichtig ist nur, dass der Merker dabei unangetastet bleibt – er wird
+    // erst weiter unten gesetzt. Sonst waere der Auftakt fuer diese Sitzung
+    // verbraucht, ohne dass ihn jemand gesehen haette.
     if (!kasten || kasten.height < 1 || window.scrollY > 4) {
       wurzel.classList.remove("auftakt-laeuft");
       wurzel.classList.add("auftakt-fertig");
@@ -33,6 +36,11 @@
       // eine Kleinigkeit danebenliegt.
       wurzel.style.setProperty("--auftakt-naht", Math.round(kasten.top + 3) + "px");
       wurzel.style.setProperty("--auftakt-fuss", Math.round(kasten.bottom - 3) + "px");
+
+      // Erst hier gilt der Auftakt als gezeigt. Das Kopfskript liest den
+      // Merker nur; setzte es ihn, waere er auch dann verbraucht, wenn wir
+      // oben doch noch abgebrochen haetten.
+      try { sessionStorage.setItem("ari-auftakt", "1"); } catch (e) {}
 
       var eingriffe = ["pointerdown", "keydown", "wheel", "touchstart"];
       var beenden = function () {

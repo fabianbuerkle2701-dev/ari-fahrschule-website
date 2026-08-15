@@ -44,11 +44,16 @@
   // noch vor dem ersten Anzeigen, sonst blitzt die Seite kurz auf, bevor
   // der Asphalt daraufliegt. Wer weniger Bewegung eingestellt hat, direkt
   // auf einen Abschnitt springt oder schon da war, bekommt die Seite sofort.
+  //
+  // Hier wird der Merker nur gelesen, nicht gesetzt. Gesetzt wird er erst,
+  // wenn der Auftakt wirklich losfaehrt (in main.js). Vorher gesetzt, war
+  // er verbraucht, sobald das Skript den Auftakt doch noch verwarf – etwa
+  // weil der Browser eine alte Scrollposition wiederherstellte. Der Besuch
+  // sah dann gar nichts und die ganze Sitzung lang nie wieder etwas.
   try {
     var ruhig = matchMedia("(prefers-reduced-motion: reduce)").matches;
     if (!ruhig && !location.hash && !sessionStorage.getItem("ari-auftakt")) {
       document.documentElement.classList.add("auftakt-laeuft");
-      sessionStorage.setItem("ari-auftakt", "1");
     }
   } catch (e) {}
 </script>
