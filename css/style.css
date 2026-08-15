@@ -85,6 +85,13 @@ html {
   /* Erlaubt das Überblenden auf height/block-size: auto. Ohne das lässt
      sich eine Antwort unbekannter Höhe nicht animieren. */
   interpolate-size: allow-keywords;
+  /* Waagerecht abschneiden gehoert an das Wurzelelement, nicht an body.
+     Auf body macht es den Body zum Scrollbehaelter – dann greift
+     scroll-behavior auf html ins Leere und Sprungmarken funktionieren
+     gar nicht mehr. Am Wurzelelement wird der Wert auf den Anzeigebereich
+     uebertragen, html bleibt der Scroller. Gebraucht wird es, weil Buehne,
+     Asphaltkante und Fahrbahn bewusst ueber die Seitenraender hinausgehen. */
+  overflow-x: hidden;
   scroll-behavior: smooth;
   scroll-padding-top: calc(var(--header-h) + 16px);
   -webkit-text-size-adjust: 100%;
@@ -99,7 +106,6 @@ body {
   line-height: 1.68;
   font-weight: 400;
   -webkit-font-smoothing: antialiased;
-  overflow-x: hidden;
 }
 
 
@@ -541,8 +547,12 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
   100% { transform: translateX(0); }
 }
 /* Nach dem Auftakt steht der Wagen. Ohne das liefe die Einfahrt der Bühne
-   ein zweites Mal, sobald die Auftaktklasse faellt. */
-.auftakt-fertig .hero-car .wagen { animation: none; }
+   ein zweites Mal, sobald die Auftaktklasse faellt.
+   Dasselbe gilt, wenn jemand ueber eine Sprungmarke kommt: Er will zu
+   einem Abschnitt weiter unten, und die Einfahrt fuhr ihm dabei kurz
+   durchs Bild. Sie gehoert zur Ankunft oben, nicht zum Sprung. */
+.auftakt-fertig .hero-car .wagen,
+.sprungmarke .hero-car .wagen { animation: none; }
 
 
 /* Felgenschub: Das Lager dreht waehrend der Einfahrt zusaetzlich von

@@ -280,16 +280,58 @@
     window.setTimeout(abschliessen, dauer + 400);
   }
 
+  /* ---------- Ankunft an einer Sprungmarke ----------
+     Verlassen wir uns nicht darauf, dass der Browser von allein an die
+     richtige Stelle springt: Bilder laden verzoegert nach, dadurch wandert
+     das Ziel, und manche Umgebungen fuehren den Sprung gar nicht aus. Nach
+     dem Laden also selbst hinspringen, wenn die Seite noch ganz oben steht.
+     Hart, nicht gleitend – der Weg dorthin ist niemandes Ziel. */
+  if (location.hash && location.hash !== "#top") {
+    window.addEventListener("load", function () {
+      var ziel;
+      try { ziel = document.querySelector(location.hash); } catch (e) { return; }
+      if (!ziel || window.scrollY > 4) return;
+      var vorher = document.documentElement.style.scrollBehavior;
+      document.documentElement.style.scrollBehavior = "auto";
+      ziel.scrollIntoView();
+      document.documentElement.style.scrollBehavior = vorher;
+    }, { once: true });
+  }
+
   /* ---------- Aktiver Menüpunkt ----------
-     Die Auszeichnung meint die Seite, nicht den Abschnitt. Vorher wanderte
-     sie beim Scrollen auf "Standorte" und "Kontakt" und fiel dazwischen –
-     etwa bei den häufigen Fragen, die keinen Menüpunkt haben – wieder auf
-     "Startseite" zurück. Das sah nach Fehler aus, weil ein Menü sagen
-     soll, wo man ist, und nicht, woran man gerade vorbeiscrollt.
-     Auf den Unterseiten steht aria-current im Markup; hier setzt es das
-     Skript, weil die Startseite denselben Kopf verwendet.              */
-  var startpunkte = document.querySelectorAll('.main-nav a[href="#top"], .footer-col a[href="#top"]');
-  startpunkte.forEach(function (a) { a.setAttribute("aria-current", "page"); });
+     Die Auszeichnung folgt dem, wohin jemand gegangen ist: der Sprungmarke
+     in der Adresse. Wer auf "Standorte" klickt, sieht "Standorte"
+     hervorgehoben; ohne Sprungmarke ist es "Startseite".
+
+     Bewusst nicht am Scrollen aufgehaengt. Das war einmal so und wanderte
+     beim Scrollen von Punkt zu Punkt, fiel zwischendurch – etwa bei den
+     häufigen Fragen, die keinen Menüpunkt haben – auf "Startseite" zurück
+     und sah nach Fehler aus. Ein Menü soll sagen, wo man hinwollte, und
+     nicht, woran man gerade vorbeikommt.
+
+     Auf den Unterseiten steht aria-current fest im Markup; dort tut diese
+     Stelle nichts, weil es keine Sprungmarken-Punkte im Menü gibt.     */
+  var menuepunkte = document.querySelectorAll('.main-nav a[href^="#"], .footer-col a[href^="#"]');
+  if (menuepunkte.length) {
+    var markieren = function () {
+      var ziel = location.hash && location.hash !== "#top" ? location.hash : "#top";
+      var getroffen = false;
+      menuepunkte.forEach(function (a) {
+        if (a.getAttribute("href") === ziel) getroffen = true;
+      });
+      if (!getroffen) ziel = "#top";
+      menuepunkte.forEach(function (a) {
+        if (a.getAttribute("href") === ziel) a.setAttribute("aria-current", "page");
+        else a.removeAttribute("aria-current");
+      });
+    };
+    markieren();
+    window.addEventListener("hashchange", markieren);
+    // Ein Klick auf denselben Punkt loest kein hashchange aus.
+    menuepunkte.forEach(function (a) {
+      a.addEventListener("click", function () { window.setTimeout(markieren, 0); });
+    });
+  }
 
   /* ---------- FAQ: immer nur eine Antwort offen ---------- */
   var faqItems = document.querySelectorAll(".faq-item");

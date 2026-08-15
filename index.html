@@ -55,6 +55,19 @@
     if (!ruhig && !location.hash && !sessionStorage.getItem("ari-auftakt")) {
       document.documentElement.classList.add("auftakt-laeuft");
     }
+    // Wer ueber eine Sprungmarke kommt, etwa aus dem Menue einer
+    // Unterseite auf #standorte, will dort ankommen und nicht sanft ueber
+    // die halbe Seite dorthin gleiten. Waehrend des ersten Sprungs also
+    // hart springen; danach gilt wieder das sanfte Gleiten fuer Klicks im
+    // Dokument. Die Klasse schaltet ausserdem die Einfahrt des Wagens ab,
+    // die sonst waehrend des Sprungs kurz durchs Bild fuhr.
+    if (location.hash) {
+      document.documentElement.classList.add("sprungmarke");
+      document.documentElement.style.scrollBehavior = "auto";
+      addEventListener("load", function () {
+        document.documentElement.style.scrollBehavior = "";
+      }, { once: true });
+    }
   } catch (e) {}
 </script>
 
