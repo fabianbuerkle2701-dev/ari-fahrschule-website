@@ -452,9 +452,12 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    bleibt das Skript aus, oeffnet sich der Vorhang trotzdem. Das Skript
    misst nur die Naht (--auftakt-naht/-fuss) und raeumt hinterher auf.
 
-   Zeitplan: Wagen und Felgenschub 60–920, Linie 60–1140 (Knick bei
-   816), Licht statisch bis 760, aus bis 1140, Vorhang 760–1200, Text
-   780/820/860 je 360, Unterstrich 1120–1600, Skript-Aufraeumen 1250. */
+   Zeitplan: Wagen und Felgenschub 60–1180, Linie 60–1400 (Knick bei
+   998), Licht statisch bis 1020, aus bis 1400, Vorhang 1020–1520, Text
+   1040/1085/1130 je 380, Unterstrich 1380–1900, Aufraeumen 1600.
+
+   Auf schmalen Schirmen gilt ein eigener Plan, siehe ganz unten in
+   diesem Abschnitt: Dort faellt der Vorhang weg. */
 .auftakt { display: none; }
 .auftakt-laeuft .auftakt { display: block; }
 .auftakt span {
@@ -463,11 +466,11 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 }
 .auftakt-oben {
   top: 0; height: var(--auftakt-naht, 70%);
-  animation: auftaktOben 440ms var(--ease) 760ms forwards;
+  animation: auftaktOben 500ms var(--ease) 1020ms forwards;
 }
 .auftakt-unten {
   top: var(--auftakt-fuss, 70%); bottom: 0;
-  animation: auftaktUnten 440ms var(--ease) 760ms forwards;
+  animation: auftaktUnten 500ms var(--ease) 1020ms forwards;
 }
 @keyframes auftaktOben  { to { transform: translateY(-100%); } }
 @keyframes auftaktUnten { to { transform: translateY(100%); } }
@@ -501,7 +504,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    Bühne wird nahtlos übernommen, weil der Endwert die Identitaet ist.
    Abbruch mitten im Überschwinger snapt maximal 0.5vw, das traegt. */
 .auftakt-laeuft .hero-car .wagen {
-  animation: auftaktWagen 860ms linear 60ms backwards;
+  animation: auftaktWagen 1120ms linear 60ms backwards;
 }
 @keyframes auftaktWagen {
   0%   { transform: translateX(118vw); animation-timing-function: cubic-bezier(.16, .8, .3, 1); }
@@ -512,24 +515,6 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    ein zweites Mal, sobald die Auftaktklasse faellt. */
 .auftakt-fertig .hero-car .wagen { animation: none; }
 
-/* Auf dem Handy ist der Bildausschnitt hoch und schmal: Derselbe Wagen,
-   der auf dem Breitbild eine Fahrbahn fuellt, ist hier ein kleiner Fleck
-   am unteren Rand. Er kommt deshalb schmal gross herein und geht auf
-   seine Ruhegroesse zurueck – die Kamera faehrt zurueck, waehrend er
-   einparkt. Der Drehpunkt liegt auf der Reifenaufstandsflaeche, damit die
-   Raeder waehrend der ganzen Bewegung auf dem Asphalt bleiben. Der
-   Endwert ist wieder die Identitaet, die Übergabe also unveraendert. */
-@media (max-width: 620px) {
-  .auftakt-laeuft .hero-car .wagen {
-    transform-origin: 50% 100%;
-    animation-name: auftaktWagenSchmal;
-  }
-  @keyframes auftaktWagenSchmal {
-    0%   { transform: translateX(118vw) scale(1.28); animation-timing-function: cubic-bezier(.16, .8, .3, 1); }
-    85%  { transform: translateX(-0.5vw) scale(1.035); animation-timing-function: cubic-bezier(.33, 0, .2, 1); }
-    100% { transform: translateX(0) scale(1); }
-  }
-}
 
 /* Felgenschub: Das Lager dreht waehrend der Einfahrt zusaetzlich von
    2turn auf 0 – abnehmender Winkel, also gegen den Uhrzeigersinn wie
@@ -539,7 +524,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    Endlosdrehung auf dem Bild wurde nie angefasst. Zwei Umdrehungen
    statt physikalisch korrekter sieben: Lesbarkeit vor Simulation. */
 .auftakt-laeuft .hero-car .felge-lager {
-  animation: felgenSchub 860ms cubic-bezier(.16, .8, .3, 1) 60ms backwards;
+  animation: felgenSchub 1120ms cubic-bezier(.16, .8, .3, 1) 60ms backwards;
 }
 @keyframes felgenSchub { from { transform: rotate(2turn); } to { transform: rotate(0turn); } }
 
@@ -557,7 +542,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 .auftakt-laeuft .hero-ground::after {
   content: ""; position: absolute; inset: 0 -60px; z-index: 1;
   background: var(--asphalt); pointer-events: none;
-  animation: linieZiehen 1080ms linear 60ms forwards;
+  animation: linieZiehen 1340ms linear 60ms forwards;
 }
 @keyframes linieZiehen {
   0%   { transform: translateX(0); animation-timing-function: cubic-bezier(.2, .7, .4, 1); }
@@ -582,7 +567,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
   background: radial-gradient(100% 62% at 100% 52%,
               rgba(255, 240, 190, .26), rgba(255, 240, 190, .08) 55%,
               rgba(255, 240, 190, 0) 82%);
-  animation: auftaktLichtAus 380ms var(--ease) 760ms forwards;
+  animation: auftaktLichtAus 380ms var(--ease) 1020ms forwards;
 }
 @keyframes auftaktLichtAus { to { opacity: 0; } }
 
@@ -590,9 +575,9 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    freigibt: Überschrift, Fliesstext, Knoepfe in drei kurzen Schlaegen.
    Alles endet vor dem Aufraeumen bei 1250, der Klassenwechsel trifft
    nie eine laufende Bewegung. */
-.auftakt-laeuft .hero-copy h1     { animation: auftaktText 360ms var(--ease) 780ms backwards; }
-.auftakt-laeuft .hero-copy .lead  { animation: auftaktText 360ms var(--ease) 820ms backwards; }
-.auftakt-laeuft .hero-cta         { animation: auftaktText 360ms var(--ease) 860ms backwards; }
+.auftakt-laeuft .hero-copy h1     { animation: auftaktText 380ms var(--ease) 1040ms backwards; }
+.auftakt-laeuft .hero-copy .lead  { animation: auftaktText 380ms var(--ease) 1085ms backwards; }
+.auftakt-laeuft .hero-cta         { animation: auftaktText 380ms var(--ease) 1130ms backwards; }
 @keyframes auftaktText { from { opacity: 0; transform: translateY(14px); } }
 
 /* Die Pointe: Die Mittellinie kommt bei 1140 am linken Rand an, im
@@ -605,7 +590,33 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    Besucher ohne Auftakt behalten die Basisregel (swipe 1s .6s). */
 html.auftakt-laeuft .hero h1 .accent::after,
 html.auftakt-fertig .hero h1 .accent::after {
-  animation: swipe 480ms var(--ease-out) 1120ms both;
+  animation: swipe 520ms var(--ease-out) 1380ms both;
+}
+
+/* --- Auftakt auf schmalen Schirmen ---
+   Hoch und schmal ist die Fahrbahn nur ein Streifen ganz unten. Ein
+   Vorhang über die ganze Flaeche waere dort fast nur Schwarz: Beim
+   Öffnen saehe man vom Hero nichts, nur einen kleinen Wagen am unteren
+   Rand. Deshalb faellt der Vorhang hier weg.
+
+   Was bleibt, ist der eigentliche Kern: Der Wagen faehrt herein und
+   zieht die goldene Mittellinie hinter sich her, und derselbe Strich
+   zieht sich danach unter "Führerschein". Der Unterschied ist, dass der
+   Hero die ganze Zeit sichtbar ist – auf dem Handy sieht man Strasse und
+   Überschrift sogar gleichzeitig, die Übergabe des Strichs liest sich
+   hier also besser als auf dem Breitbild.
+
+   Der Text tritt deshalb sofort ein statt erst zum Öffnen. Das Licht
+   entfaellt: Ein Scheinwerferkegel braucht Dunkelheit. Und der Wagen
+   wird nicht mehr über den Vorhang gehoben, den es hier nicht gibt. */
+@media (max-width: 900px) {
+  .auftakt-laeuft .auftakt { display: none; }
+  .auftakt-laeuft .hero-car { z-index: 1; }
+  .auftakt-laeuft .hero-car .wagen::before { content: none; }
+
+  .auftakt-laeuft .hero-copy h1     { animation-delay: 60ms; }
+  .auftakt-laeuft .hero-copy .lead  { animation-delay: 105ms; }
+  .auftakt-laeuft .hero-cta         { animation-delay: 150ms; }
 }
 
 /* Alles, was fest über der Seite schwebt, tritt so lange zurück. Beide

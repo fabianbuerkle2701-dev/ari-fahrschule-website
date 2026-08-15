@@ -47,7 +47,7 @@
       eingriffe.forEach(function (art) {
         window.addEventListener(art, beenden, { passive: true });
       });
-      window.setTimeout(beenden, 1250);
+      window.setTimeout(beenden, 1600);
     }
   }
 
