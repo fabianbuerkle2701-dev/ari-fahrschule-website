@@ -323,19 +323,49 @@
       var msg = form.querySelector("#cf-msg");
       var ds = form.querySelector("#cf-ds");
 
+      // In der Reihenfolge der Felder pruefen, damit der Sprung nicht
+      // ueber das Formular springt. Bei der Nummer bewusst nur zaehlen,
+      // wie viele Ziffern drinstehen: Ein strengeres Muster wuerde
+      // gaengige Schreibweisen wie +49 176 …, 0761/12345 oder Nummern
+      // mit Durchwahl faelschlich abweisen.
       if (!name.value.trim()) { name.focus(); sagen("Bitte trag noch deinen Namen ein."); return; }
+      if (!phone.value.trim()) { phone.focus(); sagen("Bitte trag noch deine Telefonnummer ein – darüber melden wir uns."); return; }
+      if (phone.value.replace(/\D/g, "").length < 6) { phone.focus(); sagen("Die Telefonnummer sieht noch nicht vollständig aus."); return; }
       if (!mail.checkValidity()) { mail.focus(); sagen("Die E-Mail-Adresse sieht noch nicht vollständig aus."); return; }
+      if (!msg.value.trim()) { msg.focus(); sagen("Schreib uns noch kurz, worum es geht."); return; }
       if (ds && !ds.checked) { ds.focus(); sagen("Bitte bestätige noch die Datenschutzerklärung."); return; }
 
+      // Im Postfach der Fahrschule soll eine fertige Anfrage liegen, keine
+      // Feldliste. Der Einstiegssatz nennt die gewaehlte Klasse, darunter
+      // steht die Nachricht des Anfragers, darunter die Kontaktdaten.
+      var wahl = klasse.value;
+      var einstieg;
+      if (/wei\u00df ich noch nicht/i.test(wahl)) {
+        einstieg = "ich m\u00f6chte den F\u00fchrerschein machen und bin mir noch nicht sicher, " +
+                   "welche Klasse zu mir passt.";
+      } else {
+        var teile = wahl.split("\u2013");
+        var kuerzel = teile[0].trim();
+        var zusatz = (teile[1] || "").trim();
+        einstieg = "ich interessiere mich f\u00fcr den F\u00fchrerschein der Klasse " + kuerzel +
+                   (zusatz ? " (" + zusatz + ")" : "") + ".";
+      }
+
       var text =
+        "Hallo Fahrschule ARI,\n\n" +
+        einstieg + "\n\n" +
+        "Mein Anliegen:\n" +
+        msg.value.trim() + "\n\n" +
+        "Meine Kontaktdaten:\n" +
         "Name: " + name.value.trim() + "\n" +
-        "Telefon: " + (phone.value.trim() || "–") + "\n" +
-        "E-Mail: " + mail.value.trim() + "\n" +
-        "Klasse: " + klasse.value + "\n\n" +
-        (msg.value.trim() || "(keine Nachricht)") + "\n";
+        "Telefon: " + phone.value.trim() + "\n" +
+        "E-Mail: " + mail.value.trim() + "\n\n" +
+        "\u00dcber einen kurzen R\u00fcckruf w\u00fcrde ich mich freuen.\n\n" +
+        "Viele Gr\u00fc\u00dfe\n" +
+        name.value.trim() + "\n";
 
       window.location.href = "mailto:" + MAIL +
-        "?subject=" + encodeURIComponent("Anfrage über die Webseite – " + klasse.value) +
+        "?subject=" + encodeURIComponent("Anfrage über die Webseite – " + wahl) +
         "&body=" + encodeURIComponent(text);
 
       sagen("Dein E-Mail-Programm öffnet sich. Falls nicht: " + MAIL);

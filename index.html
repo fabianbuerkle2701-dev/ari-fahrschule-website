@@ -727,8 +727,8 @@
               <input id="cf-name" name="name" type="text" autocomplete="name" required>
             </div>
             <div class="field">
-              <label for="cf-phone">Telefon</label>
-              <input id="cf-phone" name="telefon" type="tel" autocomplete="tel">
+              <label for="cf-phone">Telefon <span aria-hidden="true">*</span></label>
+              <input id="cf-phone" name="telefon" type="tel" autocomplete="tel" required>
             </div>
           </div>
 
@@ -751,8 +751,8 @@
 
           <div class="form-row">
             <div class="field">
-              <label for="cf-msg">Nachricht</label>
-              <textarea id="cf-msg" name="nachricht" placeholder="Worum geht es? Zum Beispiel: Ich möchte im Herbst mit Klasse B anfangen."></textarea>
+              <label for="cf-msg">Nachricht <span aria-hidden="true">*</span></label>
+              <textarea id="cf-msg" name="nachricht" required placeholder="Worum geht es? Zum Beispiel: Ich möchte im Herbst mit Klasse B anfangen."></textarea>
             </div>
           </div>
 
@@ -768,7 +768,8 @@
           </button>
           <p class="form-status" id="formStatus" role="status"></p>
           <p class="form-note">
-            Mit dem Absenden öffnet sich dein E-Mail-Programm mit der fertigen
+            Felder mit <span aria-hidden="true">*</span><span class="sr-only">Stern</span> sind
+            Pflicht. Mit dem Absenden öffnet sich dein E-Mail-Programm mit der fertigen
             Nachricht an <a href="mailto:Info@fahrschule-ari.de">Info@fahrschule-ari.de</a>.
             Deine Angaben laufen so über niemanden sonst.
           </p>
