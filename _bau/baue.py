@@ -58,7 +58,7 @@ def seite(datei, titel, beschreibung, inhalt, aktiv=None):
 <link rel="stylesheet" href="css/style.css">
 <script>
   // Kennzeichnet, dass Skripte laufen. Nur dann werden Abschnitte fuer das
-  // Einblenden versteckt – ohne JavaScript bleibt die Seite vollstaendig
+  // Einblenden versteckt. Ohne JavaScript bleibt die Seite vollstaendig
   // lesbar, statt halb leer zu bleiben.
   document.documentElement.classList.add("js");
 </script>

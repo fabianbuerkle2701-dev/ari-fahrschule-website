@@ -1,5 +1,5 @@
 /* =========================================================
-   ARI Fahrschule – Verhalten der Seite
+   ARI Fahrschule, Verhalten der Seite
    Kein Framework, keine externen Aufrufe.
    ========================================================= */
 (function () {
@@ -22,7 +22,7 @@
     // Kein Vorhang ohne brauchbare Messung: Steht die Bühne noch nicht oder
     // stellt der Browser eine alte Scrollposition wieder her, laege die Naht
     // an der falschen Stelle. Dann lieber gleich die fertige Seite zeigen.
-    // Wichtig ist nur, dass der Merker dabei unangetastet bleibt – er wird
+    // Wichtig ist nur, dass der Merker dabei unangetastet bleibt. Er wird
     // erst weiter unten gesetzt. Sonst waere der Auftakt fuer diese Sitzung
     // verbraucht, ohne dass ihn jemand gesehen haette.
     if (!kasten || kasten.height < 1 || window.scrollY > 4) {
@@ -145,7 +145,7 @@
     });
 
     /* Im Fußbereich weicht der Pfeil zurück: dort lag er sonst über
-       "Impressum · Datenschutz". Verloren geht nichts – die Fußzeile hat
+       "Impressum · Datenschutz". Verloren geht nichts, die Fußzeile hat
        ihre eigenen Verweise, unter anderem zur Startseite.              */
     var fuss = document.querySelector(".site-footer");
     if (fuss && "IntersectionObserver" in window) {
@@ -186,7 +186,7 @@
     if (roadRun) {
       drivers.push({ el: roadRun, prop: "--drive", from: -0.28, to: 1.34 });
       // Wie oft sich die Räder auf der Strecke drehen müssen, ergibt sich
-      // aus Reifenumfang und Fahrweg – geraten sähe man sofort.
+      // aus Reifenumfang und Fahrweg. Geraten sähe man sofort.
       var messeUmdrehungen = function () {
         var wagen = roadRun.querySelector(".wagen");
         if (!wagen) return;
@@ -276,7 +276,7 @@
 
     // Sicherheitsnetz: Browser halten requestAnimationFrame an, sobald der
     // Tab in den Hintergrund rutscht. Ohne das blieben die Zahlen auf null
-    // stehen – genau das war zu sehen.
+    // stehen. Genau das war zu sehen.
     window.setTimeout(abschliessen, dauer + 400);
   }
 
@@ -285,7 +285,7 @@
      richtige Stelle springt: Bilder laden verzoegert nach, dadurch wandert
      das Ziel, und manche Umgebungen fuehren den Sprung gar nicht aus. Nach
      dem Laden also selbst hinspringen, wenn die Seite noch ganz oben steht.
-     Hart, nicht gleitend – der Weg dorthin ist niemandes Ziel. */
+     Hart, nicht gleitend, der Weg dorthin ist niemandes Ziel. */
   if (location.hash && location.hash !== "#top") {
     window.addEventListener("load", function () {
       var ziel;
@@ -304,8 +304,8 @@
      hervorgehoben; ohne Sprungmarke ist es "Startseite".
 
      Bewusst nicht am Scrollen aufgehaengt. Das war einmal so und wanderte
-     beim Scrollen von Punkt zu Punkt, fiel zwischendurch – etwa bei den
-     häufigen Fragen, die keinen Menüpunkt haben – auf "Startseite" zurück
+     beim Scrollen von Punkt zu Punkt, fiel zwischendurch, etwa bei den
+     häufigen Fragen, die keinen Menüpunkt haben, auf "Startseite" zurück
      und sah nach Fehler aus. Ein Menü soll sagen, wo man hinwollte, und
      nicht, woran man gerade vorbeikommt.
 
@@ -371,7 +371,7 @@
       // gaengige Schreibweisen wie +49 176 …, 0761/12345 oder Nummern
       // mit Durchwahl faelschlich abweisen.
       if (!name.value.trim()) { name.focus(); sagen("Bitte trag noch deinen Namen ein."); return; }
-      if (!phone.value.trim()) { phone.focus(); sagen("Bitte trag noch deine Telefonnummer ein – darüber melden wir uns."); return; }
+      if (!phone.value.trim()) { phone.focus(); sagen("Bitte trag noch deine Telefonnummer ein, darüber melden wir uns."); return; }
       if (phone.value.replace(/\D/g, "").length < 6) { phone.focus(); sagen("Die Telefonnummer sieht noch nicht vollständig aus."); return; }
       if (!mail.checkValidity()) { mail.focus(); sagen("Die E-Mail-Adresse sieht noch nicht vollständig aus."); return; }
       if (!msg.value.trim()) { msg.focus(); sagen("Schreib uns noch kurz, worum es geht."); return; }
@@ -407,7 +407,7 @@
         name.value.trim() + "\n";
 
       window.location.href = "mailto:" + MAIL +
-        "?subject=" + encodeURIComponent("Anfrage über die Webseite – " + wahl) +
+        "?subject=" + encodeURIComponent("Anfrage über die Webseite: " + wahl) +
         "&body=" + encodeURIComponent(text);
 
       sagen("Dein E-Mail-Programm öffnet sich. Falls nicht: " + MAIL);

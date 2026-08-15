@@ -13,7 +13,7 @@ def kopfteil(h1, lead):
 # ---------------------------------------------------------------- Preise
 def posten(bezeichnung, wert, zusatz=""):
     z = f'<small>{zusatz}</small>' if zusatz else ""
-    w = wert if wert else '<span class="p-leer">–</span>'
+    w = wert if wert else '<span class="p-leer">auf Anfrage</span>'
     return f'''        <div class="p-zeile">
           <span class="p-was">{bezeichnung}{z}</span>
           <span class="p-wert">{w}</span>
@@ -21,10 +21,11 @@ def posten(bezeichnung, wert, zusatz=""):
 '''
 
 PREISE = kopfteil(
-    "Was der Führerschein kostet.",
+    "Was der Führerschein in Freiburg kostet.",
     "Die Zahlen unten stehen so auch als Preisaushang nach § 32 Fahrlehrergesetz "
-    "in unseren Büros. Keine Pakete, keine versteckten Posten – du zahlst den "
-    "Grundbetrag und die Fahrstunden, die du tatsächlich brauchst."
+    "in unseren Büros in Zähringen und im Stühlinger. Keine Pakete, keine "
+    "versteckten Posten: Du zahlst den Grundbetrag und die Fahrstunden, die du "
+    "tatsächlich brauchst."
 ) + '''
   <section class="preise">
     <div class="shell">
@@ -60,7 +61,7 @@ PREISE = kopfteil(
       <div class="p-extra">
         <div class="p-extra-block reveal">
           <span class="p-extra-label">Beide Klassen zusammen</span>
-          <strong>B + BE – Grundbetrag 699,00 €</strong>
+          <strong>B + BE, Grundbetrag 699,00 €</strong>
           <p>Wer beides zusammen macht, zahlt den Grundbetrag nur einmal
              und spart gegenüber 499 € plus 299 € rund hundert Euro.</p>
         </div>
@@ -109,8 +110,8 @@ PREISE = kopfteil(
 # ---------------------------------------------------------------- Klassen
 KLASSEN = kopfteil(
     "Vier Klassen, ein Ziel.",
-    "Ob erster Führerschein, Wohnwagen oder Pferdeanhänger – wir bilden in den "
-    "Klassen aus, die du im Alltag wirklich brauchst."
+    "Ob erster Führerschein, Wohnwagen oder Pferdeanhänger: Deine Freiburger "
+    "Fahrschule bildet in den Klassen aus, die du im Alltag wirklich brauchst."
 ) + '''
   <section>
     <div class="shell klassen-lang">
@@ -123,7 +124,7 @@ KLASSEN = kopfteil(
              acht Sitzplätzen außer dem Fahrersitz. Die Klassen AM und L sind
              enthalten.</p>
           <p>Ab 18 Jahren, mit Begleitetem Fahren schon ab 17. Anfangen kannst du
-             ab 16½ – wer früh beginnt, hält den Führerschein pünktlich zum
+             ab 16½. Wer früh beginnt, hält den Führerschein pünktlich zum
              Geburtstag in der Hand.</p>
           <p>Zur Ausbildung gehören 12 Doppelstunden Grundstoff und 2 Doppelstunden
              Zusatzstoff im Theorieunterricht, dazu die Fahrstunden und die zwölf
@@ -138,7 +139,7 @@ KLASSEN = kopfteil(
         <div class="kl-text">
           <h2>Automatik lernen, ohne Automatik im Führerschein</h2>
           <p class="lead">Du lernst und prüfst auf Automatik und bekommst trotzdem
-             einen Führerschein ohne Beschränkung – du darfst also auch Schaltwagen
+             einen Führerschein ohne Beschränkung. Du darfst also auch Schaltwagen
              fahren.</p>
           <p>Dafür brauchst du mindestens zehn Fahrstunden zu 45 Minuten auf einem
              Schaltwagen und eine anschließende Testfahrt bei deinem Fahrlehrer.
@@ -155,13 +156,13 @@ KLASSEN = kopfteil(
         <div class="kl-text">
           <h2>Anhänger bis 4.250 kg</h2>
           <p class="lead">Die Schulung für alle, die mit Wohnwagen, Pferde- oder
-             Bootsanhänger unterwegs sind – Zugfahrzeug und Anhänger zusammen bis
+             Bootsanhänger unterwegs sind. Zugfahrzeug und Anhänger zusammen bis
              4.250 kg.</p>
           <p>Es ist keine Prüfung, sondern eine Fahrerschulung nach Anlage 7a FeV:
              Theorie, Übungen auf dem Platz und Fahren im Verkehr. Am Ende steht
              kein Prüfer, sondern eine Bescheinigung.</p>
           <p>Voraussetzung ist die Klasse B. Ob B96 reicht oder ob es BE sein muss,
-             hängt am Gewicht deines Gespanns – bring die Fahrzeugscheine mit, dann
+             hängt am Gewicht deines Gespanns. Bring die Fahrzeugscheine mit, dann
              rechnen wir es zusammen aus.</p>
           <p class="kl-preis"><a href="preise.html">Kurs 599 €</a></p>
         </div>
@@ -189,7 +190,7 @@ KLASSEN = kopfteil(
       <div class="note-band reveal" style="margin-top:0">
         <div>
           <h3>Unsicher, was zu dir passt?</h3>
-          <p>Sag uns, was du fahren willst – wir sagen dir, welche Klasse du dafür
+          <p>Sag uns, was du fahren willst. Wir sagen dir, welche Klasse du dafür
              brauchst und welche nicht.</p>
         </div>
         <a class="btn btn-gold" href="tel:+4917643454447">0176 43454447</a>
@@ -201,15 +202,16 @@ KLASSEN = kopfteil(
 # ---------------------------------------------------------------- Fahrschule
 FAHRSCHULE = kopfteil(
     "Ein Fahrlehrer, der dich kennt.",
-    "Keine Massenabfertigung, kein ständiger Wechsel: Du fährst mit jemandem, "
-    "der weiß, wo du stehst und was du noch brauchst."
+    "Keine Massenabfertigung, kein ständiger Wechsel: In dieser Freiburger "
+    "Fahrschule fährst du mit jemandem, der weiß, wo du stehst und was du noch "
+    "brauchst."
 ) + '''
   <section>
     <div class="shell about-grid">
       <div class="about-copy reveal">
         <p class="lead">
           „Mein Name ist Miftar Rexhepi. Ich bin seit über zehn Jahren Fahrlehrer
-          und habe die Fahrschule ARI im Februar 2024 neu eröffnet – mit einer
+          und habe die Fahrschule ARI im Februar 2024 in Freiburg neu eröffnet, mit einer
           klaren Vorstellung davon, wie Fahrausbildung aussehen sollte.“
         </p>
         <p>
@@ -220,7 +222,7 @@ FAHRSCHULE = kopfteil(
         </p>
         <p>
           Es geht uns nicht nur um den Führerschein, sondern darum, dass du danach
-          sicher und selbstbewusst unterwegs bist – auch in zehn Jahren noch.
+          sicher und selbstbewusst unterwegs bist, auch in zehn Jahren noch.
         </p>
         <ul class="values">
           <li>Zuverlässigkeit</li>
@@ -231,7 +233,7 @@ FAHRSCHULE = kopfteil(
 
       <figure class="about-figure reveal reveal-delay-1">
         <img src="images/miftar.jpg" alt="Miftar Rexhepi, Inhaber und Fahrlehrer der Fahrschule ARI, vor einem der Fahrschulwagen." width="649" height="980" loading="lazy">
-        <figcaption>Miftar Rexhepi – seit über zehn Jahren Fahrlehrer.</figcaption>
+        <figcaption>Miftar Rexhepi, seit über zehn Jahren Fahrlehrer in Freiburg.</figcaption>
       </figure>
     </div>
   </section>
@@ -246,13 +248,13 @@ FAHRSCHULE = kopfteil(
         <p>
           Der Unterricht ist in geschlossene Themenblöcke gegliedert. Du wartest
           also nicht auf einen Kursstart, sondern kommst zum nächsten Abend, der
-          dir passt – in Zähringen oder im Stühlinger. Bilder und Videos laufen
+          dir passt, in Zähringen oder im Stühlinger. Bilder und Videos laufen
           dabei über den großen Bildschirm.
         </p>
         <dl class="facts">
           <div><dt>12</dt><dd>Doppelstunden Grundstoff, je 90 Minuten</dd></div>
           <div><dt>2</dt><dd>Doppelstunden Zusatzstoff für Klasse B</dd></div>
-          <div><dt>0 €</dt><dd>für die Lern-App – die bekommst du von uns</dd></div>
+          <div><dt>0 €</dt><dd>für die Lern-App, die bekommst du von uns</dd></div>
         </dl>
       </div>
     </div>
@@ -263,7 +265,7 @@ FAHRSCHULE = kopfteil(
       <div class="section-head reveal">
         <h2>Womit du fährst.</h2>
         <p>Gepflegte Fahrzeuge mit aktuellen Assistenzsystemen, regelmäßig gewartet
-           und sauber – weil du dich darin wohlfühlen sollst.</p>
+           und sauber, weil du dich darin wohlfühlen sollst.</p>
       </div>
 
       <div class="why-grid">
@@ -275,7 +277,7 @@ FAHRSCHULE = kopfteil(
         <div class="why-item reveal reveal-delay-1">
           <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 8v8M8.5 12h7"/></svg></div>
           <h3>VW Golf Plus, Automatik</h3>
-          <p>Für alle, die auf Automatik lernen – mit B197 trotzdem ohne
+          <p>Für alle, die auf Automatik lernen und mit B197 trotzdem ohne
              Beschränkung im Führerschein.</p>
         </div>
         <div class="why-item reveal reveal-delay-2">
@@ -291,15 +293,15 @@ FAHRSCHULE = kopfteil(
 
 SEITEN = {
     "preise.html": dict(
-        titel="Preise – ARI Fahrschule Freiburg",
-        beschreibung="Preisaushang der ARI Fahrschule Freiburg nach § 32 Fahrlehrergesetz: Grundbetrag, Fahrstunden und Prüfungsgebühren für die Klassen B, B96 und BE.",
+        titel="Preise Führerschein Freiburg | ARI Fahrschule",
+        beschreibung="Was der Führerschein in Freiburg kostet: Preisaushang der ARI Fahrschule nach § 32 Fahrlehrergesetz mit Grundbetrag, Fahrstunden und Prüfungsgebühren für B, B96 und BE.",
         inhalt=PREISE, aktiv="preise.html"),
     "klassen.html": dict(
-        titel="Führerscheinklassen B, B197, B96 und BE – ARI Fahrschule Freiburg",
-        beschreibung="Die Führerscheinklassen der ARI Fahrschule Freiburg im Detail: B, B197 mit Automatik, B96 und BE für Anhänger.",
+        titel="Führerscheinklassen in Freiburg | ARI Fahrschule",
+        beschreibung="Führerscheinklassen bei deiner Freiburger Fahrschule im Detail: B für den Pkw, B197 mit Automatik, B96 und BE für Anhänger.",
         inhalt=KLASSEN, aktiv="klassen.html"),
     "fahrschule.html": dict(
-        titel="Unsere Fahrschule – ARI Fahrschule Freiburg",
-        beschreibung="Miftar Rexhepi, seit über zehn Jahren Fahrlehrer, über die ARI Fahrschule in Freiburg, den Theorieunterricht und den Fuhrpark.",
+        titel="Über uns | Freiburger Fahrschule ARI",
+        beschreibung="Miftar Rexhepi, seit über zehn Jahren Fahrlehrer, über seine Freiburger Fahrschule, den Theorieunterricht in Zähringen und im Stühlinger und den Fuhrpark.",
         inhalt=FAHRSCHULE, aktiv=None),
 }

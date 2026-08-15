@@ -1,5 +1,5 @@
 /* =========================================================
-   ARI Fahrschule Freiburg – Gestaltung
+   ARI Fahrschule Freiburg, Gestaltung
    Farben aus dem Logo: Gold, Anthrazit, Creme.
    Aufbau: 1. Grundlagen  2. Bausteine  3. Abschnitte
            4. Assistent   5. Bewegung   6. Schmale Bildschirme
@@ -11,10 +11,10 @@
 :root {
   /* Farben direkt aus dem Logo: Weiss, Gold, das Grau der Wortmarke.
      Die Textwerte sind so weit abgedunkelt, dass sie den Kontrast
-     nach WCAG AA schaffen – reines Logo-Gold auf Weiss tut das nicht. */
+     nach WCAG AA schaffen, reines Logo-Gold auf Weiss tut das nicht. */
   --gold: #c9b41e;          /* Logo-Gold, für Flächen und Linien */
   /* Eigener Ton nur für den Fokusring. Logo-Gold schafft auf Weiss nur
-     2,1:1, WCAG verlangt für Fokusanzeigen 3:1 – wer mit der Tastatur
+     2,1:1, WCAG verlangt für Fokusanzeigen 3:1, wer mit der Tastatur
      bedient, sah kaum, wo er steht. Dieser Ton hält auf jedem Grund der
      Seite mindestens 3,2:1, von Weiss bis Asphalt, in beiden Modi. */
   --fokus: #9c8911;
@@ -86,7 +86,7 @@ html {
      sich eine Antwort unbekannter Höhe nicht animieren. */
   interpolate-size: allow-keywords;
   /* Waagerecht abschneiden gehoert an das Wurzelelement, nicht an body.
-     Auf body macht es den Body zum Scrollbehaelter – dann greift
+     Auf body macht es den Body zum Scrollbehaelter, dann greift
      scroll-behavior auf html ins Leere und Sprungmarken funktionieren
      gar nicht mehr. Am Wurzelelement wird der Wert auf den Anzeigebereich
      uebertragen, html bleibt der Scroller. Gebraucht wird es, weil Buehne,
@@ -158,7 +158,7 @@ ul { margin: 0; padding: 0; list-style: none; }
    Beim Klick auf Klassen oder Preise blitzte die Seite weiß auf und
    Kopfzeile samt Logo sprangen neu ins Bild. Mit benannten Elementen
    bleiben sie stehen, nur der Inhalt blendet über. Browser, die das
-   nicht kennen, laden wie bisher – es fehlt ihnen nichts.        */
+   nicht kennen, laden wie bisher, es fehlt ihnen nichts.        */
 @view-transition { navigation: auto; }
 
 .site-header { view-transition-name: kopfzeile; }
@@ -173,7 +173,7 @@ ul { margin: 0; padding: 0; list-style: none; }
    Das neue Farbschema waechst als Kreis aus dem Schalter heraus, statt
    hart umzuspringen. Waehrend des Wechsels geben Kopfzeile, Wortmarke,
    Fusszeile und Assistent ihre eigenen Namen ab: Sonst waeren sie eigene
-   Gruppen, die der Kreis nicht erfasst – sie wuerden schlagartig
+   Gruppen, die der Kreis nicht erfasst, sie wuerden schlagartig
    umspringen, waehrend der Rest sauber aufzieht. Ohne Unterstuetzung
    oder bei weniger Bewegung schaltet das Skript schlicht um. */
 html.themenwechsel .site-header,
@@ -380,7 +380,7 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
 }
 /* Haarlinie auf der Naht: macht aus zwei Flaechen eine Komposition.
    Sie endet an der Fahrbahn. Vorher lief sie darüber hinweg, weil sie
-   über der Fahrbahn liegt – das sah aus wie ein Strich auf der Strasse. */
+   über der Fahrbahn liegt, das sah aus wie ein Strich auf der Strasse. */
 .hero-media::before {
   content: ""; position: absolute; z-index: 2; width: 1px;
   inset: 0 auto clamp(84px, 10vw, 122px) 0;
@@ -408,7 +408,7 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
    Die Felge ist gezeichnet (images/felge.svg), nicht aus dem Foto
    geschnitten: dadurch ist sie exakt rund, hat keine Schnittkante und
    bleibt bei jeder Größe scharf. Sie liegt innerhalb des Reifens, der
-   Teil des Fahrzeugbildes bleibt – dort kann nichts durchblitzen.
+   Teil des Fahrzeugbildes bleibt, dort kann nichts durchblitzen.
    Die Prozentwerte stammen aus der Vermessung des Fahrzeugbildes. */
 .wagen { position: relative; display: block; }
 .wagen-karosse { display: block; width: 100%; height: auto; }
@@ -418,7 +418,7 @@ html[data-theme="dark"] .hero-media img { filter: saturate(.62) contrast(1.05) b
 .felge-v { left: 13.028%; }
 .felge-h { left: 73.944%; }
 /* Im Hero sitzt jede Felge in einem Lager (span). Das Lager uebernimmt
-   die Position, das Bild fuellt es aus – so kann der Auftakt dem Lager
+   die Position, das Bild fuellt es aus, so kann der Auftakt dem Lager
    eine zusaetzliche Drehung geben, die sich mit der endlosen Drehung des
    Bildes addiert, ohne deren Phase anzufassen. */
 .hero-car .felge-lager {
@@ -474,22 +474,22 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    herein und zieht dabei die goldene Mittellinie wie einen Stift hinter
    sich her; danach reisst der Asphalt entlang dieser Linie an seinen
    Abrisskanten auf, und derselbe Strich zieht sich als Unterstrich
-   unter "Führerschein" – Strasse und Überschrift sind eine Geste.
+   unter "Führerschein", Strasse und Überschrift sind eine Geste.
 
    Die Mittellinie und die Felgen laufen dabei durchgehend in ihren
    endlosen Schleifen weiter; der Auftakt legt nur Zusätze darüber
    (einen Deckstreifen, ein zusätzlich drehendes Lager, einen Kegel
-   Licht). Faellt die Auftaktklasse – durch Eingriff oder den Zeitgeber
-   im Skript –, kollabiert alles in den Ruhezustand der Seite: Das
+   Licht). Faellt die Auftaktklasse, ausgeloest durch Eingriff oder Zeitgeber
+   im Skript, kollabiert alles in den Ruhezustand der Seite: Das
    letzte Bild des Auftakts ist das erste Bild der Seite.
 
    Die Bewegung liegt vollstaendig im CSS und laeuft mit forwards aus;
    bleibt das Skript aus, oeffnet sich der Vorhang trotzdem. Das Skript
    misst nur die Naht (--auftakt-naht/-fuss) und raeumt hinterher auf.
 
-   Zeitplan: Wagen und Felgenschub 60–1180, Linie 60–1400 (Knick bei
-   998), Licht statisch bis 1020, aus bis 1400, Vorhang 1020–1520, Text
-   1040/1085/1130 je 380, Unterstrich 1380–1900, Aufraeumen 1600.
+   Zeitplan: Wagen und Felgenschub 60 bis 1180, Linie 60 bis 1400 (Knick bei
+   998), Licht statisch bis 1020, aus bis 1400, Vorhang 1020 bis 1520, Text
+   1040/1085/1130 je 380, Unterstrich 1380 bis 1900, Aufraeumen 1600.
 
    Auf schmalen Schirmen gilt ein eigener Plan, siehe ganz unten in
    diesem Abschnitt: Dort faellt der Vorhang weg. */
@@ -513,11 +513,11 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 /* Abrisskanten: Asphalt-Fransen stehen über die schnurgeraden Flächen
    hinaus. Geschlossen liegen sie Asphalt auf Asphalt im Fahrbahnband
    und sind unsichtbar; erst wenn die Flächen über die helle Bühne
-   fahren, erscheint der Riss – genau im Moment des Reissens. Sie haben
+   fahren, erscheint der Riss, genau im Moment des Reissens. Sie haben
    keine eigene Bewegung, sie erben das translateY der Flächen.
    Hoehe hart bei 30px gedeckelt: Die Goldlinie liegt mindestens 38px
    unter der Naht (46 % von minimal 84px Fahrbahn), 3px Überlappung
-   plus 30px Fransen = 33px – die Fransen erreichen die Linie nie. */
+   plus 30px Fransen = 33px, die Fransen erreichen die Linie nie. */
 .auftakt-oben::after,
 .auftakt-unten::after {
   content: ""; position: absolute; left: 0; right: 0;
@@ -533,7 +533,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 .auftakt-laeuft .hero-car { z-index: 85; }
 
 /* Einfahrt mit Kamera-Physik: Der Wagen schiesst herein, die Kamera
-   holt auf, überholt um eine Handbreit und korrigiert zurueck – der
+   holt auf, überholt um eine Handbreit und korrigiert zurueck, der
    Wagen driftet minimal über die Ruheposition hinaus und setzt sich
    dann exakt auf translateX(0). Nichts bremst: Das ewige Cruisen der
    Bühne wird nahtlos übernommen, weil der Endwert die Identitaet ist.
@@ -556,7 +556,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 
 
 /* Felgenschub: Das Lager dreht waehrend der Einfahrt zusaetzlich von
-   2turn auf 0 – abnehmender Winkel, also gegen den Uhrzeigersinn wie
+   2turn auf 0, abnehmender Winkel, also gegen den Uhrzeigersinn wie
    felgeLinks (0 auf -1turn). Lager- und Felgendrehung addieren sich;
    die Kurve ist dieselbe wie die erste Phase des Wagens und endet mit
    waagerechter Tangente: Die Übergabe ans Cruisen ist nahtlos, die
@@ -570,14 +570,13 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 /* Der goldene Strich: Die Mittellinie laeuft von Anfang an in ihrer
    endlosen Schleife, liegt aber unter einem asphaltfarbenen Deckstreifen.
    Der schiebt sich nach links aus dem Bild und legt die Linie von rechts
-   her frei – der Wagen zieht den Strich hinter sich her. Am Knick der
-   Kurve liegt die Aufdeckfront unter der Karosserie (52–69vw breit),
+   her frei, der Wagen zieht den Strich hinter sich her. Am Knick der
+   Kurve liegt die Aufdeckfront unter der Karosserie (52 bis 69vw breit),
    die Übergabe ist deshalb auf jeder Viewportbreite verdeckt; danach
    reisst sich der Strich los und vollendet sich zum linken Rand.
    Bewusst KEINE Maske auf .hero-ground::before: Das Element pendelt
    selbst per translateX in der Schleife, eine Maske pendelte mit.
-   Der Überhang -60px entspricht dem Bleed von .hero-ground::before –
-   wer den eine aendert, aendert beide. */
+   Der Überhang -60px entspricht dem Bleed von .hero-ground::before, wer den eine aendert, aendert beide. */
 .auftakt-laeuft .hero-ground::after {
   content: ""; position: absolute; inset: 0 -60px; z-index: 1;
   background: var(--asphalt); pointer-events: none;
@@ -602,12 +601,12 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
      Im Bild sitzt die Lampe bei 5,6 % der Wagenbreite und 52,6 % der Hoehe
      (nachgemessen an golf-8.png, der Wagen zeigt nach links). Die rechte
      Kante dieses Kastens ist der Lichtursprung, also right: 94.4 %.
-     Senkrecht: 20 % + 53 % von 62 % Hoehe = 52,9 % – die Lampenmitte. */
+     Senkrecht: 20 % + 53 % von 62 % Hoehe = 52,9 %, die Lampenmitte. */
   content: ""; position: absolute; right: 94.4%; width: 76%;
   top: 20%; height: 62%; pointer-events: none;
   /* Explizite Radien, nicht closest-side: Mit dem Zentrum auf der
      rechten Kante waere die naechste Seite null Pixel entfernt und der
-     Verlauf haette Radius null – er renderte gar nicht. */
+     Verlauf haette Radius null, er renderte gar nicht. */
   background: radial-gradient(100% 58% at 100% 53%,
               rgba(255, 240, 190, .28), rgba(255, 240, 190, .09) 52%,
               rgba(255, 240, 190, 0) 80%);
@@ -630,7 +629,7 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
    Doppel-Deklaration nicht aufraeumen: Die Regel steht absichtlich
    identisch unter beiden Klassen, damit sich der berechnete Wert beim
    Klassenwechsel um 1250 nicht aendert und die laufende Bewegung nicht
-   neu startet – jede Abweichung, auch nur im Delay, startet sie neu.
+   neu startet, jede Abweichung, auch nur im Delay, startet sie neu.
    Besucher ohne Auftakt behalten die Basisregel (swipe 1s .6s). */
 html.auftakt-laeuft .hero h1 .accent::after,
 html.auftakt-fertig .hero h1 .accent::after {
@@ -646,7 +645,7 @@ html.auftakt-fertig .hero h1 .accent::after {
    Was bleibt, ist der eigentliche Kern: Der Wagen faehrt herein und
    zieht die goldene Mittellinie hinter sich her, und derselbe Strich
    zieht sich danach unter "Führerschein". Der Unterschied ist, dass der
-   Hero die ganze Zeit sichtbar ist – auf dem Handy sieht man Strasse und
+   Hero die ganze Zeit sichtbar ist, auf dem Handy sieht man Strasse und
    Überschrift sogar gleichzeitig, die Übergabe des Strichs liest sich
    hier also besser als auf dem Breitbild.
 
@@ -1014,7 +1013,7 @@ html[data-theme="dark"] .loc-b .loc-pin { background: var(--ink-3); color: #1416
 .faq-answer { padding: 0 60px 24px 2px; font-size: .98rem; color: var(--ink-2); }
 
 /* Der Winkel drehte sich schon sauber, der Text sprang. ::details-content
-   ist der Kasten, den der Browser selbst um den Inhalt legt – nur darüber
+   ist der Kasten, den der Browser selbst um den Inhalt legt, nur darüber
    lässt sich ein <details> überblenden. Wo der Browser das nicht kennt,
    klappt die Antwort wie bisher sofort auf. */
 .faq-item::details-content {
@@ -1679,7 +1678,7 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 }
 /* Die neun Bilder treten versetzt ein, nicht alle auf einmal. Der Versatz
    ist bewusst knapp: Bei 55 ms je Bild ist das letzte nach einer halben
-   Sekunde da – man nimmt eine Reihenfolge wahr, wartet aber auf nichts.
+   Sekunde da, man nimmt eine Reihenfolge wahr, wartet aber auf nichts.
    Wie bei den uebrigen Abschnitten wird nur versteckt, wenn Skripte
    laufen, sonst blieben die Bilder ohne JavaScript dauerhaft weg. */
 html.js .bk-band .bk { opacity: 0; transform: translateY(16px); }
@@ -1724,8 +1723,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 /* ---------------------------------------------------------
    11. Handy: Maßstab statt nur Umbruch
    Die Abstände und Schriftgrößen sind für breite Bildschirme gemacht.
-   Auf 375 px wirkt dieselbe Großzügigkeit nicht luftig, sondern zäh –
-   die Seite war 18 Bildschirme lang. Hier wird der ganze Maßstab
+   Auf 375 px wirkt dieselbe Großzügigkeit nicht luftig, sondern zäh, die Seite war 18 Bildschirme lang. Hier wird der ganze Maßstab
    heruntergezogen, nicht nur umgebrochen.
    --------------------------------------------------------- */
 @media (max-width: 620px) {
@@ -1743,7 +1741,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 
   /* Bühne: Foto, Überschrift, die zwei Schaltflächen UND die Fahrbahn
      mit dem Wagen sollen ohne Scrollen sichtbar sein. Die Fahrbahn stand
-     vorher nicht in der Rechnung – auf einem Handy mit Adressleiste lagen
+     vorher nicht in der Rechnung, auf einem Handy mit Adressleiste lagen
      von ihren 84px nur 19 im Bild, der Wagen klebte bei 94 Prozent der
      Höhe am unteren Rand und schien zu schweben. Die fehlende Höhe kommt
      aus dem Foto (20svh statt 30svh); der Abstand darunter bleibt, denn
