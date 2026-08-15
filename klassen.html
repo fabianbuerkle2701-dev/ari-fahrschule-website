@@ -21,6 +21,12 @@
 <link rel="stylesheet" href="css/fonts.css">
 <link rel="stylesheet" href="css/style.css">
 <script>
+  // Kennzeichnet, dass Skripte laufen. Nur dann werden Abschnitte fuer das
+  // Einblenden versteckt – ohne JavaScript bleibt die Seite vollstaendig
+  // lesbar, statt halb leer zu bleiben.
+  document.documentElement.classList.add("js");
+</script>
+<script>
   try {
     var t = localStorage.getItem("ari-theme");
     if (!t) t = matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -172,7 +178,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Seite</h4>
+        <h3>Seite</h3>
         <ul>
           <li><a href="index.html">Startseite</a></li>
           <li><a href="klassen.html" aria-current="page">Klassen</a></li>
@@ -185,7 +191,7 @@
       </div>
 
       <div class="footer-col">
-        <h4>Kontakt</h4>
+        <h3>Kontakt</h3>
         <ul>
           <li><a href="tel:+4917643454447">0176 43454447</a></li>
           <li><a href="mailto:Info@fahrschule-ari.de">Info@fahrschule-ari.de</a></li>

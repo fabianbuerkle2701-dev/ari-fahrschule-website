@@ -254,8 +254,8 @@
      soll, wo man ist, und nicht, woran man gerade vorbeiscrollt.
      Auf den Unterseiten steht aria-current im Markup; hier setzt es das
      Skript, weil die Startseite denselben Kopf verwendet.              */
-  var startpunkt = document.querySelector('.main-nav a[href="#top"]');
-  if (startpunkt) startpunkt.setAttribute("aria-current", "page");
+  var startpunkte = document.querySelectorAll('.main-nav a[href="#top"], .footer-col a[href="#top"]');
+  startpunkte.forEach(function (a) { a.setAttribute("aria-current", "page"); });
 
   /* ---------- FAQ: immer nur eine Antwort offen ---------- */
   var faqItems = document.querySelectorAll(".faq-item");
