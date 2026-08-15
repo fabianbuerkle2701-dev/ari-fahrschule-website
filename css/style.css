@@ -163,6 +163,30 @@ ul { margin: 0; padding: 0; list-style: none; }
 ::view-transition-old(root),
 ::view-transition-new(root) { animation-duration: 220ms; }
 
+/* --- Wechsel zwischen hell und dunkel ---
+   Das neue Farbschema waechst als Kreis aus dem Schalter heraus, statt
+   hart umzuspringen. Waehrend des Wechsels geben Kopfzeile, Wortmarke,
+   Fusszeile und Assistent ihre eigenen Namen ab: Sonst waeren sie eigene
+   Gruppen, die der Kreis nicht erfasst – sie wuerden schlagartig
+   umspringen, waehrend der Rest sauber aufzieht. Ohne Unterstuetzung
+   oder bei weniger Bewegung schaltet das Skript schlicht um. */
+html.themenwechsel .site-header,
+html.themenwechsel .site-header .brand,
+html.themenwechsel .site-footer,
+html.themenwechsel .ari-root { view-transition-name: none; }
+
+html.themenwechsel::view-transition-old(root) {
+  animation: none; mix-blend-mode: normal; z-index: 0;
+}
+html.themenwechsel::view-transition-new(root) {
+  animation: themenKreis 520ms var(--ease-out);
+  mix-blend-mode: normal; z-index: 1;
+}
+@keyframes themenKreis {
+  from { clip-path: circle(0 at var(--wechsel-x) var(--wechsel-y)); }
+  to   { clip-path: circle(var(--wechsel-r) at var(--wechsel-x) var(--wechsel-y)); }
+}
+
 /* Kopf- und Fußzeile sollen nicht überblenden, sondern schlicht bleiben. */
 ::view-transition-old(kopfzeile),
 ::view-transition-new(kopfzeile),
@@ -1224,9 +1248,13 @@ html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: var(--shadow-md);
-  animation: ariIn .32s var(--ease);
+  /* Der Drehpunkt liegt in der Ecke, in der der Knopf sitzt: Das Fenster
+     waechst aus ihm heraus, statt aus dem Nichts in der Mitte zu erscheinen.
+     Ohne das hat die Bewegung keinen Ursprung und wirkt beliebig. */
+  transform-origin: 100% 100%;
+  animation: ariIn .32s var(--ease-out);
 }
-@keyframes ariIn { from { opacity: 0; transform: translateY(14px) scale(.98); } }
+@keyframes ariIn { from { opacity: 0; transform: translateY(8px) scale(.92); } }
 
 .ari-head {
   display: flex; align-items: center; gap: 12px; padding: 16px 16px 15px;
@@ -1344,7 +1372,8 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
     animation-duration: .01ms !important; animation-iteration-count: 1 !important;
     transition-duration: .01ms !important;
   }
-  html.js .reveal { opacity: 1; transform: none; }
+  html.js .reveal,
+  html.js .bk-band .bk { opacity: 1; transform: none; }
 }
 
 /* ---------------------------------------------------------
@@ -1638,6 +1667,26 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 @media (hover: hover) and (pointer: fine) {
   .bk:hover img { transform: translateY(-4px); }
 }
+/* Die neun Bilder treten versetzt ein, nicht alle auf einmal. Der Versatz
+   ist bewusst knapp: Bei 55 ms je Bild ist das letzte nach einer halben
+   Sekunde da – man nimmt eine Reihenfolge wahr, wartet aber auf nichts.
+   Wie bei den uebrigen Abschnitten wird nur versteckt, wenn Skripte
+   laufen, sonst blieben die Bilder ohne JavaScript dauerhaft weg. */
+html.js .bk-band .bk { opacity: 0; transform: translateY(16px); }
+html.js .bk-band.is-visible .bk {
+  opacity: 1; transform: none;
+  transition: opacity .5s var(--ease), transform .5s var(--ease);
+}
+html.js .bk-band.is-visible .bk:nth-child(1) { transition-delay: 0ms; }
+html.js .bk-band.is-visible .bk:nth-child(2) { transition-delay: 55ms; }
+html.js .bk-band.is-visible .bk:nth-child(3) { transition-delay: 110ms; }
+html.js .bk-band.is-visible .bk:nth-child(4) { transition-delay: 165ms; }
+html.js .bk-band.is-visible .bk:nth-child(5) { transition-delay: 220ms; }
+html.js .bk-band.is-visible .bk:nth-child(6) { transition-delay: 275ms; }
+html.js .bk-band.is-visible .bk:nth-child(7) { transition-delay: 330ms; }
+html.js .bk-band.is-visible .bk:nth-child(8) { transition-delay: 385ms; }
+html.js .bk-band.is-visible .bk:nth-child(9) { transition-delay: 440ms; }
+
 .bk figcaption {
   margin-top: 10px; font-size: .8rem; color: var(--ink-3); line-height: 1.4;
 }

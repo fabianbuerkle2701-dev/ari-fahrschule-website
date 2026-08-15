@@ -3,3 +3,6 @@
 # Rohmaterial und Sicherungen bleiben lokal — sie gehoeren nicht ins Netz
 images/original/
 _altbestand/
+
+# Abhaengigkeiten aus npm bleiben lokal
+node_modules/

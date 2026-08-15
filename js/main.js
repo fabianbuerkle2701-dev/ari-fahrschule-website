@@ -65,8 +65,34 @@
     themeToggle.addEventListener("click", function () {
       var root = document.documentElement;
       var next = root.dataset.theme === "dark" ? "light" : "dark";
-      root.dataset.theme = next;
-      try { localStorage.setItem("ari-theme", next); } catch (e) {}
+      var umschalten = function () {
+        root.dataset.theme = next;
+        try { localStorage.setItem("ari-theme", next); } catch (e) {}
+      };
+
+      // Ohne Unterstuetzung oder bei weniger Bewegung schlicht umschalten.
+      if (!document.startViewTransition ||
+          window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+        umschalten();
+        return;
+      }
+
+      // Das neue Farbschema waechst als Kreis aus dem Schalter heraus. Der
+      // Radius reicht bis zur entferntesten Ecke, sonst bliebe eine Ecke
+      // unberuehrt. Die Werte liest das CSS aus diesen Eigenschaften.
+      var k = themeToggle.getBoundingClientRect();
+      var x = k.left + k.width / 2;
+      var y = k.top + k.height / 2;
+      var r = Math.hypot(Math.max(x, window.innerWidth - x),
+                         Math.max(y, window.innerHeight - y));
+      root.style.setProperty("--wechsel-x", x + "px");
+      root.style.setProperty("--wechsel-y", y + "px");
+      root.style.setProperty("--wechsel-r", r + "px");
+      root.classList.add("themenwechsel");
+
+      var lauf = document.startViewTransition(umschalten);
+      lauf.finished.then(aufraeumen, aufraeumen);
+      function aufraeumen() { root.classList.remove("themenwechsel"); }
     });
   }
 
