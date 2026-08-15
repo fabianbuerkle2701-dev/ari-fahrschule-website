@@ -111,7 +111,7 @@
       {
         id: "anmeldung",
         label: "Wie melde ich mich an?",
-        keywords: ["anmelden", "anmeldung", "einschreiben", "registrieren", "starten", "anfangen", "loslegen", "beginnen", "dabei", "aufnehmen", "platz", "warteliste"],
+        keywords: ["anmelden", "anmeldung", "melde", "angemeldet", "einschreiben", "registrieren", "starten", "anfangen", "loslegen", "beginnen", "dabei", "aufnehmen", "platz", "warteliste"],
         answer:
           "Am schnellsten telefonisch: " + PHONE_HUMAN + "\n\nIm Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nWenn dir Schreiben lieber ist, nimm das Kontaktformular auf der Startseite oder schreib an " + MAIL + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus – mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
         handoff: true
@@ -255,7 +255,13 @@
       if (score > bestScore) { bestScore = score; best = topic; }
     });
 
-    return bestScore >= 2.5 ? best : null;
+    // Schwelle 3, nicht 2.5: Ein blosser Wortanfang zaehlt 2.5, ein ganzes
+    // Wort 3.5. Bei 2.5 genuegte ein einziger Zufallstreffer im Wortanfang
+    // fuer eine selbstbewusste Antwort – "Wochenende" traf "wochen" und
+    // brachte die Antwort zur Ausbildungsdauer. Jetzt braucht es ein
+    // ganzes Wort oder zwei Wortanfaenge; sonst sagt der Assistent
+    // ehrlich, dass er unsicher ist, und bietet Anruf und E-Mail an.
+    return bestScore >= 3 ? best : null;
   }
 
   /* ---------------------------------------------------------
