@@ -1,11 +1,14 @@
 /* =========================================================
    Bestätigung der Datenschutzerklärung
 
-   Kein Cookie-Banner: Die Seite setzt keine Cookies, lädt nichts von
-   Dritten und braucht daher für nichts eine Einwilligung. Was hier
-   passiert, ist eine einmalige Kenntnisnahme der Datenschutzerklärung —
-   ohne Ablehnen-Knopf, weil es nichts abzulehnen gibt, und ohne
-   Sperrbildschirm, weil die Seite auch vorher nichts verarbeitet.
+   Kein Cookie-Banner: Die Seite setzt keine Cookies und braucht fast
+   nirgends eine Einwilligung. Einzige Ausnahme sind die eingebetteten
+   Kartenausschnitte bei den Standorten, die laufen aber auf berechtigtem
+   Interesse (Art. 6 Abs. 1 lit. f DSGVO), nicht auf Einwilligung — es
+   gibt also nichts anzukreuzen. Was hier passiert, ist eine einmalige
+   Kenntnisnahme der Datenschutzerklärung, ohne Ablehnen-Knopf, weil es
+   nichts abzulehnen gibt, und ohne Sperrbildschirm, weil die Seite auch
+   vorher nichts verarbeitet, das eine Einwilligung braucht.
 
    Einwilligungspflichtig wird genau eine Sache: der Assistent, sobald
    er über assistant-backend/ mit einem Sprachmodell läuft. Dann
@@ -49,9 +52,9 @@
     wurzel.setAttribute("aria-label", "Datenschutz");
     wurzel.innerHTML =
       '<div class="dh-innen">' +
-        '<p class="dh-text">Diese Seite setzt keine Cookies, bindet keine Werbe- oder ' +
-        'Analysedienste ein und gibt nichts an Dritte weiter. ' +
-        'Näheres in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
+        '<p class="dh-text">Diese Seite setzt keine Cookies und bindet keine Werbe- oder ' +
+        'Analysedienste ein. Bei den Standorten sind Kartenausschnitte von OpenStreetMap ' +
+        'eingebettet. Näheres in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
         '<button class="btn btn-gold dh-ok" type="button">Akzeptieren</button>' +
       '</div>';
     document.body.appendChild(wurzel);

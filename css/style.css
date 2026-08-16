@@ -995,6 +995,21 @@ html[data-theme="dark"] .loc-b .loc-pin { background: var(--ink-3); color: #1416
 }
 .loc-a .loc-head h3 { color: var(--gold-deep); }
 
+/* Kartenausschnitt je Standort, echtes OpenStreetMap-Embed. Steht
+   bewusst zwischen Kopf und Zeiten: Erst wissen, wo man ist, dann sehen,
+   wo es liegt, dann die Details. Der "Groessere Karte"-Verweis ist
+   OpenStreetMaps eigene Vorgabe fuer eingebettete Karten. */
+.loc-map { margin-bottom: 24px; }
+.loc-map iframe {
+  display: block; width: 100%; height: 200px; border: 1px solid var(--line);
+  border-radius: var(--radius-sm);
+}
+.loc-map-gross {
+  display: inline-block; margin-top: 6px; font-size: .82rem; color: var(--ink-3);
+  text-decoration: none;
+}
+.loc-map-gross:hover { color: var(--gold-deep); }
+
 .hours { display: grid; gap: 0; margin-bottom: 26px; }
 .hours-row {
   display: grid; grid-template-columns: 1fr auto; gap: 16px; align-items: center;
