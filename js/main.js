@@ -396,18 +396,18 @@
       // Im Postfach der Fahrschule soll eine fertige Anfrage liegen, keine
       // Feldliste. Der Einstiegssatz nennt die gewaehlte Klasse, darunter
       // steht die Nachricht des Anfragers, darunter die Kontaktdaten.
-      var wahl = klasse.value;
-      var einstieg;
-      if (/wei\u00df ich noch nicht/i.test(wahl)) {
-        einstieg = "ich m\u00f6chte den F\u00fchrerschein machen und bin mir noch nicht sicher, " +
-                   "welche Klasse zu mir passt.";
-      } else {
-        var teile = wahl.split("\u2013");
-        var kuerzel = teile[0].trim();
-        var zusatz = (teile[1] || "").trim();
-        einstieg = "ich interessiere mich f\u00fcr den F\u00fchrerschein der Klasse " + kuerzel +
-                   (zusatz ? " (" + zusatz + ")" : "") + ".";
-      }
+      // Kuerzel und Zusatz stehen als Attribute am Auswahlfeld. Frueher
+      // wurde die Beschriftung am Gedankenstrich zerlegt; als der aus den
+      // Texten verschwand, stand in jeder Mail "der Klasse B: Pkw." mit
+      // Doppelpunkt mitten im Satz. Am Trennzeichen haengt jetzt nichts mehr.
+      var gewaehlt = klasse.options[klasse.selectedIndex];
+      var kuerzel = klasse.value;
+      var zusatz = gewaehlt ? (gewaehlt.getAttribute("data-zusatz") || "") : "";
+      var einstieg = kuerzel
+        ? "ich interessiere mich f\u00fcr den F\u00fchrerschein der Klasse " + kuerzel +
+          (zusatz ? " (" + zusatz + ")" : "") + "."
+        : "ich m\u00f6chte den F\u00fchrerschein machen und bin mir noch nicht sicher, " +
+          "welche Klasse zu mir passt.";
 
       var text =
         "Hallo Fahrschule ARI,\n\n" +
@@ -423,7 +423,8 @@
         name.value.trim() + "\n";
 
       var adresse = "mailto:" + MAIL +
-        "?subject=" + encodeURIComponent("Anfrage über die Webseite: " + wahl) +
+        "?subject=" + encodeURIComponent(kuerzel ? "Anfrage über die Webseite, Klasse " + kuerzel
+                                          : "Anfrage über die Webseite") +
         "&body=" + encodeURIComponent(text);
 
       // Viele Mailprogramme schneiden mailto-Adressen ab etwa 2000 Zeichen
