@@ -40,7 +40,8 @@ PREISE = kopfteil(
     + posten("Fahrstunde", "79,00 €", "je 45 Minuten") \
     + posten("Sonderfahrten", "85,00 €", "Überland, Autobahn und Dunkelheit, je 45 Minuten") \
     + posten("Vorstellung zur theoretischen Prüfung", "79,00 €") \
-    + posten("Vorstellung zur praktischen Prüfung", "199,00 €", "komplett") + '''
+    + posten("Vorstellung zur praktischen Prüfung", "199,00 €", "komplett") \
+    + posten("Lern-App", "89,00 €", "einmalig, für die Vorbereitung zu Hause") + '''
         </article>
 
         <article class="p-karte reveal reveal-delay-1">
@@ -98,10 +99,10 @@ PREISE = kopfteil(
       <div class="note-band reveal">
         <div>
           <h3>Rechnen wir es gemeinsam durch?</h3>
-          <p>Am Telefon schätzen wir dir in fünf Minuten realistisch ein, womit
-             du in deiner Situation rechnen musst.</p>
+          <p>Schreib uns kurz deine Situation, wir schätzen realistisch ein,
+             womit du rechnen musst.</p>
         </div>
-        <a class="btn btn-gold" href="tel:+4917643454447">0176 43454447</a>
+        <a class="btn btn-gold" href="index.html#kontakt">Schreiben</a>
       </div>
     </div>
   </section>
@@ -193,7 +194,7 @@ KLASSEN = kopfteil(
           <p>Sag uns, was du fahren willst. Wir sagen dir, welche Klasse du dafür
              brauchst und welche nicht.</p>
         </div>
-        <a class="btn btn-gold" href="tel:+4917643454447">0176 43454447</a>
+        <a class="btn btn-gold" href="index.html#kontakt">Schreiben</a>
       </div>
     </div>
   </section>
@@ -255,7 +256,7 @@ FAHRSCHULE = kopfteil(
         <dl class="facts">
           <div><dt>12</dt><dd>Doppelstunden Grundstoff, je 90 Minuten</dd></div>
           <div><dt>2</dt><dd>Doppelstunden Zusatzstoff für Klasse B</dd></div>
-          <div><dt>0 €</dt><dd>für die Lern-App, die bekommst du von uns</dd></div>
+          <div><dt>89 €</dt><dd>für die Lern-App, einmalig</dd></div>
         </dl>
       </div>
     </div>
@@ -283,8 +284,8 @@ FAHRSCHULE = kopfteil(
         </div>
         <div class="why-item reveal reveal-delay-2">
           <div class="why-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M11 18.5h2"/></svg></div>
-          <h3>Lern-App inklusive</h3>
-          <p>Alle Schüler bekommen kostenlos die Führerscheinlern-App und lernen
+          <h3>Lern-App separat</h3>
+          <p>Die Führerscheinlern-App kostet einmalig 89 €. Damit lernst du
              damit, wann und wo sie wollen.</p>
         </div>
       </div>
@@ -354,7 +355,7 @@ THEMEN_SEITE = kopfteil(
           <p>Sag uns kurz, welches Thema du zuletzt hattest, dann sagen wir dir,
              wo du wieder einsteigst.</p>
         </div>
-        <a class="btn btn-gold" href="tel:+4917643454447">0176 43454447</a>
+        <a class="btn btn-gold" href="index.html#kontakt">Schreiben</a>
       </div>
     </div>
   </section>

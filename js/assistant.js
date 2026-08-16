@@ -14,6 +14,14 @@
       Fällt der Dienst aus oder braucht er zu lange, springt
       automatisch wieder die Wissensbasis ein.
 
+   In beiden Betriebsarten kann der Assistent auch eine Anfrage
+   aufnehmen: Name, Telefon, E-Mail, Klasse, Anliegen, der Reihe nach
+   erfragt, dann dieselbe Art E-Mail wie das Kontaktformular. Das laeuft
+   komplett lokal und oeffnet am Ende mailto:, genau wie das Formular in
+   main.js - es verlaesst nichts den Browser, bis der Besuch selbst im
+   eigenen Mailprogramm auf Senden geht. Siehe "Anfrage im Gespraech"
+   weiter unten.
+
    Einrichtung: siehe assistant-backend/README.md
    ========================================================= */
 (function () {
@@ -38,7 +46,7 @@
     subtitle: "antwortet sofort",
     badge: "KI",
     greeting:
-      "Hallo! Ich bin der Assistent der Fahrschule ARI in Freiburg.\nFrag mich nach Klassen, Theoriezeiten, Standorten oder dem Ablauf. Ich antworte sofort.",
+      "Hallo! Ich bin der Assistent der Fahrschule ARI in Freiburg.\nFrag mich nach Klassen, Theoriezeiten, Standorten oder dem Ablauf, oder ich nehme gleich hier deine Anfrage auf. Ich antworte sofort.",
     disclaimer:
       "Ich bin ein digitaler Assistent, kein Fahrlehrer. Bei Preisen und allem Verbindlichen hole ich lieber das Team dazu.",
     inputLabel: "Deine Frage",
@@ -49,7 +57,7 @@
     suggestionsLabel: "Häufig gefragt",
     moreLabel: "Das interessiert andere auch",
     fallback:
-      "Da bin ich mir nicht sicher, ob ich dich richtig verstanden habe, und dann rate ich lieber nicht.\n\nSchau, ob unten etwas passt. Oder ruf kurz an, das geht meistens schneller als jedes Formular.",
+      "Da bin ich mir nicht sicher, ob ich dich richtig verstanden habe, und dann rate ich lieber nicht.\n\nSchau, ob unten etwas passt. Oder schreib \"Anfrage\", dann nehme ich hier gleich deine Angaben auf.",
     handoffTitle: "Lieber direkt sprechen?",
     callLabel: "Anrufen",
     mailLabel: "E-Mail",
@@ -62,7 +70,7 @@
         label: "Was kostet der Führerschein?",
         keywords: ["preis", "preise", "kosten", "kostet", "teuer", "guenstig", "euro", "gebuehr", "zahlen", "bezahlen", "pauschale", "tarif", "rate", "ratenzahlung", "finanzierung", "grundbetrag", "fahrstunde", "preisaushang"],
         answer:
-          "Die festen Posten stehen offen auf der Seite unter Preise, so wie im Preisaushang:\n\n• Klasse B: Grundbetrag 499 €\n• Fahrstunde: 79 € je 45 Minuten\n• Sonderfahrten: 85 € je 45 Minuten\n• Vorstellung zur Theorieprüfung: 79 €, zur praktischen Prüfung: 199 €\n• Klasse BE: Grundbetrag 299 €, zusammen mit B nur 699 €\n• B96-Kurs: 599 €\n\nWas ich dir nicht sagen kann, ist die Endsumme. Die hängt daran, wie viele Fahrstunden du brauchst, und das ist von Mensch zu Mensch verschieden. Dazu kommen die amtlichen Gebühren von Führerscheinstelle und Prüforganisation.\n\nRuf kurz an, dann schätzen wir das für deine Situation realistisch ein.",
+          "Die festen Posten stehen offen auf der Seite unter Preise, so wie im Preisaushang:\n\n• Klasse B: Grundbetrag 499 €\n• Fahrstunde: 79 € je 45 Minuten\n• Sonderfahrten: 85 € je 45 Minuten\n• Vorstellung zur Theorieprüfung: 79 €, zur praktischen Prüfung: 199 €\n• Klasse BE: Grundbetrag 299 €, zusammen mit B nur 699 €\n• B96-Kurs: 599 €\n• Lern-App: 89 € einmalig, nicht im Grundbetrag enthalten\n\nWas ich dir nicht sagen kann, ist die Endsumme. Die hängt daran, wie viele Fahrstunden du brauchst, und das ist von Mensch zu Mensch verschieden. Dazu kommen die amtlichen Gebühren von Führerscheinstelle und Prüforganisation.\n\nRuf kurz an, dann schätzen wir das für deine Situation realistisch ein.",
         handoff: true
       },
       {
@@ -113,7 +121,7 @@
         label: "Wie melde ich mich an?",
         keywords: ["anmelden", "anmeldung", "melde", "angemeldet", "einschreiben", "registrieren", "starten", "anfangen", "loslegen", "beginnen", "dabei", "aufnehmen", "platz", "warteliste"],
         answer:
-          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\n\nIm Gespräch klären wir in fünf Minuten, welche Klasse passt, was du mitbringen musst und wann der nächste Theorieabend liegt.\n\nWenn dir Schreiben lieber ist, nimm das Kontaktformular auf der Startseite oder schreib an " + MAIL + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus. Mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
+          "Am einfachsten hier: Schreib \"Anfrage\", dann frage ich dich der Reihe nach ab und stelle daraus eine Nachricht an uns zusammen.\n\nGeht auch über das Kontaktformular auf der Startseite, per E-Mail an " + MAIL + " oder telefonisch: " + PHONE_HUMAN + ". Vorbeikommen geht natürlich auch. Den Antrag füllen wir gemeinsam aus. Mit dem Theorieunterricht kannst du sofort starten, auch während der Antrag noch läuft.",
         handoff: true
       },
       {
@@ -149,14 +157,14 @@
         label: "Gibt es eine Lern-App?",
         keywords: ["app", "lernapp", "lern app", "online", "handy", "lernen", "zuhause", "fragebogen", "uebungsfragen", "digital"],
         answer:
-          "Ja, und sie kostet dich nichts extra. Alle unsere Schüler bekommen die Führerscheinlern-App.\n\nDamit lernst du, wann und wo du willst, im Bus, auf dem Sofa, in der Pause. Die Theorieabende ersetzt sie nicht, aber sie macht die Vorbereitung auf die Prüfung deutlich leichter."
+          "Ja, die Führerscheinlern-App gibt es für einmalig 89 €.\n\nDamit lernst du, wann und wo du willst, im Bus, auf dem Sofa, in der Pause. Die Theorieabende ersetzt sie nicht, aber sie macht die Vorbereitung auf die Prüfung deutlich leichter."
       },
       {
         id: "ablauf",
         label: "Wie läuft das alles ab?",
         keywords: ["ablauf", "schritte", "reihenfolge", "wie geht", "was zuerst", "beginnen", "vorgehen", "plan", "weg"],
         answer:
-          "In fünf Schritten:\n\n1. Anmeldung: am besten telefonisch, sonst über das Kontaktformular auf der Startseite oder persönlich\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen, den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
+          "In fünf Schritten:\n\n1. Anmeldung: am besten schriftlich über das Kontaktformular, hier im Chat oder persönlich, geht aber auch telefonisch\n2. Unterlagen besorgen: Lichtbild, Sehtest, Erste-Hilfe-Kurs\n3. Fahrerlaubnis beantragen, den Papierkram machen wir gemeinsam\n4. Theorieunterricht und theoretische Prüfung\n5. Übungs- und Sonderfahrten, dann die praktische Prüfung\n\nWir sagen dir bei jedem Schritt, was ansteht. Du musst dich um nichts alleine kümmern."
       },
       {
         id: "dauer",
@@ -198,9 +206,9 @@
       {
         id: "kontakt",
         label: "Wie erreiche ich euch?",
-        keywords: ["kontakt", "telefon", "nummer", "anrufen", "erreichen", "mail", "email", "whatsapp", "schreiben", "instagram", "melden"],
+        keywords: ["kontakt", "telefon", "nummer", "anrufen", "erreichen", "mail", "email", "whatsapp", "schreiben", "instagram", "melden", "anfrage", "formular", "beratung", "beraten"],
         answer:
-          "Am schnellsten telefonisch: " + PHONE_HUMAN + "\nPer E-Mail: " + MAIL + "\n\nAuf Instagram findest du uns als @fahrschule_ari, dort posten wir Bestandene, Termine und was sonst so ansteht.",
+          "Am liebsten schriftlich: " + MAIL + ", über das Kontaktformular auf der Startseite oder gleich hier im Chat, ich nehme deine Angaben auf und stelle eine Nachricht an uns zusammen.\n\nTelefonisch geht auch: " + PHONE_HUMAN + ". Auf Instagram findest du uns als @fahrschule_ari, dort posten wir Bestandene, Termine und was sonst so ansteht.",
         handoff: true
       }
     ]
@@ -381,6 +389,223 @@
       return box;
     }
 
+    function kontaktNode() {
+      var box = document.createElement("div");
+      box.className = "ari-handoff";
+
+      var t = document.createElement("span");
+      t.className = "ari-handoff-title";
+      t.textContent = "Am liebsten gleich hier?";
+      box.appendChild(t);
+
+      var row = document.createElement("div");
+      row.className = "ari-handoff-row";
+
+      var start = document.createElement("button");
+      start.type = "button";
+      start.className = "ari-hbtn ari-hbtn-primary";
+      start.textContent = "Anfrage stellen";
+      start.addEventListener("click", function () { anfrageStarten(); });
+
+      var call = document.createElement("a");
+      call.className = "ari-hbtn";
+      call.href = "tel:" + PHONE_LINK;
+      call.textContent = PACK.callLabel;
+
+      row.appendChild(start);
+      row.appendChild(call);
+      box.appendChild(row);
+      return box;
+    }
+
+    /* ---------------------------------------------------------
+       Anfrage im Gespraech
+       Fragt dieselben Angaben ab wie das Kontaktformular in main.js
+       und baut daraus dieselbe Art E-Mail. "anfrage" haelt den
+       Zustand, solange der Dialog laeuft; ist er gesetzt, gehen
+       Eingaben nicht mehr an matchTopic(), sondern an anfrageAntwort().
+       --------------------------------------------------------- */
+    var anfrage = null;
+    var KLASSEN_ZUSATZ = { B: "Pkw", B197: "Automatik", B96: "Anhänger", BE: "Anhänger" };
+    var ANFRAGE_FELDER = [
+      {
+        schluessel: "name", frage: "Wie heißt du?",
+        pruefen: function (v) { return v.trim().length > 0; },
+        fehler: "Magst du mir noch kurz deinen Namen sagen?"
+      },
+      {
+        schluessel: "telefon", frage: "Unter welcher Telefonnummer erreichen wir dich?",
+        pruefen: function (v) { return v.replace(/\D/g, "").length >= 6; },
+        fehler: "Das sieht noch nicht nach einer vollständigen Telefonnummer aus."
+      },
+      {
+        schluessel: "email", frage: "Und deine E-Mail-Adresse?",
+        pruefen: function (v) { return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim()); },
+        fehler: "Das sieht noch nicht nach einer vollständigen E-Mail-Adresse aus."
+      },
+      {
+        schluessel: "klasse",
+        frage: "Für welche Klasse interessierst du dich, B, B197, B96 oder BE? Wenn du es noch nicht weißt, schreib einfach \"weiß nicht\".",
+        pruefen: function () { return true; }
+      },
+      {
+        schluessel: "anliegen", frage: "Magst du in ein, zwei Sätzen beschreiben, worum es geht?",
+        pruefen: function (v) { return v.trim().length > 0; },
+        fehler: "Schreib mir noch kurz, worum es geht, dann kann das Team direkt loslegen."
+      }
+    ];
+
+    // Grobe Zuordnung auf eine der vier Klassen. Trifft nichts, bleibt
+    // das Feld leer, genau wie "Weiß ich noch nicht" im Formular.
+    function klasseErkennen(v) {
+      var q = normalize(v);
+      var w = q.split(" ");
+      if (w.indexOf("b197") !== -1 || q.indexOf("automatik") !== -1) return "B197";
+      if (w.indexOf("b96") !== -1) return "B96";
+      if (w.indexOf("be") !== -1 && q.indexOf("anhaenger") !== -1) return "BE";
+      if (w.indexOf("be") !== -1 && w.length <= 2) return "BE";
+      if (w.indexOf("b") !== -1) return "B";
+      return "";
+    }
+
+    function anfrageStarten() {
+      anfrage = { schritt: 0, daten: {} };
+      suggest.textContent = "";
+      var t = showTyping();
+      window.setTimeout(function () {
+        t.remove();
+        addMsg("bot",
+          "Gern, dann sammle ich kurz die wichtigsten Angaben. Du kannst jederzeit \"abbrechen\" schreiben.\n\n" +
+          ANFRAGE_FELDER[0].frage);
+      }, thinkTime("kurz"));
+    }
+
+    function anfrageAbbrechen() {
+      anfrage = null;
+      var t = showTyping();
+      window.setTimeout(function () {
+        t.remove();
+        addMsg("bot", "Kein Problem, ich breche ab. Frag mich einfach wieder, wenn du magst.");
+        renderSuggestions();
+      }, thinkTime("kurz"));
+    }
+
+    function anfrageAntwort(v) {
+      if (/^(abbrechen|abbruch|stop|stopp)$/i.test(v.trim())) { anfrageAbbrechen(); return; }
+
+      var feld = ANFRAGE_FELDER[anfrage.schritt];
+      var wert = feld.schluessel === "klasse" ? klasseErkennen(v) : v.trim();
+
+      if (feld.schluessel !== "klasse" && !feld.pruefen(v)) {
+        var tf = showTyping();
+        window.setTimeout(function () { tf.remove(); addMsg("bot", feld.fehler); }, thinkTime(feld.fehler));
+        return;
+      }
+
+      anfrage.daten[feld.schluessel] = wert;
+      anfrage.schritt++;
+
+      if (anfrage.schritt < ANFRAGE_FELDER.length) {
+        var naechstes = ANFRAGE_FELDER[anfrage.schritt];
+        var tn = showTyping();
+        window.setTimeout(function () { tn.remove(); addMsg("bot", naechstes.frage); }, thinkTime(naechstes.frage));
+        return;
+      }
+
+      anfrageBestaetigen();
+    }
+
+    function anfrageBestaetigen() {
+      var d = anfrage.daten;
+      var zusammenfassung =
+        "Alles klar, " + d.name + ". Das habe ich:\n\n" +
+        "Name: " + d.name + "\n" +
+        "Telefon: " + d.telefon + "\n" +
+        "E-Mail: " + d.email + "\n" +
+        "Klasse: " + (d.klasse || "weiß noch nicht") + "\n" +
+        "Anliegen: " + d.anliegen + "\n\n" +
+        "Ich öffne jetzt dein E-Mail-Programm mit einer fertigen Nachricht an uns. Einverstanden?";
+
+      var box = document.createElement("div");
+      box.className = "ari-handoff";
+      var titel = document.createElement("span");
+      titel.className = "ari-handoff-title";
+      titel.textContent = "Anfrage abschicken?";
+      box.appendChild(titel);
+
+      var row = document.createElement("div");
+      row.className = "ari-handoff-row";
+
+      var ja = document.createElement("button");
+      ja.type = "button";
+      ja.className = "ari-hbtn ari-hbtn-primary";
+      ja.textContent = "Ja, senden";
+      ja.addEventListener("click", function () { box.remove(); anfrageAbsenden(); });
+
+      var nein = document.createElement("button");
+      nein.type = "button";
+      nein.className = "ari-hbtn";
+      nein.textContent = "Doch lieber anrufen";
+      nein.addEventListener("click", function () {
+        box.remove();
+        anfrage = null;
+        var t = showTyping();
+        window.setTimeout(function () {
+          t.remove();
+          addMsg("bot", "Klar, dann meld dich einfach unter " + PHONE_HUMAN + ".");
+          renderSuggestions();
+        }, thinkTime("kurz"));
+      });
+
+      row.appendChild(ja);
+      row.appendChild(nein);
+      box.appendChild(row);
+
+      var t = showTyping();
+      window.setTimeout(function () { t.remove(); addMsg("bot", zusammenfassung, box); }, thinkTime(zusammenfassung));
+    }
+
+    function anfrageAbsenden() {
+      var d = anfrage.daten;
+      anfrage = null;
+
+      var kuerzel = d.klasse || "";
+      var zusatz = KLASSEN_ZUSATZ[kuerzel] || "";
+      var einstieg = kuerzel
+        ? "ich interessiere mich für den Führerschein der Klasse " + kuerzel + (zusatz ? " (" + zusatz + ")" : "") + "."
+        : "ich möchte den Führerschein machen und bin mir noch nicht sicher, welche Klasse zu mir passt.";
+
+      var text =
+        "Hallo Fahrschule ARI,\n\n" +
+        einstieg + "\n\n" +
+        "Mein Anliegen:\n" + d.anliegen + "\n\n" +
+        "Meine Kontaktdaten:\n" +
+        "Name: " + d.name + "\n" +
+        "Telefon: " + d.telefon + "\n" +
+        "E-Mail: " + d.email + "\n\n" +
+        "Über einen kurzen Rückruf würde ich mich freuen.\n\n" +
+        "Viele Grüße\n" + d.name + "\n";
+
+      // Derselbe Grenzwert wie beim Kontaktformular in main.js: Viele
+      // Mailprogramme schneiden mailto-Adressen ab etwa 2000 Zeichen ab,
+      // ohne es zu sagen.
+      var adresse = "mailto:" + MAIL +
+        "?subject=" + encodeURIComponent(kuerzel ? "Anfrage über den Assistenten, Klasse " + kuerzel : "Anfrage über den Assistenten") +
+        "&body=" + encodeURIComponent(text);
+
+      if (adresse.length > 1900) {
+        addMsg("bot",
+          "Dein Anliegen ist für den E-Mail-Weg etwas zu lang geraten. Ruf uns bitte kurz an: " + PHONE_HUMAN + ".",
+          handoffNode());
+        renderSuggestions();
+        return;
+      }
+
+      window.location.href = adresse;
+      addMsg("bot", "Dein E-Mail-Programm öffnet sich mit der fertigen Nachricht. Falls nicht: " + MAIL + ".");
+      renderSuggestions();
+    }
+
     function renderSuggestions() {
       suggest.textContent = "";
       var remaining = PACK.topics.filter(function (t) { return asked.indexOf(t.id) === -1; });
@@ -417,7 +642,7 @@
       var t = showTyping();
       window.setTimeout(function () {
         t.remove();
-        addMsg("bot", topic.answer, topic.handoff ? handoffNode() : null);
+        addMsg("bot", topic.answer, topic.id === "kontakt" ? kontaktNode() : (topic.handoff ? handoffNode() : null));
         history.push({ role: "assistant", content: topic.answer });
         renderSuggestions();
       }, thinkTime(topic.answer));
@@ -586,6 +811,10 @@
       addMsg("user", v);
       history.push({ role: "user", content: v });
       input.value = "";
+      // Laeuft der Anfrage-Dialog, ist jede Eingabe eine Antwort auf die
+      // laufende Frage, kein Fall fuer die Wissensbasis oder das Modell.
+      if (anfrage) { anfrageAntwort(v); return; }
+      if (/^anfrage$/i.test(v)) { anfrageStarten(); return; }
       if (!API_URL) { answerLocal(v); return; }
       if (window.ariDatenschutz && !window.ariDatenschutz.erlaubt("assistent")) {
         einwilligungEinholen(v);
