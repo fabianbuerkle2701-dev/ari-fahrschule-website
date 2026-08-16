@@ -62,9 +62,17 @@
   /* ---------- Farbschema ---------- */
   var themeToggle = document.getElementById("themeToggle");
   if (themeToggle) {
+    // Der gewuenschte Modus wird hier mitgefuehrt und nicht aus dem DOM
+    // gelesen. Beim Wechsel als Kreis setzt startViewTransition das Attribut
+    // erst in seinem Rueckruf; zwei schnelle Klicks lasen sonst beide
+    // denselben alten Wert und landeten im falschen Modus, statt wieder
+    // dort zu sein, wo man angefangen hat.
+    var gewuenscht = null;
     themeToggle.addEventListener("click", function () {
       var root = document.documentElement;
-      var next = root.dataset.theme === "dark" ? "light" : "dark";
+      if (gewuenscht === null) gewuenscht = root.dataset.theme;
+      gewuenscht = gewuenscht === "dark" ? "light" : "dark";
+      var next = gewuenscht;
       var umschalten = function () {
         root.dataset.theme = next;
         try { localStorage.setItem("ari-theme", next); } catch (e) {}
@@ -98,23 +106,31 @@
 
   /* ---------- Menü auf schmalen Bildschirmen ---------- */
   if (navToggle && header) {
+    var menueZu = function (zurueckZumKnopf) {
+      if (!header.classList.contains("nav-open")) return;
+      header.classList.remove("nav-open");
+      navToggle.setAttribute("aria-expanded", "false");
+      navToggle.setAttribute("aria-label", "Menü öffnen");
+      if (zurueckZumKnopf) navToggle.focus();
+    };
+
     navToggle.addEventListener("click", function () {
       var open = header.classList.toggle("nav-open");
       navToggle.setAttribute("aria-expanded", open ? "true" : "false");
       navToggle.setAttribute("aria-label", open ? "Menü schließen" : "Menü öffnen");
     });
     mainNav.addEventListener("click", function (e) {
-      if (e.target.closest("a")) {
-        header.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
-      }
+      if (e.target.closest("a")) menueZu(false);
     });
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && header.classList.contains("nav-open")) {
-        header.classList.remove("nav-open");
-        navToggle.setAttribute("aria-expanded", "false");
-        navToggle.focus();
-      }
+      if (e.key === "Escape") menueZu(true);
+    });
+    // Tippen neben das offene Menü schliesst es. Ohne das blieb es stehen,
+    // bis jemand den Knopf wiederfindet, und verdeckte dabei die Seite.
+    document.addEventListener("pointerdown", function (e) {
+      if (!header.classList.contains("nav-open")) return;
+      if (e.target.closest("#mainNav") || e.target.closest("#navToggle")) return;
+      menueZu(false);
     });
   }
 
@@ -406,9 +422,21 @@
         "Viele Gr\u00fc\u00dfe\n" +
         name.value.trim() + "\n";
 
-      window.location.href = "mailto:" + MAIL +
+      var adresse = "mailto:" + MAIL +
         "?subject=" + encodeURIComponent("Anfrage über die Webseite: " + wahl) +
         "&body=" + encodeURIComponent(text);
+
+      // Viele Mailprogramme schneiden mailto-Adressen ab etwa 2000 Zeichen
+      // ab, ohne es zu sagen. Dann kaeme die Anfrage still gekuerzt an, und
+      // niemand wuesste davon. Lieber vorher bitten, den Text zu kuerzen.
+      if (adresse.length > 1900) {
+        msg.focus();
+        sagen("Deine Nachricht ist für den E-Mail-Weg etwas zu lang. Kürze sie bitte " +
+              "oder ruf uns an, dann klären wir es im Gespräch.");
+        return;
+      }
+
+      window.location.href = adresse;
 
       sagen("Dein E-Mail-Programm öffnet sich. Falls nicht: " + MAIL);
     });
