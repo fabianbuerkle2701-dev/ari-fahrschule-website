@@ -273,6 +273,91 @@
   }
 
   /* ---------------------------------------------------------
+     Offene Vergleichsfragen ("Was ist der Unterschied zwischen
+     B und B197?") und erfundene Klassen ("Was ist B78?")
+
+     matchTopic() waehlt immer nur EIN Thema, eine Vergleichsfrage
+     braeuchte aber zwei. Hier werden zuerst die im Text erwaehnten
+     Klassen erkannt (bewusst nur die vier, die es wirklich gibt, in
+     fester Reihenfolge fuer eine gleichbleibende Ausgabe), und eine
+     Zahl hinter "b", die keine dieser Klassen ist, wird als
+     nicht angebotene Klasse gemeldet statt irgendeinem Thema
+     zugeordnet zu werden. Das bleibt eine feste, keine erfundene
+     Antwort: Jeder Text unten steht auch schon anderswo im Code. */
+  var KLASSEN_REIHENFOLGE = ["B", "B197", "B96", "BE"];
+  var KLASSEN_KURZ = {
+    B: "der klassische Autoführerschein bis 3.500 kg, AM und L sind enthalten, ab 18 oder mit Begleitetem Fahren ab 17",
+    B197: "wie B, aber du lernst und prüfst auf Automatik und machst zusätzlich mindestens zehn Fahrstunden auf dem Schalter, danach gilt der Führerschein ohne Automatik-Beschränkung",
+    B96: "eine Schulung ohne Prüfung für Anhänger, Zugfahrzeug und Anhänger zusammen bis 4.250 kg",
+    BE: "die große Anhängerklasse mit eigener praktischer Prüfung, für schwerere Gespanne als B96"
+  };
+
+  function klassenErwaehnt(text) {
+    var q = normalize(text);
+    var treffer = [];
+    if (/\bb\s?197\b/.test(q)) treffer.push("B197");
+    if (/\bb\s?96\b/.test(q)) treffer.push("B96");
+    if (/\bbe\b/.test(q)) treffer.push("BE");
+    // Das blosse "b" erst pruefen, nachdem b197/b96 aus dem Text raus
+    // sind, sonst zaehlt "b" aus "b 197" versehentlich mit.
+    var q2 = q.replace(/\bb\s?197\b/g, " ").replace(/\bb\s?96\b/g, " ");
+    if (/\bb\b/.test(q2)) treffer.push("B");
+    return KLASSEN_REIHENFOLGE.filter(function (k) { return treffer.indexOf(k) !== -1; });
+  }
+
+  function klassenUnbekannt(text) {
+    var m = normalize(text).match(/\bb\s?(\d{1,3})\b/);
+    if (!m || m[1] === "96" || m[1] === "197") return null;
+    return "B" + m[1];
+  }
+
+  function klassenVergleich(text) {
+    var t = klassenErwaehnt(text);
+    return t.length === 2 ? t : null;
+  }
+
+  function vergleichsText(paar) {
+    return "Kurz gegenübergestellt:\n\n" +
+      "• " + paar[0] + ": " + KLASSEN_KURZ[paar[0]] + "\n" +
+      "• " + paar[1] + ": " + KLASSEN_KURZ[paar[1]] + "\n\n" +
+      "Sag mir, was du vorhast, dann sage ich dir genauer, was für dich passt.";
+  }
+
+  function klassenUnbekanntText(code) {
+    return "Die Klasse " + code + " gibt es bei uns nicht. Wir bilden aus in B, B197, B96 und BE.";
+  }
+
+  // Erkennt eine echte Frage an Satzzeichen oder typischen Fragewoertern
+  // am Anfang. Greift auch waehrend des Anfrage-Dialogs: Sonst landete
+  // eine Zwischenfrage stumm als Wert im laufenden Feld.
+  var FRAGE_BEGINN = ["was", "wie", "wann", "wo", "warum", "wieso", "weshalb",
+    "welche", "welcher", "welches", "kann ich", "darf ich", "gibt es",
+    "gibts", "muss ich"];
+  function wirktWieFrage(v) {
+    if (v.indexOf("?") !== -1) return true;
+    var q = normalize(v);
+    return FRAGE_BEGINN.some(function (w) { return q === w || q.indexOf(w + " ") === 0; });
+  }
+
+  // Eine Stelle, die entscheidet, womit eine freie Eingabe beantwortet
+  // wird: erfundene Klasse, Vergleich zweier echter Klassen, ein
+  // getroffenes Thema, oder ehrlich die Rueckfallantwort. Wird sowohl
+  // fuer den normalen Chat als auch fuer Zwischenfragen im Anfrage-
+  // Dialog benutzt, damit beide dieselbe Antwort geben.
+  function loesungFuer(v) {
+    var unbekannt = klassenUnbekannt(v);
+    if (unbekannt) return { text: klassenUnbekanntText(unbekannt), topic: null };
+
+    var paar = klassenVergleich(v);
+    if (paar) return { text: vergleichsText(paar), topic: null };
+
+    var topic = matchTopic(v);
+    if (topic) return { text: topic.answer, topic: topic };
+
+    return { text: PACK.fallback, topic: null };
+  }
+
+  /* ---------------------------------------------------------
      Oberfläche
      --------------------------------------------------------- */
   function build() {
@@ -494,6 +579,19 @@
       if (/^(abbrechen|abbruch|stop|stopp)$/i.test(v.trim())) { anfrageAbbrechen(); return; }
 
       var feld = ANFRAGE_FELDER[anfrage.schritt];
+
+      // Klingt die Eingabe nach einer echten Frage statt einer Antwort auf
+      // genau dieses Feld, wird sie beantwortet, danach kommt dieselbe
+      // Feldfrage noch einmal. Sonst landete "Was ist der Unterschied
+      // zwischen B und B197?" stumm als Wert im Feld "Klasse", und der
+      // Dialog rauschte weiter, ohne die Frage beantwortet zu haben.
+      // Beim Anliegen nicht: dort ist eine Frage oft schon die richtige
+      // Antwort und soll unveraendert ins Anliegen.
+      if (feld.schluessel !== "anliegen" && wirktWieFrage(v)) {
+        zwischenfrageBeantworten(v, feld);
+        return;
+      }
+
       var wert = feld.schluessel === "klasse" ? klasseErkennen(v) : v.trim();
 
       if (feld.schluessel !== "klasse" && !feld.pruefen(v)) {
@@ -513,6 +611,17 @@
       }
 
       anfrageBestaetigen();
+    }
+
+    function zwischenfrageBeantworten(v, feld) {
+      var text = loesungFuer(v).text;
+      var t1 = showTyping();
+      window.setTimeout(function () {
+        t1.remove();
+        addMsg("bot", text);
+        var t2 = showTyping();
+        window.setTimeout(function () { t2.remove(); addMsg("bot", feld.frage); }, thinkTime(feld.frage));
+      }, thinkTime(text));
     }
 
     function anfrageBestaetigen() {
@@ -649,14 +758,21 @@
     }
 
     function answerLocal(value) {
-      var topic = matchTopic(value);
-      if (topic) { answerTopic(topic); return; }
+      var loesung = loesungFuer(value);
+
+      // Ein getroffenes Thema laeuft weiter ueber answerTopic(): Nur die
+      // kennt "gefragt"/Verlauf und den Sonderknopf beim Kontakt-Thema.
+      if (loesung.topic) { answerTopic(loesung.topic); return; }
+
       var t = showTyping();
       window.setTimeout(function () {
         t.remove();
-        addMsg("bot", PACK.fallback, handoffNode());
+        // Nur die ehrliche Rueckfallantwort bekommt die Anruf/E-Mail-
+        // Knoepfe; bei einer erfundenen Klasse oder einem Vergleich ist
+        // die Antwort bereits vollstaendig, ein Knopf waere unnoetig.
+        addMsg("bot", loesung.text, loesung.text === PACK.fallback ? handoffNode() : null);
         renderSuggestions();
-      }, thinkTime(PACK.fallback));
+      }, thinkTime(loesung.text));
     }
 
     // Mit Sprachmodell verlassen Nachrichten den Browser. Dafuer wird vor
