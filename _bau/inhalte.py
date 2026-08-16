@@ -292,6 +292,74 @@ FAHRSCHULE = kopfteil(
   </section>
 '''
 
+# ---------------------------------------------------------------- Theorie-Themen
+# Die 14 Themen und ihre Reihenfolge sind amtlich vorgegeben (Fahrschueler-
+# Ausbildungsordnung, Anlage 1 fuer den Grundstoff 1-12, Anlage 2.2 fuer den
+# Zusatzstoff Klasse B 13-14). Welches Thema an welchem Abend dran ist, kann
+# sich aber jede Woche weiterschieben - das rechnet js/theorie-plan.js aus
+# einem festen Ankerpunkt aus, hier steht nur die feste Liste der Titel.
+THEMEN_SEITE = kopfteil(
+    "Was gerade dran ist.",
+    "Der Unterricht ist in geschlossene Themenblöcke gegliedert, deshalb kannst du "
+    "jederzeit einsteigen. Hier siehst du, welches Thema an den nächsten Abenden "
+    "dran ist, und darunter alle 14 Themen im Überblick."
+) + '''
+  <section class="themen-plan">
+    <div class="shell">
+      <h2>Die nächsten Theorieabende</h2>
+      <div id="themaPlan" class="thema-plan">
+        <p class="thema-plan-fallback">
+          Ruf uns kurz an, wir sagen dir, welches Thema gerade dran ist:
+          <a href="tel:+4917643454447">0176 43454447</a>.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="themen-liste">
+    <div class="shell">
+      <div class="p-hinweis">
+        <h2>Alle 14 Themen im Überblick</h2>
+        <p>
+          Zwölf Themen sind für jede Führerscheinklasse vorgeschrieben, zwei
+          weitere kommen für Klasse B dazu. Unten stehen sie in der Reihenfolge,
+          in der wir sie unterrichten.
+        </p>
+        <ol class="thema-liste">
+          <li>Persönliche Voraussetzungen</li>
+          <li>Risikofaktor Mensch</li>
+          <li>Rechtliche Rahmenbedingungen</li>
+          <li>Straßenverkehrssystem und seine Nutzung</li>
+          <li>Vorfahrt und Verkehrsregelungen</li>
+          <li>Verkehrszeichen und Verkehrseinrichtungen sowie Bahnübergänge</li>
+          <li>Andere Teilnehmer im Straßenverkehr</li>
+          <li>Geschwindigkeit, Abstand und umweltschonende Fahrweise</li>
+          <li>Verkehrsverhalten bei Fahrmanövern, Verkehrsbeobachtung</li>
+          <li>Ruhender Verkehr</li>
+          <li>Verhalten in besonderen Situationen, Folgen von Verstößen gegen Verkehrsvorschriften</li>
+          <li>Lebenslanges Lernen</li>
+          <li>Technische Bedingungen, Personen- und Güterbeförderung, umweltbewusster Umgang mit Kraftfahrzeugen</li>
+          <li>Fahren mit Solokraftfahrzeugen und Zügen</li>
+        </ol>
+        <p class="p-stand">
+          Grundlage: Fahrschüler-Ausbildungsordnung (FahrschAusbO), Anlage 1 und
+          Anlage 2.2. Themen 1 bis 12 gelten für jede Klasse, 13 und 14 zusätzlich
+          für Klasse B.
+        </p>
+      </div>
+
+      <div class="note-band">
+        <div>
+          <h3>Ein Abend verpasst?</h3>
+          <p>Sag uns kurz, welches Thema du zuletzt hattest, dann sagen wir dir,
+             wo du wieder einsteigst.</p>
+        </div>
+        <a class="btn btn-gold" href="tel:+4917643454447">0176 43454447</a>
+      </div>
+    </div>
+  </section>
+'''
+
 SEITEN = {
     "preise.html": dict(
         titel="Preise Führerschein Freiburg | ARI Fahrschule",
@@ -305,4 +373,9 @@ SEITEN = {
         titel="Über uns | Freiburger Fahrschule ARI",
         beschreibung="Miftar Rexhepi, seit über zehn Jahren Fahrlehrer, über seine Freiburger Fahrschule, den Theorieunterricht in Zähringen und im Stühlinger und den Fuhrpark.",
         inhalt=FAHRSCHULE, aktiv=None),
+    "theorie-themen.html": dict(
+        titel="Theorie-Themen | ARI Fahrschule Freiburg",
+        beschreibung="Welches Theorie-Thema gerade dran ist, und alle 14 Themen der Fahrschüler-Ausbildungsordnung für Klasse B im Überblick, bei der ARI Fahrschule in Freiburg.",
+        inhalt=THEMEN_SEITE, aktiv="theorie-themen.html",
+        skript='<script src="js/theorie-plan.js" defer></script>\n'),
 }

@@ -33,7 +33,7 @@ def anpassen(block, aktiv):
         b = b.replace('href="' + aktiv + '"', 'href="' + aktiv + '" aria-current="page"', 1)
     return b
 
-def seite(datei, titel, beschreibung, inhalt, aktiv=None):
+def seite(datei, titel, beschreibung, inhalt, aktiv=None, skript=""):
     html = f'''<!DOCTYPE html>
 <html lang="de" data-theme="light">
 <head>
@@ -88,7 +88,7 @@ def seite(datei, titel, beschreibung, inhalt, aktiv=None):
 <script src="js/zaehler.js" defer></script>
 <script src="js/main.js" defer></script>
 <script src="js/assistant.js" defer></script>
-</body>
+{skript}</body>
 </html>
 '''
     with open(os.path.join(WURZEL, datei), "w", encoding="utf-8") as f:

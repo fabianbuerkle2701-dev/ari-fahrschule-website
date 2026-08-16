@@ -1668,6 +1668,51 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 .p-hinweis h2 { font-size: clamp(1.3rem, 2.2vw, 1.7rem); margin-bottom: 16px; }
 .p-stand { font-size: .86rem; color: var(--ink-3); }
 
+/* --- Theorie-Themen ---
+   Der Turnus wird berechnet, nicht getippt: js/theorie-plan.js rechnet ab
+   einem festen Ankerpunkt fort, welches Thema an welchem Abend dran ist,
+   und traegt die Karten hier ein. Ohne Javascript bleibt die Fallback-
+   Zeile stehen, die im Markup schon steht, statt ein veraltetes Datum zu
+   riskieren. Die 14 Themen selbst aendern sich nicht, die stehen fest im
+   HTML und brauchen kein Skript. */
+.themen-plan { padding: clamp(40px, 5vw, 64px) 0 0; }
+.themen-plan h2 { margin-bottom: 22px; }
+.thema-plan-fallback {
+  color: var(--ink-2); font-size: .97rem;
+  padding: clamp(20px, 2.6vw, 28px); background: var(--band);
+  border-radius: var(--radius); border: 1px solid var(--line);
+}
+.thema-plan-fallback a { color: var(--gold-deep); }
+
+.thema-karten { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.thema-karte {
+  background: var(--card); border: 1px solid var(--line);
+  border-radius: var(--radius); padding: clamp(22px, 2.6vw, 30px);
+}
+.thema-kopf {
+  display: flex; align-items: center; gap: 12px;
+  padding-bottom: 14px; margin-bottom: 12px; border-bottom: 1px solid var(--line-soft);
+}
+.thema-tag {
+  flex: none; font-family: "Rubik", sans-serif; font-weight: 700;
+  font-size: .74rem; letter-spacing: .06em; text-transform: uppercase;
+  color: #241f0c; background: var(--gold); border-radius: var(--radius-pill);
+  padding: 5px 12px; white-space: nowrap;
+}
+.thema-kopf h3 { font-size: 1rem; }
+.thema-titel { font-size: .93rem; color: var(--ink); margin-bottom: 10px; line-height: 1.5; }
+.thema-ort { font-size: .84rem; color: var(--ink-3); }
+
+.themen-liste { padding: clamp(48px, 6vw, 76px) 0 clamp(56px, 6vw, 88px); }
+.thema-liste {
+  list-style: decimal; padding-left: 1.3em; display: grid; gap: 11px;
+  max-width: 62ch; margin-top: 22px; font-size: .95rem; color: var(--ink-2);
+}
+.thema-liste li { padding-left: 8px; }
+.thema-liste li::marker {
+  font-family: "Rubik", sans-serif; font-weight: 700; color: var(--gold-titel);
+}
+
 /* --- Klassen im Detail --- */
 .klassen-lang { display: grid; gap: clamp(40px, 5vw, 72px); }
 .kl {
@@ -1711,7 +1756,7 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 .pt-zahl span { font-size: .85rem; color: var(--ink-3); }
 
 @media (max-width: 900px) {
-  .p-karten, .p-extra { grid-template-columns: 1fr; }
+  .p-karten, .p-extra, .thema-karten { grid-template-columns: 1fr; }
   .kl { grid-template-columns: 1fr; gap: 12px; }
   .kl-marke { justify-content: flex-start; padding-top: 0; }
   .preis-teaser { grid-template-columns: 1fr; }
