@@ -1793,3 +1793,49 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
   .kl-text .lead { font-size: 1rem; margin-bottom: 14px; }
   .klassen-lang { gap: 30px; }
 }
+
+/* ---------------------------------------------------------
+   12. Papier
+   Gedruckt wird hier vor allem zweierlei: der Preisaushang und das
+   Impressum. Ohne eigene Regeln kaemen die dunklen Baender als grosse
+   schwarze Flaechen mit aufs Blatt, dazu die schwebenden Knoepfe und
+   die feste Kopfzeile. Also: alles Bewegliche und Bedienbare weg,
+   dunkle Flaechen aufhellen, und nichts mitten in einer Karte umbrechen.
+   --------------------------------------------------------- */
+@media print {
+  /* Bedienelemente und Zierde gehoeren nicht aufs Papier */
+  .site-header, .to-top, .ari-root, .dh, .scroll-progress, .auftakt,
+  .hero-car, .hero-ground, .road-run, .strip-wheel, .strip-edge,
+  .skip-link, .hero-media, .bk-band, .theorie-band { display: none !important; }
+
+  html, body {
+    background: #fff !important; color: #000 !important;
+    font-size: 11pt; line-height: 1.45;
+  }
+  /* Alle Flaechen hell, sonst frisst der Drucker die Patrone */
+  .hero, .hero-stage, .strip, .why, .contact, .site-footer, .fakten,
+  .theorie-card, .loc, .faq-aside, .p-karte, .kl-kachel, .anruf {
+    background: #fff !important; color: #000 !important;
+    box-shadow: none !important;
+  }
+  .site-footer, .strip, .fakten { border-top: 1px solid #999; }
+
+  /* Abschnitte, die das Skript sonst erst beim Scrollen einblendet */
+  html.js .reveal, html.js .reveal.is-visible, html.js .bk-band .bk {
+    opacity: 1 !important; transform: none !important;
+  }
+
+  .hero-stage { min-height: 0 !important; padding: 0 0 12pt !important; }
+  section, .shell { padding-block: 10pt !important; }
+
+  /* Nichts mitten im Kasten umbrechen */
+  .p-karte, .kl-kachel, .loc, .faq-item, .p-extra-block, .grund {
+    break-inside: avoid; page-break-inside: avoid;
+  }
+  h1, h2, h3 { break-after: avoid; page-break-after: avoid; color: #000 !important; }
+
+  /* Adressen sichtbar machen, aber nur die, die man wirklich abtippt */
+  .loc-address a::after, .contact-card[href^="tel:"]::after,
+  .contact-card[href^="mailto:"]::after { content: ""; }
+  a { color: #000 !important; text-decoration: none; }
+}
