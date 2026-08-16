@@ -132,7 +132,10 @@ a:hover { text-decoration-color: var(--gold); }
 img, svg { max-width: 100%; }
 ul { margin: 0; padding: 0; list-style: none; }
 
-::selection { background: var(--gold); color: #fff; }
+/* Gold mit Weiss schaffte nur 2,1:1, im Dunkelmodus 1,7:1. Genau beim
+   Markieren einer Nummer verschwand der Text. Dunkle Schrift auf Gold
+   liest sich in beiden Modi. */
+::selection { background: var(--gold); color: #24200f; }
 
 :focus-visible {
   outline: 2px solid var(--fokus);
@@ -284,6 +287,9 @@ section { padding: clamp(76px, 9vw, 132px) 0; position: relative; }
   transition: border-color .3s var(--ease), background .3s var(--ease), height .3s var(--ease);
 }
 .site-header.is-stuck { border-bottom-color: var(--line-soft); height: 66px; }
+/* Das Menue auf schmalen Schirmen richtet sich an dieser Groesse aus. */
+html { --kopf-hoehe: var(--header-h); }
+html:has(.site-header.is-stuck) { --kopf-hoehe: 66px; }
 .site-header .shell { display: flex; align-items: center; gap: 28px; }
 
 .brand { display: inline-flex; align-items: center; text-decoration: none; margin-right: auto; }
@@ -497,7 +503,15 @@ html[data-theme="dark"] .hero-car .wagen { filter: drop-shadow(0 16px 26px rgba(
 .auftakt-laeuft .auftakt { display: block; }
 .auftakt span {
   position: fixed; left: 0; right: 0; z-index: 80;
-  background: var(--asphalt); pointer-events: none;
+  background: var(--asphalt);
+  /* Die Flaechen schlucken Klicks, sie reichen sie nicht durch. Vorher
+     stand hier pointer-events: none: Der Treffertest ging durch den
+     Asphalt hindurch auf die Knoepfe der Buehne, die waehrend des
+     Auftakts nur durchsichtig, aber weiter bedienbar sind. Wer die
+     schwarze Flaeche wegklicken wollte, landete im Telefonwaehler.
+     Eine Dauersperre entsteht nicht: Die Flaechen fahren mit forwards
+     aus dem Bild und nehmen ihren Trefferbereich mit. Die Kopfzeile
+     liegt ohnehin darueber und bleibt die ganze Zeit bedienbar. */
 }
 .auftakt-oben {
   top: 0; height: var(--auftakt-naht, 70%);
@@ -1150,7 +1164,12 @@ html[data-theme="dark"] .loc-b .loc-pin { background: var(--ink-3); color: #1416
   background: var(--gold) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2324200f' stroke-width='3.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m5 13 4 4 10-10'/%3E%3C/svg%3E") center/13px no-repeat;
   border-color: var(--gold);
 }
-.zustimmung input:focus-visible { outline: 2px solid var(--fokus); outline-offset: 2px; }
+/* Auch :focus, nicht nur :focus-visible: Beim Absenden ohne Haken setzt
+   das Skript den Fokus per focus() hierher. Das gilt nicht als
+   focus-visible, es war also nichts zu sehen, obwohl die Meldung
+   ausdruecklich auf dieses Kaestchen zeigte. */
+.zustimmung input:focus-visible,
+.zustimmung input:focus { outline: 2px solid var(--fokus); outline-offset: 2px; }
 .zustimmung a { color: var(--gold-deep); }
 
 .form-status { font-size: .9rem; margin-top: 14px; color: var(--gold-deep); min-height: 1.2em; }
@@ -1277,7 +1296,14 @@ html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
 
 .ari-panel {
   position: absolute; right: 0; bottom: 0; width: min(384px, calc(100vw - 32px));
-  height: min(680px, calc(100dvh - 40px));
+  /* Die Wurzel sitzt 44 px ueber dem unteren Rand. 100dvh - 40px war
+     deshalb immer 4 px zu hoch und schnitt oben den Rahmen ab. Und bei
+     niedrigen Fenstern (200 Prozent Zoom, Handy quer) blieb fuer den
+     Verlauf nichts uebrig, weil alle anderen Teile feste Hoehen haben.
+     Mit einer Mindesthoehe bleibt das Fenster bedienbar, notfalls
+     ueberlaeuft es nach oben statt den Verlauf zu verschlucken. */
+  height: min(680px, calc(100dvh - 56px));
+  max-height: calc(100dvh - 56px);
   display: flex; flex-direction: column; overflow: hidden;
   background: var(--surface); border: 1px solid var(--line);
   border-radius: var(--radius); box-shadow: var(--shadow-md);
@@ -1313,10 +1339,18 @@ html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
 }
 .ari-close:hover { background: var(--stone); color: var(--ink); }
 
-.ari-log { flex: 1; overflow-y: auto; padding: 18px 16px 6px; scrollbar-width: thin; }
+.ari-log {
+  flex: 1; overflow-y: auto; padding: 18px 16px 6px; scrollbar-width: thin;
+  /* Ohne Mindesthoehe drueckten die festen Teile den Verlauf auf null:
+     Man sah keine einzige Nachricht mehr. */
+  min-height: 84px;
+}
 .ari-msg { display: flex; margin-bottom: 12px; }
 .ari-msg-user { justify-content: flex-end; }
 .ari-bubble {
+  /* Lange Zeichenketten ohne Leerzeichen sprengten sonst die Blase und
+     erzeugten einen waagerechten Rollbalken im Verlauf. */
+  overflow-wrap: anywhere;
   max-width: 86%; padding: 12px 15px; border-radius: var(--radius-sm);
   font-size: .93rem; line-height: 1.55;
 }
@@ -1355,6 +1389,10 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
 .ari-suggest { padding: 4px 16px 12px; flex: none; }
 .ari-suggest-label { display: block; font-size: .74rem; color: var(--ink-3); margin-bottom: 8px; }
 .ari-chips { display: flex; flex-wrap: wrap; gap: 7px; }
+/* Bei niedrigen Fenstern nimmt der Vorschlagsblock sonst die halbe Hoehe. */
+@media (max-height: 620px) {
+  .ari-suggest { max-height: 92px; overflow-y: auto; }
+}
 .ari-chip {
   font-family: inherit; font-size: .82rem; padding: 8px 13px;
   border-radius: var(--radius-pill); border: 1px solid var(--line);
@@ -1368,7 +1406,10 @@ html[data-theme="dark"] .ari-msg-user .ari-bubble { background: var(--gold); col
   border-top: 1px solid var(--line-soft); flex: none;
 }
 .ari-input {
-  flex: 1; font-family: inherit; font-size: .93rem; color: var(--ink);
+  /* Mindestens 16 px: Safari auf dem iPhone zoomt sonst beim Antippen
+     in die Seite hinein und wieder heraus geht nur von Hand. */
+  font-size: max(16px, .93rem);
+  flex: 1; font-family: inherit; color: var(--ink);
   background: var(--stone); border: 1px solid transparent; border-radius: var(--radius-pill);
   padding: 12px 16px; transition: border-color .2s var(--ease), background .2s var(--ease);
 }
@@ -1453,7 +1494,14 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 
   .nav-toggle { display: grid; }
   .main-nav {
-    position: fixed; inset: var(--header-h) 0 auto 0;
+    /* An der Kopfzeile ausgerichtet, nicht an ihrer Ausgangshoehe: Im
+       Zustand is-stuck ist sie nur noch 66 px hoch, dazwischen klaffte
+       sonst ein Streifen, durch den der Inhalt lief.
+       Dazu eine Hoehengrenze mit eigenem Rollbalken, sonst wird im
+       Querformat der letzte Punkt abgeschnitten und ist unerreichbar. */
+    position: fixed; inset: var(--kopf-hoehe, var(--header-h)) 0 auto 0;
+    max-height: calc(100dvh - var(--kopf-hoehe, var(--header-h)));
+    overflow-y: auto; overscroll-behavior: contain;
     background: var(--paper); border-bottom: 1px solid var(--line);
     padding: 12px 0 24px; transform: translateY(-120%); opacity: 0;
     visibility: hidden; transition: transform .35s var(--ease), opacity .3s var(--ease), visibility .3s;

@@ -401,6 +401,10 @@
         b.addEventListener("click", function () {
           addMsg("user", topic.label);
           history.push({ role: "user", content: topic.label });
+          // Die Knoepfe werden gleich ersetzt, auch der gerade gedrueckte.
+          // Ohne das faellt der Fokus auf den Seitenkoerper und die naechste
+          // Tabulatortaste beginnt wieder ganz oben.
+          input.focus();
           answerTopic(topic);
         });
         row.appendChild(b);
@@ -524,10 +528,20 @@
       }, 560);
     }
 
+    // Unsichtbar heisst nicht unerreichbar: Ohne das blieb der Knopf im
+    // Tab-Fluss, man landete auf etwas Unsichtbarem und Enter schloss das
+    // Fenster wieder.
+    function knopfVerbergen(verbergen) {
+      if (verbergen) launcher.setAttribute("tabindex", "-1");
+      else launcher.removeAttribute("tabindex");
+      launcher.setAttribute("aria-hidden", verbergen ? "true" : "false");
+    }
+
     function open() {
       panel.hidden = false;
       root.classList.add("ari-open");
       launcher.setAttribute("aria-expanded", "true");
+      knopfVerbergen(true);
       start();
       window.setTimeout(function () { input.focus(); }, 80);
     }
@@ -536,13 +550,20 @@
       panel.hidden = true;
       root.classList.remove("ari-open");
       launcher.setAttribute("aria-expanded", "false");
+      knopfVerbergen(false);
       launcher.focus();
     }
 
     launcher.addEventListener("click", function () { panel.hidden ? open() : close(); });
     closeBtn.addEventListener("click", close);
     document.addEventListener("keydown", function (e) {
-      if (e.key === "Escape" && !panel.hidden) close();
+      if (e.key !== "Escape" || panel.hidden) return;
+      // Nur schliessen, wenn der Tastendruck aus dem Assistenten kommt.
+      // Vorher schloss Escape von ueberall und zog den Fokus in die Ecke,
+      // etwa mitten beim Ausfuellen des Kontaktformulars.
+      if (!panel.contains(e.target) && e.target !== launcher &&
+          e.target !== document.body) return;
+      close();
     });
 
     // Jeder Knopf mit data-ari-open holt den Assistenten nach vorn

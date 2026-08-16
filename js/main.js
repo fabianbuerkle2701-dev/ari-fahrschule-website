@@ -132,6 +132,22 @@
       if (e.target.closest("#mainNav") || e.target.closest("#navToggle")) return;
       menueZu(false);
     });
+
+    // Wird das Fenster breit, gilt das schmale Menü nicht mehr. Der Zustand
+    // blieb sonst haengen und die Fläche klappte beim naechsten Verschmaelern
+    // ungefragt wieder auf.
+    var schmal = window.matchMedia("(max-width: 900px)");
+    var beiWechsel = function (e) { if (!e.matches) menueZu(false); };
+    if (schmal.addEventListener) schmal.addEventListener("change", beiWechsel);
+    else if (schmal.addListener) schmal.addListener(beiWechsel);
+
+    // Beim Öffnen in das Menü hinein, nicht daran vorbei: Die Punkte stehen
+    // im Quelltext vor dem Knopf, der Tabulator sprang also dahinter.
+    navToggle.addEventListener("click", function () {
+      if (!header.classList.contains("nav-open")) return;
+      var erster = mainNav.querySelector("a");
+      if (erster) window.setTimeout(function () { erster.focus(); }, 60);
+    });
   }
 
   /* ---------- Fortschritt, Kopfzeile, Nach-oben-Knopf ---------- */
@@ -157,7 +173,11 @@
 
   if (toTop) {
     toTop.addEventListener("click", function () {
-      window.scrollTo({ top: 0, behavior: "smooth" });
+      // Ein ausdrueckliches behavior schlaegt die CSS-Eigenschaft
+      // scroll-behavior. Wer weniger Bewegung eingestellt hat, bekam hier
+      // trotzdem eine Fahrt ueber die ganze Seite.
+      var ruhig = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      window.scrollTo({ top: 0, behavior: ruhig ? "auto" : "smooth" });
     });
 
     /* Im Fußbereich weicht der Pfeil zurück: dort lag er sonst über
