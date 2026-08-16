@@ -1204,10 +1204,12 @@ html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
 .to-top.im-fuss { opacity: 0; visibility: hidden; transform: translateY(10px); pointer-events: none; }
 .to-top svg { width: 17px; height: 17px; }
 
-/* Fortschrittsbalken oben */
+/* Fortschrittsbalken oben. Läuft bei jedem Scroll-Frame mit, deshalb
+   transform statt width, das bleibt reines Compositing ohne Reflow. */
 .scroll-progress {
-  position: fixed; top: 0; left: 0; height: 2px; width: 0;
-  background: var(--gold); z-index: 95; transition: width .1s linear;
+  position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+  transform: scaleX(0); transform-origin: left;
+  background: var(--gold); z-index: 95; transition: transform .1s linear;
 }
 
 /* ---------------------------------------------------------

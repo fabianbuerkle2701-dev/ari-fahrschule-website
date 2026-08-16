@@ -180,7 +180,7 @@
       if (header) header.classList.toggle("is-stuck", y > 12);
       if (toTop) toTop.classList.toggle("is-visible", y > 600);
       var max = document.documentElement.scrollHeight - window.innerHeight;
-      progress.style.width = max > 0 ? (y / max) * 100 + "%" : "0";
+      progress.style.transform = "scaleX(" + (max > 0 ? y / max : 0) + ")";
       ticking = false;
     });
   }
