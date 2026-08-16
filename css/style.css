@@ -1444,12 +1444,17 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
   .hero-media { inset: 0 0 auto 0; width: 100%; height: calc(var(--header-h) + 34svh); }
   .hero-media img { object-position: 50% 46%; }
   /* Die Kopfzeile schwebt hier über volle Bildbreite, ohne Übergang wirkt
-     ihre Unterkante wie glatt abgeschnitten. Ein weicher Verlauf in ihrer
-     eigenen Farbe federt das ab, in Hell wie Dunkel über die Variable. */
+     ihre Unterkante wie glatt abgeschnitten. Erst eine Flaeche in ihrer
+     eigenen Farbe bis zu ihrer Unterkante, damit dort kein Sprung
+     entsteht, dann ein deutlich laengerer Verlauf ins Bild darunter,
+     in Hell wie Dunkel über die Variable. */
   .hero-media::after {
     content: ""; position: absolute; inset: 0 0 auto 0;
-    height: calc(var(--header-h) + 36px);
-    background: linear-gradient(to bottom, color-mix(in srgb, var(--paper) 60%, transparent), transparent);
+    height: calc(var(--header-h) + 130px);
+    background: linear-gradient(to bottom,
+      color-mix(in srgb, var(--paper) 88%, transparent) 0,
+      color-mix(in srgb, var(--paper) 88%, transparent) var(--header-h),
+      transparent calc(var(--header-h) + 130px));
     pointer-events: none;
   }
   .hero-media::before { inset: auto 0 0 0; width: auto; height: 2px; }
