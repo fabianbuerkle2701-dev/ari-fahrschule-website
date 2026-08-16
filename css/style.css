@@ -1435,21 +1435,16 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 @media (max-width: 900px) {
   :root { --shell: min(1200px, 92vw); }
 
-  /* Hier liegt die Kopfzeile direkt auf dem Hero-Foto, nicht auf normalem
-     Seitengrund wie sonst. Bei 78 % Deckkraft blieb vom Foto darunter
-     kaum etwas zu erkennen. Ungestuckt also deutlich durchsichtiger,
-     Text und Logo bleiben durch Weichzeichner und Sättigung lesbar.
-     Sobald gescrollt wird (is-stuck), wieder die normale Deckkraft. */
-  .site-header { background: color-mix(in srgb, var(--paper) 40%, transparent); }
-  .site-header.is-stuck { background: color-mix(in srgb, var(--paper) 78%, transparent); }
-
   /* Gestapelt: Foto als Streifen oben, darunter Papier mit dem Text.
      Die Naht wird dabei aus der Senkrechten in die Waagerechte gedreht. */
   .hero-stage {
     min-height: 0; display: block;
     padding: calc(var(--header-h) + 34svh + 40px) 0 clamp(160px, 40vw, 210px);
   }
-  .hero-media { inset: 0 0 auto 0; width: 100%; height: calc(var(--header-h) + 34svh); }
+  /* Das Foto beginnt bewusst erst unterhalb der Kopfzeile, nicht darunter
+     versteckt: egal wie durchsichtig sie ist, überlappt sie immer einen
+     Teil davon. So bleibt das ganze Foto sichtbar. */
+  .hero-media { inset: var(--header-h) 0 auto 0; width: 100%; height: 34svh; }
   .hero-media img { object-position: 50% 46%; }
   .hero-media::before { inset: auto 0 0 0; width: auto; height: 2px; }
   .hero-copy { max-width: none; padding-inline-end: 0; }
@@ -1507,7 +1502,7 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
   .theorie-photo::after {
     background: linear-gradient(to bottom, rgba(16, 18, 20, .9), rgba(16, 18, 20, .82));
   }
-  .hero-media { height: calc(var(--header-h) + 20svh); }
+  .hero-media { height: 20svh; }
   .facts dt { min-width: 74px; font-size: 1.45rem; }
   .road-run { height: 84px; }
   .fakten { grid-template-columns: 1fr; row-gap: 0; }
@@ -1847,7 +1842,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
   .hero-stage {
     padding: calc(var(--header-h) + 20svh + 24px) 0 clamp(152px, 40vw, 190px);
   }
-  .hero-media { height: calc(var(--header-h) + 20svh); }
+  .hero-media { height: 20svh; }
   .hero h1 { font-size: clamp(2.2rem, 10.5vw, 2.9rem); margin-bottom: 16px; }
   .hero .lead { font-size: 1rem; }
   .hero-cta { margin-top: 22px; gap: 10px; }
