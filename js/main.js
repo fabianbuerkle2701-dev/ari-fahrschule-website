@@ -18,6 +18,15 @@
   var wurzel = document.documentElement;
   if (wurzel.classList.contains("auftakt-laeuft")) {
     var strasse = document.querySelector(".hero-ground");
+    // In einem verborgenen Tab laufen die Animationen nicht, der Zeitgeber
+    // raeumt aber trotzdem auf: Der Auftakt waere verbraucht, ohne dass ihn
+    // jemand gesehen haette. Dann lieber ganz darauf verzichten.
+    if (document.visibilityState === "hidden") {
+      wurzel.classList.remove("auftakt-laeuft");
+      wurzel.classList.add("auftakt-fertig");
+      strasse = null;
+    }
+
     var kasten = strasse ? strasse.getBoundingClientRect() : null;
     // Kein Vorhang ohne brauchbare Messung: Steht die Bühne noch nicht oder
     // stellt der Browser eine alte Scrollposition wieder her, laege die Naht
@@ -68,6 +77,7 @@
     // denselben alten Wert und landeten im falschen Modus, statt wieder
     // dort zu sein, wo man angefangen hat.
     var gewuenscht = null;
+    var laufendeNummer = 0;
     themeToggle.addEventListener("click", function () {
       var root = document.documentElement;
       if (gewuenscht === null) gewuenscht = root.dataset.theme;
@@ -98,9 +108,15 @@
       root.style.setProperty("--wechsel-r", r + "px");
       root.classList.add("themenwechsel");
 
+      // Ein zweiter Klick bricht den ersten Uebergang ab. Dessen Zusage wird
+      // dabei erfuellt, das Aufraeumen lief also und nahm die Klasse des
+      // neuen Uebergangs mit weg. Nur der jeweils juengste raeumt auf.
+      var meiner = (laufendeNummer += 1);
       var lauf = document.startViewTransition(umschalten);
       lauf.finished.then(aufraeumen, aufraeumen);
-      function aufraeumen() { root.classList.remove("themenwechsel"); }
+      function aufraeumen() {
+        if (meiner === laufendeNummer) root.classList.remove("themenwechsel");
+      }
     });
   }
 

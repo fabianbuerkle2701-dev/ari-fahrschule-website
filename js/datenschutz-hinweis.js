@@ -49,7 +49,8 @@
     wurzel.setAttribute("aria-label", "Datenschutz");
     wurzel.innerHTML =
       '<div class="dh-innen">' +
-        '<p class="dh-text">Wir verarbeiten keine Daten über diese Seite und geben nichts an Dritte weiter. ' +
+        '<p class="dh-text">Diese Seite setzt keine Cookies, bindet keine Werbe- oder ' +
+        'Analysedienste ein und gibt nichts an Dritte weiter. ' +
         'Näheres in der <a href="datenschutz.html">Datenschutzerklärung</a>.</p>' +
         '<button class="btn btn-gold dh-ok" type="button">Akzeptieren</button>' +
       '</div>';

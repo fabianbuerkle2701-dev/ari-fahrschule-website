@@ -97,7 +97,7 @@
       {
         id: "oeffnung",
         label: "Wann habt ihr Büro?",
-        keywords: ["oeffnungszeiten", "offnungszeiten", "geoeffnet", "geoffnet", "buero", "buro", "sprechzeiten", "wann offen", "auf", "erreichbar", "vorbeikommen"],
+        keywords: ["oeffnungszeiten", "offnungszeiten", "geoeffnet", "geoffnet", "buero", "buro", "sprechzeiten", "wann offen", "erreichbar", "vorbeikommen", "offen"],
         answer:
           "Unsere Bürozeiten:\n\n• Zähringen: Montag und Freitag, 12:00 bis 18:00 Uhr\n• Stühlinger: Dienstag und Donnerstag, 12:00 bis 18:00 Uhr\n\nDanach ist an denselben Standorten Theorie von 18:00 bis 19:30 Uhr, in Zähringen nur montags.\n\nAn Feiertagen und in den Ferien kann das abweichen. Ein kurzer Anruf vorher spart dir den Weg."
       },
@@ -133,7 +133,7 @@
       {
         id: "fahrlehrer",
         label: "Wer unterrichtet bei euch?",
-        keywords: ["fahrlehrer", "wer", "lehrer", "team", "miftar", "rexhepi", "chef", "inhaber", "erfahrung", "ausbilder", "unterrichtet"],
+        keywords: ["fahrlehrer", "lehrer", "team", "miftar", "rexhepi", "chef", "inhaber", "erfahrung", "ausbilder", "unterrichtet"],
         answer:
           "Bei uns unterrichtet Miftar Rexhepi, seit über zehn Jahren Fahrlehrer in Freiburg. Im Februar 2024 hat er die Fahrschule ARI neu eröffnet.\n\nDas heißt für dich: kein ständiger Wechsel des Fahrlehrers. Du fährst mit jemandem, der weiß, wo du stehst und was du noch brauchst."
       },
