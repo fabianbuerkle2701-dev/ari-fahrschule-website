@@ -1855,6 +1855,9 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 
   .strip { padding: clamp(52px, 14vw, 76px) 0 clamp(32px, 8vw, 46px); }
   .strip-grid { gap: 26px 18px; }
+  /* Auf schmalen Bildschirmen wirkt die Asphaltkante nur noch abgehackt,
+     beide Seiten haben ohnehin dieselbe Asphaltfarbe. */
+  .strip-edge { display: none; }
 
   .fakten { padding-top: 24px; padding-bottom: 26px; }
   .about-grid, .contact-grid, .faq-wrap { gap: 28px; }
