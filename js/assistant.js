@@ -150,7 +150,7 @@
         label: "Welche Autos fahrt ihr?",
         keywords: ["auto", "autos", "fahrzeug", "fahrzeuge", "fuhrpark", "golf", "vw", "wagen", "modell", "welches"],
         answer:
-          "Einen VW Golf 8 und einen VW Golf Plus mit Automatik.\n\nBeide haben aktuelle Assistenzsysteme, werden regelmäßig gewartet und sind sauber. Das ist uns wichtig, weil du dich darin wohlfühlen sollst."
+          "Einen VW Golf 8 und einen VW Golf 8 R mit Automatik.\n\nBeide haben aktuelle Assistenzsysteme, werden regelmäßig gewartet und sind sauber. Das ist uns wichtig, weil du dich darin wohlfühlen sollst."
       },
       {
         id: "app",
