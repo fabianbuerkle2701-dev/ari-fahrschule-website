@@ -16,7 +16,7 @@ WER WIR SIND
 - Die Fahrschule wurde im Februar 2024 neu eröffnet
 - Es unterrichtet ein Fahrlehrer, kein ständiger Wechsel, persönliche Betreuung
 - Zwei Standorte, der Vertrag gilt für beide, Theorieabende dürfen gemischt werden:
-  Zähringen, Zähringerstraße 373, 79108 Freiburg: Büro Mo und Fr 12:00-18:00, Theorie nur montags 18:00-19:30
+  Zähringen, Zähringerstraße 373, 79108 Freiburg: Büro Mo und Mi 12:00-18:00, Theorie nur montags 18:00-19:30
   Stühlinger, Stühlingerstraße 12, 79106 Freiburg: Büro Di und Do 12:00-18:00, Theorie Di und Do 18:00-19:30
 - Telefon 0176 43454447, E-Mail Info@fahrschule-ari.de, Instagram @fahrschule_ari
 
