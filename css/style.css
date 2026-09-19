@@ -730,15 +730,12 @@ html.auftakt-fertig .hero h1 .accent::after {
 /* --- Zahlenband --- */
 .strip {
   position: relative; overflow: hidden;
-  /* Derselbe Asphalt wie Fahrbahn und Info-Leiste. Gleicher Ton heisst:
-     Der Übergang ist allein die Asphaltkante, keine gerade Farbkante. */
+  /* Derselbe Asphalt wie Fahrbahn und Info-Leiste: kein Kantenbild noetig,
+     der Uebergang ist schon dieselbe Flaeche. Ein frueheres Kantenbild
+     skalierte mit vw ohne Deckel und wuchs auf breiten Bildschirmen ueber
+     das Polster hinaus, es schnitt dann in die Zahlen darunter. */
   background: var(--asphalt); color: #fff;
   padding: clamp(64px, 7vw, 92px) 0 clamp(40px, 4vw, 56px);
-}
-/* Asphaltkante aus dem Bestand der alten Seite, als Übergang nach oben */
-.strip-edge {
-  position: absolute; top: -1px; left: 50%; transform: translateX(-50%) rotate(180deg);
-  width: 102vw; height: auto; min-width: 1000px; pointer-events: none;
 }
 /* Rad im Hintergrund, dreht sich beim Scrollen mit */
 .strip-wheel {
@@ -1860,9 +1857,6 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 
   .strip { padding: clamp(52px, 14vw, 76px) 0 clamp(32px, 8vw, 46px); }
   .strip-grid { gap: 26px 18px; }
-  /* Auf schmalen Bildschirmen wirkt die Asphaltkante nur noch abgehackt,
-     beide Seiten haben ohnehin dieselbe Asphaltfarbe. */
-  .strip-edge { display: none; }
 
   .fakten { padding-top: 24px; padding-bottom: 26px; }
   .about-grid, .contact-grid, .faq-wrap { gap: 28px; }
@@ -1901,7 +1895,7 @@ html[data-theme="dark"] .bz { color: var(--ink-3); }
 @media print {
   /* Bedienelemente und Zierde gehoeren nicht aufs Papier */
   .site-header, .to-top, .ari-root, .dh, .scroll-progress, .auftakt,
-  .hero-car, .hero-ground, .road-run, .strip-wheel, .strip-edge,
+  .hero-car, .hero-ground, .road-run, .strip-wheel,
   .skip-link, .hero-media, .bk-band, .theorie-band { display: none !important; }
 
   html, body {
