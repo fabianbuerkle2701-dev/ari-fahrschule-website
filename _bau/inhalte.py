@@ -378,5 +378,5 @@ SEITEN = {
         titel="Theorie-Themen | ARI Fahrschule Freiburg",
         beschreibung="Welches Theorie-Thema gerade dran ist, und alle 14 Themen der Fahrschüler-Ausbildungsordnung für Klasse B im Überblick, bei der ARI Fahrschule in Freiburg.",
         inhalt=THEMEN_SEITE, aktiv="theorie-themen.html",
-        skript='<script src="js/theorie-plan.js" defer></script>\n'),
+        skript='<script src="js/theorie-plan.js?v=20261023a" defer></script>\n'),
 }
