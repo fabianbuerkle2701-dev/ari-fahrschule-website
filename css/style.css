@@ -1533,6 +1533,18 @@ html.js .reveal-delay-3.is-visible { transition-delay: .24s; }
 }
 .legal .updated { font-size: .86rem; color: var(--ink-3); margin-top: 48px; }
 
+/* Widerrufsfunktion auf widerruf.html: Formular im Lesefluss der Rechtsseite.
+   Die Felder nutzen dieselben Bausteine wie das Kontaktformular. */
+.widerruf-form { margin-top: 22px; }
+.legal .wf-zusammenfassung { list-style: none; padding: 16px 18px; margin: 0 0 18px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.legal .wf-zusammenfassung li { margin-bottom: .35em; }
+.legal .wf-zusammenfassung b { color: var(--ink); font-weight: 600; }
+.wf-knoepfe { display: flex; flex-wrap: wrap; gap: 10px; margin: 0; }
+.legal .wf-muster { list-style: none; padding: 16px 18px; margin: 0 0 12px;
+  background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius-sm); }
+.legal .wf-muster li { margin-bottom: .6em; }
+
 /* ---------------------------------------------------------
    8. Bestätigung der Datenschutzerklärung
    Eine schmale Leiste, kein Sperrbildschirm: Die Seite verarbeitet
