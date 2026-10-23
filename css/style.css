@@ -1186,6 +1186,15 @@ html[data-theme="dark"] .footer-about p { color: var(--ink-3); }
 html[data-theme="dark"] .footer-bottom { border-top-color: var(--line); }
 .footer-bottom a { text-decoration: none; }
 .footer-bottom a:hover { color: var(--gold); }
+/* Widerrufsfunktion nach § 312l BGB: eine echte Schaltflaeche, staendig
+   sichtbar, mit dem gesetzlich vorgesehenen Wortlaut "Vertrag widerrufen". */
+.footer-widerruf {
+  display: inline-block; padding: 7px 14px; border-radius: var(--radius-pill);
+  border: 1px solid color-mix(in srgb, var(--gold) 55%, transparent);
+  color: var(--gold); font-weight: 500;
+  transition: background .25s var(--ease), color .25s var(--ease);
+}
+.footer-bottom a.footer-widerruf:hover { background: var(--gold); color: #24200f; }
 
 /* --- Nach oben --- */
 .to-top {

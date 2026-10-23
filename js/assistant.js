@@ -208,7 +208,7 @@
         label: "Kann ich den Vertrag widerrufen?",
         keywords: ["widerruf", "widerrufen", "widerrufsrecht", "ruecktritt", "zuruecktreten", "stornieren", "storno", "kuendigen", "kuendigung", "vertrag", "aussteigen"],
         answer:
-          "Wenn dein Ausbildungsvertrag au\u00dferhalb unserer B\u00fcros oder im Fernabsatz geschlossen wurde, also nur per E-Mail, Telefon oder \u00fcber die Webseite, kannst du ihn als Verbraucher innerhalb von 14 Tagen ohne Angabe von Gr\u00fcnden widerrufen.\n\nDas geht direkt \u00fcber die Seite \u201eWiderruf\u201c in der Fu\u00dfzeile (fahrschule-ari.de/widerruf.html): Angaben eintragen, \u201eVertrag widerrufen\u201c klicken, best\u00e4tigen, fertig. Dort steht auch die vollst\u00e4ndige Widerrufsbelehrung.\n\nWurde der Vertrag pers\u00f6nlich im B\u00fcro unterschrieben, gibt es kein gesetzliches Widerrufsrecht. Sprich uns dann einfach an, wir finden eine L\u00f6sung.",
+          "Wenn dein Ausbildungsvertrag au\u00dferhalb unserer B\u00fcros oder im Fernabsatz geschlossen wurde, also nur per E-Mail, Telefon oder \u00fcber die Webseite, kannst du ihn als Verbraucher innerhalb von 14 Tagen ohne Angabe von Gr\u00fcnden widerrufen.\n\nDas geht direkt \u00fcber den Knopf \u201eVertrag widerrufen\u201c in der Fu\u00dfzeile (fahrschule-ari.de/widerruf.html): Angaben eintragen, \u201eVertrag widerrufen\u201c klicken, best\u00e4tigen, fertig. Dort steht auch die vollst\u00e4ndige Widerrufsbelehrung.\n\nWurde der Vertrag pers\u00f6nlich im B\u00fcro unterschrieben, gibt es kein gesetzliches Widerrufsrecht. Sprich uns dann einfach an, wir finden eine L\u00f6sung.",
         handoff: true
       },
       {

@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "side-tab",
+        "value": "*",
+        "files": [
+          "css/style.css"
+        ],
+        "createdAt": "2026-10-23T17:04:54.152Z",
+        "reason": "Claude: L952 ist der linke Rand eines Blockzitats (.about-copy .lead, Vorstellungstext), L1483 die aria-current-Markierung im mobilen Menue; beides Standardmuster, keine Karten-Akzente. Vierfach in dieser Sitzung so eingestuft."
+      }
+    ]
+  }
+}
